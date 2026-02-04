@@ -12,9 +12,9 @@
         <p-password formControlName="password" [toggleMask]="true" inputId="password" [feedback]="false" />
         <label for="password">Password</label>
       </p-floatlabel >
-      <p-button label="Sign in" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" />
+      <p-button label="Sign in" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" (click)="signIn()"/>
       <p class="login-text">New here?
-        <a class="login-link">Create an account</a>
+        <a class="login-link" (click)="signUpShow()">Create an account</a>
       </p>
     </form>
   </div>

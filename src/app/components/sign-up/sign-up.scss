@@ -70,6 +70,7 @@ html, body {
 .login-link {
   color: var(--fun-blue);
   font-weight: 800;
+  cursor: pointer
 }
 
 :host ::ng-deep .p-floatlabel {

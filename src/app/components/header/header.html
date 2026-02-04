@@ -12,9 +12,7 @@
     </div>
 
     <div class="actions">
-      <p-button styleClass="btn warm" label="Sign up" (click)="signUpShow()"/>
-      <p-button styleClass="btn sunny" label="Sign in" (click)="signInShow()"/>
-      <p-button styleClass="btn aqua" label="Admin" (click)="adminConsoleShow()"/>
+      <p-button styleClass="btn warm" label="Account" icon="pi pi-user"  (click)='accountShow()'/>
       <p-overlaybadge value="{{cartCount}}" severity="danger" badgeSize="small">
       <p-button styleClass="btn deep" label="Cart" badge="{{cartCount}}" (click)="cartCountIncrement()" icon="pi pi-shopping-cart" />
 </p-overlaybadge>
@@ -22,14 +20,6 @@
   </header>
 
   <section class="content">
-    @if (signInVisible) {
-      <app-sign-in></app-sign-in>
-    } @else if (signUpVisible) {
-      <app-sign-up></app-sign-up>
-    } @else if (adminConsoleVisible) {
-      <app-admin-console></app-admin-console>
-    } @else {
-      <app-account-details></app-account-details>
-    }
+  <router-outlet />
   </section>
 </div>

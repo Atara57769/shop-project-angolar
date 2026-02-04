@@ -45,7 +45,6 @@ export class ProductService {
       }
     }
   }
-
   addProduct(newProduct: ProductModel) {
     newProduct.categoryId=this.srvCategory.getIdByName(newProduct.category) ?? 0;
     this.products.push(newProduct);

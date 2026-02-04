@@ -5,13 +5,13 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { UserModel } from '../../../models/user-model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FloatLabel } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
+import { PostUserModel } from '../../../models/post-user-model';
 @Component({
   selector: 'app-update-user',
  imports: [ InputMaskModule,ButtonModule,RouterModule,PasswordModule,FloatLabel,FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
@@ -19,7 +19,7 @@ import { InputMaskModule } from 'primeng/inputmask';
   styleUrl: './update-user.scss',
 })
 export class UpdateUser {
-user:UserModel=new UserModel();
+user:PostUserModel=new PostUserModel();
   frmUpdate = new FormGroup({
     email: new FormControl('', [Validators.required,Validators.email]),
     phone: new FormControl('', [Validators.required]),

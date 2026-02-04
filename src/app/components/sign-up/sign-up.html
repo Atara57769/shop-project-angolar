@@ -23,9 +23,9 @@
         <p-password formControlName="password" [toggleMask]="true" inputId="password" />
         <label for="password">Password</label>
       </p-floatlabel >
-      <p-button label="Create account" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" />
+      <p-button label="Create account" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" (click)="signUp()" />
       <p class="login-text">Already a member?
-        <a class="login-link">Sign in</a>
+        <a class="login-link" (click)="signInShow()">Sign in</a>
       </p>
     </form>
   </div>

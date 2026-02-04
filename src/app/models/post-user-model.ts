@@ -1,11 +1,11 @@
 import { OrderModel } from "./orders-model";
 
-export class UserModel{
+export class PostUserModel{
   id?: number;
   email:string=""
   firstName:string=""
   lastName:string=""
+  password:string=""
   address:string='';
-  isAdmin?:boolean=false
   orders: OrderModel[]=[];
 }
