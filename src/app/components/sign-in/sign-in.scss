@@ -1,0 +1,137 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+}
+
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 22px;
+  height: 100%;
+}
+
+.continar {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-card {
+  background: var(--fun-card);
+  border-radius: 24px;
+  padding: 26px 24px;
+  border: 2px solid rgba(255, 154, 60, 0.25);
+  box-shadow: var(--fun-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card::before,
+.auth-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 92, 92, 0.16), rgba(47, 131, 208, 0.16));
+  filter: blur(18px);
+}
+
+.auth-card::before {
+  width: 180px;
+  height: 180px;
+  top: -70px;
+  right: -70px;
+}
+
+.auth-card::after {
+  width: 140px;
+  height: 140px;
+  bottom: -60px;
+  left: -40px;
+}
+
+.header {
+  font-size: 28px;
+  color: var(--fun-navy);
+}
+
+.subheader {
+  margin: 6px 0 14px;
+  color: var(--fun-muted);
+}
+
+.newUser {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-text {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--fun-muted);
+  text-align: center;
+}
+
+.login-link {
+  color: var(--fun-red);
+  font-weight: 700;
+}
+
+:host ::ng-deep .p-floatlabel {
+  width: 100%;
+}
+
+:host ::ng-deep .p-floatlabel label {
+  background: var(--fun-card);
+  padding: 0 6px;
+  border-radius: 10px;
+  color: var(--fun-muted);
+}
+
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-password-input {
+  width: 100%;
+  border-radius: 14px;
+  border: 2px solid rgba(23, 79, 146, 0.12);
+  padding: 0.9rem;
+  background: #fffaf0;
+  transition: all .2s ease;
+  height: 42px;
+}
+
+:host ::ng-deep .p-inputtext:focus,
+:host ::ng-deep .p-password-input:focus {
+  border-color: var(--fun-blue);
+  box-shadow: 0 0 0 4px rgba(24, 177, 153, 0.2);
+}
+
+:host ::ng-deep .p-password {
+  width: 100%;
+  height: 42px;
+}
+
+:host ::ng-deep .p-button {
+  width: 100%;
+  border-radius: 16px;
+  padding: 0.95rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--fun-teal), var(--fun-blue));
+  border: none;
+  box-shadow: var(--fun-glow);
+  height: 42px;
+  color: #0f141f;
+}
+
+:host ::ng-deep .p-button:hover:not(.p-disabled) {
+  transform: translateY(-1px);
+}

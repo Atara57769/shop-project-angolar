@@ -1,0 +1,40 @@
+<div class="management-card">
+  <div class="card-head">
+    <div>
+      <p class="eyebrow muted">Orders</p>
+      <h3>Orders Overview</h3>
+    </div>
+    <div class="badge">Total {{orders.length}} orders</div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th>User ID</th>
+          <th>Total</th>
+          <th>Created</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (o of orders; track o.id){
+        <tr>
+          <td class="id-cell">#{{o.id}}</td>
+          <td>{{o.userId}}</td>
+          <td class="price-cell">${{o.totalPrice}}</td>
+          <td>{{o.createdAt | date:'dd/MM/yyyy'}}</td>
+          <td class="status-cell">
+            <p-select [options]="statuses"
+                      [(ngModel)]="o.status"
+                      placeholder="Choose status"
+                      class="status-select"
+                      (onChange)="updateOrderStatus(o.id, $event.value)" />
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

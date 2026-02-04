@@ -1,0 +1,141 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.management-card {
+  background: var(--fun-card);
+  border: 2px solid rgba(47, 131, 208, 0.14);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--fun-shadow);
+  max-width: 100%;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 0;
+  color: var(--fun-muted);
+}
+
+.muted {
+  color: var(--fun-muted);
+}
+
+.helper {
+  margin: 6px 0 0;
+  color: var(--fun-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(23, 79, 146, 0.12);
+}
+
+.data-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  table-layout: fixed;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 10px;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.data-table thead th {
+  background: #fff4dd;
+  font-weight: 800;
+  color: var(--fun-navy);
+  border-bottom: 1px solid rgba(23, 79, 146, 0.12);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid rgba(23, 79, 146, 0.08);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(24, 177, 153, 0.08);
+}
+
+.thumb {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(23, 79, 146, 0.2);
+}
+
+.name-cell {
+  font-weight: 800;
+  color: var(--fun-ink);
+}
+
+.description-cell {
+  color: var(--fun-muted);
+}
+
+.price-cell {
+  font-weight: 800;
+  color: var(--fun-teal);
+  white-space: nowrap;
+}
+
+.actions-col {
+  width: 140px;
+  max-width: 140px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+:host ::ng-deep .p-button {
+  border-radius: 12px;
+}
+
+:host ::ng-deep .p-button.p-button-primary {
+  background: linear-gradient(135deg, var(--fun-blue), var(--fun-teal));
+  border: none;
+  color: #0f141f;
+}
+
+:host ::ng-deep .p-button.p-button-danger {
+  border-color: var(--fun-red);
+  color: var(--fun-red);
+}
+
+:host ::ng-deep .p-confirm-dialog {
+  max-width: 90vw;
+}

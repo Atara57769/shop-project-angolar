@@ -1,0 +1,54 @@
+<p-toast />
+<p-confirmdialog />
+
+<div class="management-card">
+  <div class="card-head">
+    <div>
+      <p class="eyebrow muted">Products</p>
+      <h3>Active Catalog</h3>
+    </div>
+    <div class="actions">
+      <p-button (click)="addProduct()" label="+ Add Product"  severity="primary" />
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="data-table products-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products; track p.id){
+        <tr>
+          <td><img [src]="p.imageUrl" alt="{{p.name}}" class="thumb" /></td>
+          <td class="name-cell">{{p.name}}</td>
+          <td class="description-cell">{{p.description}}</td>
+          <td class="price-cell">${{p.price}}</td>
+          <td>{{p.category}}</td>
+          <td class="row-actions">
+            <p-button size="small" (click)="editProduct(p.id)" label="Edit" severity="primary" />
+            <p-button size="small" (click)="confirm2($event,p.id)" label="Delete" severity="danger" [outlined]="true" />
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p-dialog header="Edit product" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  @if (selectedProduct != -1){
+  <app-edit-product [currentId]="selectedProduct" (close)="hideDialog()"></app-edit-product>
+  }
+</p-dialog>
+
+<p-dialog header="Add product" [modal]="true" [(visible)]="visibleAdd" [style]="{ width: '25rem' }">
+  <app-add-prodact (close)="hideAddDialog()"></app-add-prodact>
+</p-dialog>

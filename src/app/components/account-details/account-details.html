@@ -1,0 +1,20 @@
+
+<div class="account-shell">
+  <header class="hero">
+    <p class="eyebrow">Account center</p>
+    <h1>Welcome back!</h1>
+    <p class="lede">Update your profile or review recent orders in one clean place.</p>
+    <div class="pill-row">
+      <button type="button" class="pill" [class.active]="updateDetails" (click)="updateUserDetails()">Profile</button>
+      <button type="button" class="pill" [class.active]="orders" (click)="showOrders()">Orders</button>
+    </div>
+  </header>
+
+  <section class="content-card">
+    @if (updateDetails) {
+      <app-update-user></app-update-user>
+    } @else {
+      <app-user-orders></app-user-orders>
+    }
+  </section>
+</div>

@@ -1,0 +1,117 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.management-card {
+  background: var(--fun-card);
+  border: 2px solid rgba(255, 210, 79, 0.35);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--fun-shadow);
+  max-width: 100%;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 0;
+  color: var(--fun-muted);
+}
+
+.muted {
+  color: var(--fun-muted);
+}
+
+.helper {
+  margin: 6px 0 0;
+  color: var(--fun-muted);
+}
+
+.badge {
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--fun-yellow), var(--fun-orange));
+  color: var(--fun-navy);
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: var(--fun-glow);
+}
+
+.table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(23, 79, 146, 0.12);
+}
+
+.data-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  table-layout: fixed;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 10px;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.data-table thead th {
+  background: #fff4dd;
+  font-weight: 800;
+  color: var(--fun-navy);
+  border-bottom: 1px solid rgba(23, 79, 146, 0.12);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid rgba(23, 79, 146, 0.08);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(255, 210, 79, 0.12);
+}
+
+.id-cell {
+  font-weight: 800;
+  color: var(--fun-blue);
+  white-space: nowrap;
+}
+
+.price-cell {
+  font-weight: 800;
+  color: var(--fun-teal);
+  white-space: nowrap;
+}
+
+.status-cell {
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.status-select {
+  width: 100%;
+  max-width: 100%;
+}
+
+:host ::ng-deep select,
+:host ::ng-deep .p-dropdown {
+  max-width: 100%;
+}

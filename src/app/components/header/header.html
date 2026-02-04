@@ -1,0 +1,35 @@
+<div class="page">
+  <header class="hero">
+    <div class="brand">
+      <div class="badge">
+        <span class="badge-star">★</span>
+      </div>
+      <div>
+        <p class="eyebrow">Welcome to</p>
+        <h1>FunLand</h1>
+        <p class="lede">A playful hub for signing in, shopping, and managing orders.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <p-button styleClass="btn warm" label="Sign up" (click)="signUpShow()"/>
+      <p-button styleClass="btn sunny" label="Sign in" (click)="signInShow()"/>
+      <p-button styleClass="btn aqua" label="Admin" (click)="adminConsoleShow()"/>
+      <p-overlaybadge value="{{cartCount}}" severity="danger" badgeSize="small">
+      <p-button styleClass="btn deep" label="Cart" badge="{{cartCount}}" (click)="cartCountIncrement()" icon="pi pi-shopping-cart" />
+</p-overlaybadge>
+    </div>
+  </header>
+
+  <section class="content">
+    @if (signInVisible) {
+      <app-sign-in></app-sign-in>
+    } @else if (signUpVisible) {
+      <app-sign-up></app-sign-up>
+    } @else if (adminConsoleVisible) {
+      <app-admin-console></app-admin-console>
+    } @else {
+      <app-account-details></app-account-details>
+    }
+  </section>
+</div>

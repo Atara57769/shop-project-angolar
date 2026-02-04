@@ -1,0 +1,22 @@
+<div class="orders-grid">
+  @for (o of orders; track o.id) {
+    <article class="order-card">
+      <header class="order-header">
+        <div>
+          <p class="eyebrow">Order</p>
+          <h2>#{{ o.id }}</h2>
+        </div>
+        <span class="status" [class.delivered]="o.status === 'delivered'" [class.pending]="o.status === 'pending'" [class.shipped]="o.status === 'shipped'">
+          {{ o.status }}
+        </span>
+      </header>
+      <div class="meta">
+        <p><span class="label">Total</span> ${{ o.totalPrice }}</p>
+        <p><span class="label">Date</span> {{ o.createdAt | date }}</p>
+      </div>
+      <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
+        Mark as delivered
+      </button>
+    </article>
+  }
+</div>

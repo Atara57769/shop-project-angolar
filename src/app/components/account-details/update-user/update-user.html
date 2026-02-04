@@ -1,0 +1,33 @@
+<div class="continar">
+  <div class="auth-card">
+    <h1 class="header">Update your details</h1>
+    <form [formGroup]="frmUpdate" class="newUser">
+      <p-floatlabel variant="on">
+        <input pInputText id="email" type="email" autocomplete="off" formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+      <p-inputmask inputId="phone" mask="(999) 999-9999" formControlName="phone">
+      </p-inputmask>
+      <label for="phone">Phone</label></p-floatlabel>
+
+      <p-floatlabel variant="on">
+        <input pInputText id="firstName" autocomplete="off" formControlName="firstName" />
+        <label for="firstName">First name</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <input pInputText id="lastName" autocomplete="off" formControlName="lastName" />
+        <label for="lastName">Last name</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <input pInputText id="address" autocomplete="off" formControlName="address" />
+        <label for="address">Address</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <p-password formControlName="password" [toggleMask]="true" inputId="password" />
+        <label for="password">Password</label>
+      </p-floatlabel>
+      <p-button label="update details" [raised]="true" severity="secondary" [disabled]="frmUpdate.invalid" />
+    </form>
+  </div>
+</div>

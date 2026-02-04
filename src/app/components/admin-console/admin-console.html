@@ -1,0 +1,25 @@
+
+<div class="app-shell">
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-dot">★</div>
+      <div>
+        <p class="eyebrow">Admin Console</p>
+        <h1>Products & Orders</h1>
+      </div>
+    </div>
+    <nav class="nav-links">
+       <button (click)="showProducts()" [class.selecctedButton]="prod">Products</button>
+      <button (click)="showOrders()" [class.selecctedButton]="orders">Orders</button>
+      
+    </nav>
+  </header>
+    <main class="main-content">
+        @if(prod){
+        <app-product-management ></app-product-management>
+        }
+        @if(orders){        
+        <app-orders-management ></app-orders-management>
+        }
+    </main>
+</div>

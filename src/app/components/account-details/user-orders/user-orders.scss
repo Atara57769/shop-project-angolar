@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+}
+:host{
+    display: block;
+}
+.orders-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+
+    
+}
+.order-card{
+    background: var(--fun-card);
+    border: 2px solid rgba(255, 210, 79, 0.35);
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: var(--fun-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.order-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.eyebrow{
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--fun-orange);
+}
+.order-card h2{
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--fun-navy);
+}
+.status{
+    padding: 5px 9px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: #0f141f;
+    background: #fff0d2;
+}
+.status.delivered{ background: #dcfce7; color: #15803d; }
+.status.shipped{ background: #e0f2fe; color: #075985; }
+.status.pending{ background: #fff0d2; color: #a16207; }
+.meta{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 4px;
+    color: var(--fun-muted);
+}
+.label{
+    font-weight: 700;
+    color: var(--fun-ink);
+    margin-right: 6px;
+}
+button{
+    margin-top: 6px;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--fun-blue), var(--fun-teal));
+    color: #0f141f;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--fun-glow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+button:hover:not(:disabled){
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+}
+button:disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}

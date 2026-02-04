@@ -1,0 +1,21 @@
+
+<div class="continar">
+  <div class="auth-card">
+    <h1 class="header">Welcome back</h1>
+    <p class="subheader">Sign in to continue where you left off.</p>
+    <form [formGroup]="frmSignUp" class="newUser">
+      <p-floatlabel variant="on">
+        <input pInputText id="email" autocomplete="off" formControlName="email" />
+        <label for="email">Email address</label>
+      </p-floatlabel>
+      <p-floatlabel variant="on">
+        <p-password formControlName="password" [toggleMask]="true" inputId="password" [feedback]="false" />
+        <label for="password">Password</label>
+      </p-floatlabel >
+      <p-button label="Sign in" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" />
+      <p class="login-text">New here?
+        <a class="login-link">Create an account</a>
+      </p>
+    </form>
+  </div>
+</div>

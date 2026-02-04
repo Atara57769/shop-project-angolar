@@ -1,0 +1,51 @@
+<div class="form-shell">
+  <div class="form-head">
+    <p class="helper">Update product details and save changes.</p>
+  </div>
+
+  <form [formGroup]="frmProduct" class="stack">
+    <div class="field">
+      <label for="name">Name</label>
+      <input pInputText id="name" autocomplete="off" formControlName="name" />
+    </div>
+
+    <div class="field">
+      <label for="price">Price</label>
+      <input pInputText id="price" type="number" step="0.1" min="0" formControlName="price" autocomplete="off" />
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <p-select [options]="categories" formControlName="category" placeholder="Select a category" class="w-full" />
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <input pInputText id="description" autocomplete="off" formControlName="description" />
+    </div>
+
+    <div class="field">
+      <label for="imageFile">Image file</label>
+      <div class="file-control">
+        <input id="imageFile" type="file" accept="image/*" (change)="onFileChange($event)" />
+        <label class="file-button" for="imageFile">Choose file</label>
+        <span class="file-path" *ngIf="filePath">{{filePath}}</span>
+      </div>
+      @if (previewUrl){
+        <div class="preview">
+          <img [src]="previewUrl" alt="Preview" />
+        </div>
+      }
+    </div>
+
+    <div class="field">
+      <label for="imgUrl">Image URL</label>
+      <input pInputText id="imgUrl" autocomplete="off" formControlName="imgUrl" readonly />
+    </div>
+
+    <div class="actions">
+      <p-button label="Cancel" severity="secondary" (click)="hide()" />
+      <p-button label="Save changes" (click)="saveProduct()" />
+    </div>
+  </form>
+</div>

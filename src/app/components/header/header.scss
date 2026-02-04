@@ -1,0 +1,116 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  padding: 28px 20px 48px;
+}
+
+.hero {
+  background: var(--fun-card);
+  border-radius: 26px;
+  padding: 22px 26px;
+  box-shadow: var(--fun-shadow);
+  border: 1px solid rgba(23, 79, 146, 0.12);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.badge {
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
+  background: radial-gradient(circle at 25% 30%, #fff 0 22%, transparent 25%), linear-gradient(135deg, var(--fun-yellow), var(--fun-orange));
+  display: grid;
+  place-items: center;
+  box-shadow: var(--fun-glow);
+}
+
+.badge-star {
+  font-size: 32px;
+  color: var(--fun-navy);
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  color: var(--fun-muted);
+}
+
+.hero h1 {
+  margin: 2px 0 6px;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  color: var(--fun-navy);
+}
+
+.lede {
+  margin: 0;
+  color: var(--fun-muted);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+:host ::ng-deep .p-button.btn {
+  border: none;
+  color: #0f141f;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 10px 18px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+  text-transform: capitalize;
+}
+
+:host ::ng-deep .p-button.btn.warm {
+  background: linear-gradient(135deg, var(--fun-red), var(--fun-orange));
+}
+
+:host ::ng-deep .p-button.btn.sunny {
+  background: linear-gradient(135deg, var(--fun-yellow), #ffd26f);
+}
+
+:host ::ng-deep .p-button.btn.aqua {
+  background: linear-gradient(135deg, var(--fun-teal), #32c9b1);
+}
+
+:host ::ng-deep .p-button.btn.deep {
+  background: linear-gradient(135deg, var(--fun-blue), var(--fun-navy));
+  color: #fff;
+}
+
+:host ::ng-deep .p-button.btn:hover {
+  transform: translateY(-1px);
+}
+
+.content {
+  margin-top: 22px;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}
