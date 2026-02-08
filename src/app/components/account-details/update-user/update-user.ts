@@ -21,11 +21,9 @@ import { PostUserModel } from '../../../models/post-user-model';
 export class UpdateUser {
 user:PostUserModel=new PostUserModel();
   frmUpdate = new FormGroup({
-    email: new FormControl('', [Validators.required,Validators.email]),
     phone: new FormControl('', [Validators.required]),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    address: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
+    address: new FormControl('', [Validators.required])
   });
 }

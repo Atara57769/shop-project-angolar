@@ -7,14 +7,11 @@
     <div class="pill-row">
       <button type="button" class="pill" [class.active]="updateDetails" (click)="updateUserDetails()">Profile</button>
       <button type="button" class="pill" [class.active]="orders" (click)="showOrders()">Orders</button>
+      <button type="button" class="pill"  (click)="logOut()">Log Out</button>
     </div>
   </header>
 
   <section class="content-card">
-    @if (updateDetails) {
-      <app-update-user></app-update-user>
-    } @else {
-      <app-user-orders></app-user-orders>
-    }
+  <router-outlet />
   </section>
 </div>

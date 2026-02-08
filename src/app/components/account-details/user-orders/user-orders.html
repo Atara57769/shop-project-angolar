@@ -17,6 +17,9 @@
       <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
         Mark as delivered
       </button>
+       <button type="button" (click)="showDetails(o.id)" >
+        Show details
+      </button>
     </article>
   }
 </div>

@@ -12,14 +12,15 @@
     </div>
 
     <div class="actions">
-      <p-button styleClass="btn warm" label="Account" icon="pi pi-user"  (click)='accountShow()'/>
+      <p-button styleClass="btn warm" label="Account" icon="pi pi-user" (click)='accountShow()' />
       <p-overlaybadge value="{{cartCount}}" severity="danger" badgeSize="small">
-      <p-button styleClass="btn deep" label="Cart" badge="{{cartCount}}" (click)="cartCountIncrement()" icon="pi pi-shopping-cart" />
-</p-overlaybadge>
+        <p-button styleClass="btn deep" label="Cart" badge="{{cartCount}}" (click)="cartCountIncrement()"
+          icon="pi pi-shopping-cart" />
+      </p-overlaybadge>
     </div>
   </header>
 
   <section class="content">
-  <router-outlet />
+    <router-outlet />
   </section>
 </div>

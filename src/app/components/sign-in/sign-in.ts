@@ -40,6 +40,10 @@ export class SignIn {
         this.authService.login(loggedInUser);
         this.router.navigateByUrl('admin');
       }
+      else {
+        this.authService.login(loggedInUser);
+        this.router.navigateByUrl('account');
+      }
     }
 
   }

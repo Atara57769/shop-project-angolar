@@ -1,0 +1,43 @@
+<div class="order-wrapper">
+  <div class="order-card">
+    
+    <div class="order-header">
+      <div>
+        <div class="eyebrow">Order</div>
+        <h2>#{{ order?.id }}</h2>
+      </div>
+
+      <div class="status pending">
+        {{ order?.status || 'pending' }}
+      </div>
+    </div>
+
+    <div class="meta">
+      <div>
+        <span class="label">Total:</span>
+        ${{ order?.totalPrice }}
+      </div>
+      <div>
+        <span class="label">Items:</span>
+        {{ ordrsItems?.length }}
+      </div>
+    </div>
+
+    <div class="items-grid">
+      @for (o of ordrsItems; track $index) {
+        <div class="item-card">
+          <img [src]="o.productImageUrl" />
+          <div class="item-info">
+            <div class="item-name">{{ o.productName }}</div>
+            <div>${{ o.productPrice }}</div>
+            <div>Quantity: {{ o.quantity }}</div>
+            <div class="item-total">
+              ${{ o.quantity * o.productPrice }}
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

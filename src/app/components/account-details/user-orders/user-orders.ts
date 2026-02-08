@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { OrderModel } from '../../../models/orders-model';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../../services/auth-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from '../../../services/order-service';
 
 @Component({
   selector: 'app-user-orders',
@@ -9,25 +12,25 @@ import { DatePipe } from '@angular/common';
   styleUrl: './user-orders.scss',
 })
 export class UserOrders {
-orders: OrderModel[] = [
-  {
-    id: 101,
-    items: [],
-    userId: 3,
-    totalPrice: 4500,
-    status: 'shipped',
-    createdAt: new Date('2024-05-10')
-  },
-  {
-    id: 102,
-    userId: 3,
-    items: [],
-    totalPrice: 150,
-    status: 'pending',
-    createdAt: new Date('2024-06-01')
-  }
-];
-updateStatus(id:number) {
-  this.orders.find(o => o.id === id)!.status = 'delivered';
+    authService=inject(AuthService);
+     activatedRoute = inject(ActivatedRoute)
+  router = inject(Router);
+  orderSrv=inject(OrderService);
+orders: OrderModel[] = [];
+ngOnInit() {
+  this.orders = this.authService.getCurrentUser()?.orders ?? [];
 }
+updateStatus(id:number) {
+  const orderIndex = this.orders.findIndex(o => o.id === id);
+  if (orderIndex !== -1) {
+    this.orders[orderIndex].status = 'delivered';
+  }
+  this.orderSrv.updateOrderStatus(id, 'delivered');
+}
+  showDetails(id: number) {
+    this.router.navigate(
+      ['order-details', id],
+      { relativeTo: this.activatedRoute.parent }
+    );
+  }
 }

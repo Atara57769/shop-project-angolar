@@ -28,6 +28,7 @@ export class UserService {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       address: newUser.address,
+      phone: newUser.phone,
       orders: []
     }
     return user
@@ -41,6 +42,7 @@ export class UserService {
         firstName:" post.firstName",
         lastName: "post.lastName",
         address: "post.address",
+        phone: "post.phone",
         isAdmin: true,
         orders: []
       }

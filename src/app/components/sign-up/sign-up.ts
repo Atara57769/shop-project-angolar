@@ -14,9 +14,10 @@ import { ButtonModule } from 'primeng/button';
 import { PostUserModel } from '../../models/post-user-model';
 import { UserService } from '../../services/user-service';
 import { AuthService } from '../../services/auth-service';
+import { InputMaskModule } from 'primeng/inputmask';
 @Component({
   selector: 'app-sign-up',
-  imports: [ButtonModule, RouterModule, PasswordModule, FloatLabel, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
+  imports: [InputMaskModule,ButtonModule, RouterModule, PasswordModule, FloatLabel, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.scss',
 })
@@ -30,6 +31,7 @@ export class SignUp {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     address: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
   signUp() {

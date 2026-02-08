@@ -23,23 +23,10 @@
       <input pInputText id="description" autocomplete="off" formControlName="description" />
     </div>
 
-    <div class="field">
-      <label for="imageFile">Image file</label>
-      <div class="file-control">
-        <input id="imageFile" type="file" accept="image/*" (change)="onFileChange($event)" />
-        <label class="file-button" for="imageFile" severity="primary">Choose file</label>
-        <span class="file-path" *ngIf="filePath">{{filePath}}</span>
-      </div>
-      @if (previewUrl){
-        <div class="preview">
-          <img [src]="previewUrl" alt="Preview" />
-        </div>
-      }
-    </div>
-
+   
     <div class="field">
       <label for="imgUrl">Image URL</label>
-      <input pInputText id="imgUrl" autocomplete="off" formControlName="imgUrl" readonly />
+      <input pInputText id="imgUrl" autocomplete="off" formControlName="imgUrl"  />
     </div>
 
     <div class="actions">

@@ -8,7 +8,32 @@ export class OrderService {
   orders: OrderModel[] = [
     {
       id: 101,
-      items: [],
+      orderItems: [
+  {
+    orderId: 101,
+    productId: 1,
+    quantity: 2,
+    productName: 'Laptop Dell XPS',
+    productImageUrl: 'https://via.placeholder.com/150',
+    productPrice: 4500
+  },
+  {
+    orderId: 101,
+    productId: 2,
+    quantity: 1,
+    productName: 'Wireless Mouse',
+    productImageUrl: 'https://via.placeholder.com/150',
+    productPrice: 150
+  },
+  {
+    orderId: 101,
+    productId: 3,
+    quantity: 3,
+    productName: 'Mechanical Keyboard',
+    productImageUrl: 'https://via.placeholder.com/150',
+    productPrice: 350
+  }
+],
       userId: 3,
       totalPrice: 4500,
       status: 'shipped',
@@ -17,13 +42,13 @@ export class OrderService {
     {
       id: 102,
       userId: 3,
-      items: [],
+      orderItems: [],
       totalPrice: 150,
       status: 'pending',
       createdAt: new Date('2024-06-01')
     },{
       id: 103,
-      items: [],
+      orderItems: [],
       userId: 4,
       totalPrice: 4500,
       status: 'shipped',
@@ -32,13 +57,13 @@ export class OrderService {
     {
       id: 104,
       userId: 4,
-      items: [],
+      orderItems: [],
       totalPrice: 150,
       status: 'pending',
       createdAt: new Date('2024-06-01')
     },{
       id: 105,
-      items: [],
+      orderItems: [],
       userId: 3,
       totalPrice: 4500,
       status: 'shipped',
@@ -47,13 +72,13 @@ export class OrderService {
     {
       id: 106,
       userId: 3,
-      items: [],
+      orderItems: [],
       totalPrice: 150,
       status: 'pending',
       createdAt: new Date('2024-06-01')
     },{
       id: 107,
-      items: [],
+      orderItems: [],
       userId: 3,
       totalPrice: 4500,
       status: 'shipped',
@@ -62,7 +87,7 @@ export class OrderService {
     {
       id: 108,
       userId: 3,
-      items: [],
+      orderItems: [],
       totalPrice: 150,
       status: 'pending',
       createdAt: new Date('2024-06-01')
@@ -72,10 +97,13 @@ export class OrderService {
     return [...this.orders];
   }
   updateOrderStatus(orderId: number, status: OrderStatus) {
-    const orderIndex = this.orders.findIndex(o => o.id === orderId);
+    const orderIndex = this.orders.findIndex(o => o.id === orderId)
     if (orderIndex !== -1) {
       this.orders[orderIndex].status = status;
     } 
     console.log(this.orders)
   }
+  getOrderById(id: number) {
+    return this.orders.find(o => o.id === id);
+  } 
 }

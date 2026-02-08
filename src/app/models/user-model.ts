@@ -6,6 +6,7 @@ export class UserModel{
   firstName:string=""
   lastName:string=""
   address:string='';
+  phone:string='';
   isAdmin?:boolean=false
   orders: OrderModel[]=[];
 }
