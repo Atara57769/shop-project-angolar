@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+}
+
+:host {
+    display: block;
+    padding: 40px 20px;
+    min-height: 80vh;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 20px;
+}
+
+.loading-container p {
+    font-size: 18px;
+    color: var(--fun-muted);
+    font-weight: 600;
+}
+
+/* Error State */
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 20px;
+}
+
+:host ::ng-deep .error-card {
+    max-width: 500px;
+    text-align: center;
+    background: var(--fun-card);
+    border: 2px solid rgba(255, 87, 87, 0.3);
+    border-radius: 20px;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+}
+
+.error-icon {
+    font-size: 64px;
+    color: #ff5757;
+}
+
+.error-content h2 {
+    color: var(--fun-navy);
+    font-size: 24px;
+    margin: 0;
+}
+
+.error-content p {
+    color: var(--fun-muted);
+    font-size: 16px;
+}
+
+/* Product Details Container */
+.product-details-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.product-image-section {
+    flex: 1;
+    max-width: 500px;
+}
+
+:host ::ng-deep .product-image-section .p-image {
+    width: 100%;
+}
+
+:host ::ng-deep .product-image-section .p-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: var(--fun-shadow);
+    border: 2px solid rgba(47, 131, 208, 0.2);
+}
+
+.product-info-section {
+    flex: 1;
+    max-width: 600px;
+}
+
+/* Product Card */
+:host ::ng-deep .product-info-card {
+    background: var(--fun-card);
+    border-radius: 20px;
+    border: 2px solid rgba(47, 131, 208, 0.2);
+    box-shadow: var(--fun-shadow);
+}
+
+:host ::ng-deep .product-info-card .p-card-header {
+    background: linear-gradient(135deg, rgba(24, 177, 153, 0.1), rgba(47, 131, 208, 0.1));
+    border-bottom: 2px solid rgba(47, 131, 208, 0.1);
+    padding: 24px;
+}
+
+:host ::ng-deep .product-info-card .p-card-body {
+    padding: 24px;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.product-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fun-navy);
+    margin: 0;
+    flex: 1;
+    line-height: 1.2;
+}
+
+:host ::ng-deep .category-tag {
+    background: var(--fun-teal);
+    color: var(--fun-navy);
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 8px 16px;
+}
+
+/* Product Content Sections */
+.product-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255, 154, 60, 0.1), rgba(255, 213, 79, 0.1));
+    border-radius: 12px;
+    border: 2px solid rgba(255, 154, 60, 0.3);
+}
+
+.price-label {
+    font-size: 16px;
+    color: var(--fun-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.price-value {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--fun-orange), var(--fun-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.description-section h3 {
+    font-size: 18px;
+    color: var(--fun-navy);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.description-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--fun-ink);
+}
+
+.quantity-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quantity-section label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--fun-navy);
+}
+
+:host ::ng-deep .quantity-input {
+    max-width: 200px;
+}
+
+:host ::ng-deep .quantity-input .p-inputnumber-button {
+    background: var(--fun-teal);
+    border-color: var(--fun-teal);
+    color: var(--fun-navy);
+}
+
+:host ::ng-deep .quantity-input .p-inputnumber-button:hover {
+    background: var(--fun-blue);
+    border-color: var(--fun-blue);
+}
+
+:host ::ng-deep .quantity-input .p-inputnumber-input {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    border: 2px solid rgba(24, 177, 153, 0.3);
+}
+
+/* Actions Section */
+.actions-section {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+:host ::ng-deep .add-to-cart-btn {
+    flex: 1;
+    min-width: 200px;
+    background: linear-gradient(135deg, var(--fun-teal), var(--fun-blue));
+    border: 2px solid var(--fun-blue);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(24, 177, 153, 0.3);
+}
+
+:host ::ng-deep .actions-section .p-button-outlined {
+    border: 2px solid rgba(47, 131, 208, 0.4);
+    color: var(--fun-navy);
+    font-weight: 600;
+    border-radius: 12px;
+}
+
+:host ::ng-deep .actions-section .p-button-outlined:hover {
+    background: var(--fun-cream);
+    border-color: var(--fun-blue);
+}
+
+/* PrimeNG Divider */
+:host ::ng-deep .p-divider {
+    margin: 0;
+}
+
+:host ::ng-deep .p-divider.p-divider-horizontal::before {
+    border-top: 2px solid rgba(47, 131, 208, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .product-details-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-image-section,
+    .product-info-section {
+        max-width: 100%;
+    }
+
+    .product-name {
+        font-size: 24px;
+    }
+
+    .price-value {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    :host {
+        padding: 20px 12px;
+    }
+
+    .product-details-container {
+        gap: 24px;
+    }
+
+    .product-header {
+        flex-direction: column;
+    }
+
+    .actions-section {
+        flex-direction: column;
+    }
+
+    :host ::ng-deep .add-to-cart-btn {
+        width: 100%;
+    }
+}

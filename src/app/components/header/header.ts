@@ -26,6 +26,11 @@ export class Header {
   cartCountIncrement() {
     this.cartCount++;
   }
+  
+  shopShow() {
+    this.router.navigateByUrl('show-products');
+  }
+  
   accountShow() {   
   if (this.authService.isUserConnect()) {
     this.router.navigateByUrl('account')

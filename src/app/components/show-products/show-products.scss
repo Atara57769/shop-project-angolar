@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    display: block;
+    padding: 20px;
+    font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+}
+
+.products-page-container {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.all-products {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    min-width: 0;
+}
+
+.filters-container {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 320px;
+}
+
+.no-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--fun-card);
+    border-radius: 20px;
+    border: 2px dashed rgba(47, 131, 208, 0.3);
+}
+
+.no-products p {
+    color: var(--fun-muted);
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+/* Product Card Styling */
+:host ::ng-deep .product-card-primeng {
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(47, 131, 208, 0.2);
+    background: var(--fun-card);
+    box-shadow: var(--fun-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+:host ::ng-deep .product-card-primeng:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(23, 79, 146, 0.18);
+    border-color: var(--fun-teal);
+}
+
+:host ::ng-deep .product-card-primeng::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--fun-teal), var(--fun-blue));
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+:host ::ng-deep .product-card-primeng:hover::before {
+    opacity: 0.1;
+}
+
+.product-image-container {
+    height: 280px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 247, 230, 0.5), rgba(253, 241, 214, 0.5));
+    position: relative;
+}
+
+.product-image-full {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+:host ::ng-deep .product-card-primeng:hover .product-image-full {
+    transform: scale(1.05);
+}
+
+.product-footer {
+    padding: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--fun-card);
+}
+
+.product-name-footer {
+    font-size: 15px;
+    flex-grow: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--fun-ink);
+    font-weight: 600;
+}
+
+.product-price-footer {
+    font-size: 17px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: var(--fun-navy);
+    background: linear-gradient(135deg, var(--fun-orange), var(--fun-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+:host ::ng-deep .p-card .p-card-body {
+    padding: 0 !important;
+}
+
+:host ::ng-deep .p-card-footer {
+    padding: 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .all-products {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .products-page-container {
+        flex-direction: column-reverse;
+    }
+
+    .filters-container {
+        max-width: 100%;
+    }
+
+    .all-products {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    :host {
+        padding: 12px;
+    }
+
+    .all-products {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+
+    .product-image-container {
+        height: 200px;
+    }
+
+    .product-footer {
+        padding: 12px;
+    }
+
+    .product-name-footer {
+        font-size: 13px;
+    }
+
+    .product-price-footer {
+        font-size: 15px;
+    }
+}

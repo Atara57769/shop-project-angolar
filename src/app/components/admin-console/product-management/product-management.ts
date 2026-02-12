@@ -34,19 +34,19 @@ export class ProductManagement {
   }
 
   loadProducts() {
-    this.srvProducts.getAllProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-      },
-      error: (err) => {
-        console.error('Error loading products:', err);
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Error', 
-          detail: 'Failed to load products' 
-        });
-      }
-    });
+    // this.srvProducts.getAllProducts().subscribe({
+    //   next: (products) => {
+    //     this.products = products;
+    //   },
+    //   error: (err) => {
+    //     console.error('Error loading products:', err);
+    //     this.messageService.add({ 
+    //       severity: 'error', 
+    //       summary: 'Error', 
+    //       detail: 'Failed to load products' 
+    //     });
+    //   }
+    // });
   }
 
   hideDialog() {
@@ -58,20 +58,20 @@ export class ProductManagement {
     this.visible = true;
   }
   deleteProduct(productId: number) {
-    this.srvProducts.deleteProductById(productId).subscribe({
-      next: () => {
-        this.loadProducts();
-        this.visible = false;
-      },
-      error: (err) => {
-        console.error('Error deleting product:', err);
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Error', 
-          detail: 'Failed to delete product' 
-        });
-      }
-    });
+    // this.srvProducts.deleteProductById(productId).subscribe({
+    //   next: () => {
+    //     this.loadProducts();
+    //     this.visible = false;
+    //   },
+    //   error: (err) => {
+    //     console.error('Error deleting product:', err);
+    //     this.messageService.add({ 
+    //       severity: 'error', 
+    //       summary: 'Error', 
+    //       detail: 'Failed to delete product' 
+    //     });
+    //   }
+    // });
   }
   confirm2(event: Event, id: number) {
     this.confirmationService.confirm({

@@ -1,0 +1,98 @@
+@if (loading) {
+  <div class="loading-container">
+    <p-progressSpinner />
+    <p>Loading product details...</p>
+  </div>
+} @else if (product) {
+  <div class="product-details-container">
+    <div class="product-image-section">
+      <p-image 
+        [src]="product.imageUrl" 
+        [preview]="true" 
+        alt="{{product.name}}" 
+        width="450"
+        [imageStyle]="{ 'border-radius': '16px' }">
+        <ng-template #indicator>
+          <i class="pi pi-search"></i>
+        </ng-template>
+      </p-image>
+    </div>
+
+    <div class="product-info-section">
+      <p-card styleClass="product-info-card">
+        <ng-template pTemplate="header">
+          <div class="product-header">
+            <h1 class="product-name">{{product.name}}</h1>
+            <p-tag [value]="product.categoryName" severity="info" styleClass="category-tag" />
+          </div>
+        </ng-template>
+        
+        <div class="product-content">
+          <div class="price-section">
+            <span class="price-label">Price</span>
+            <span class="price-value">{{product.price | currency:'ILS':'symbol':'1.2-2'}}</span>
+          </div>
+          
+          <p-divider />
+          
+          <div class="description-section">
+            <h3>Description</h3>
+            <p class="description-text">{{product.description}}</p>
+          </div>
+          
+          <p-divider />
+          
+          <div class="quantity-section">
+            <label for="quantity">Quantity</label>
+            <p-inputnumber 
+              [(ngModel)]="quantity" 
+              [showButtons]="true" 
+              buttonLayout="horizontal" 
+              [min]="1" 
+              [max]="99"
+              inputId="quantity"
+              styleClass="quantity-input">
+              <ng-template pTemplate="incrementbuttonicon">
+                <span class="pi pi-plus"></span>
+              </ng-template>
+              <ng-template pTemplate="decrementbuttonicon">
+                <span class="pi pi-minus"></span>
+              </ng-template>
+            </p-inputnumber>
+          </div>
+          
+          <div class="actions-section">
+            <p-button 
+              label="Add To Cart" 
+              icon="pi pi-shopping-cart" 
+              iconPos="right" 
+              size="large"
+              styleClass="add-to-cart-btn"
+              (click)="addToCart()" />
+            <p-button 
+              label="Back to Shop" 
+              icon="pi pi-arrow-left" 
+              [outlined]="true"
+              size="large"
+              severity="secondary"
+              (click)="router.navigate(['/show-products'])" />
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+} @else {
+  <div class="error-container">
+    <p-card styleClass="error-card">
+      <div class="error-content">
+        <i class="pi pi-exclamation-triangle error-icon"></i>
+        <h2>Product Not Found</h2>
+        <p>Sorry, we couldn't find the product you're looking for.</p>
+        <p-button 
+          label="Back to Shop" 
+          icon="pi pi-arrow-left" 
+          (click)="router.navigate(['/show-products'])" />
+      </div>
+    </p-card>
+  </div>
+}

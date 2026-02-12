@@ -1,0 +1,61 @@
+<div class="filters">
+    <div class="filter-container">
+
+        <section>
+            <p-inputgroup>
+                <i class="pi pi-search"></i>
+                <input pInputText [(ngModel)]="search" placeholder="search" />
+            </p-inputgroup>
+
+        </section>
+
+        <section>
+            <h3 class="filter-title">SORT BY</h3>
+            <div class="options-row">
+                <button class="chip active">New in</button>
+                <button class="chip">Priced from low to high</button>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+
+            <h3 class="filter-title">CATEGORIES</h3>
+            <div class="categories-wrapper">
+                <div class="card flex justify-center">
+                    <div class="flex flex-col gap-4">
+                        @for (category of categories; track category.id) {
+                        <div class="category-item flex w-full">
+                            <p-checkbox [value]="category" [inputId]="category.name"
+                                [(ngModel)]="selectedCategories" />
+                            <label [for]="category.name" class="category-label">
+                                {{category.name}}
+                            </label>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+            <h3 class="filter-title">PRICE</h3>
+            <div class="price-slider-container">
+                <input type="range" min="0" max="200" class="slider">
+                <div class="price-inputs">
+                    <div class="price-field">
+                        <label>Minimum price</label>
+                        <div class="input-wrapper">40 ₪</div>
+                    </div>
+                    <div class="price-field">
+                        <label>Maximum price</label>
+                        <div class="input-wrapper">120 ₪</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+$fun-orange: #ffd26f;
+$fun-red: #ff5c5c;
+$fun-navy: #1a2a44;
+$fun-muted: #64748b;
+$fun-teal: #4fd1c5;
+$fun-bg-light: #fff9ee;
+$transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.filter-container {
+  background: white;
+  border-radius: 26px;
+  padding: 24px;
+  border: 2px solid rgba($fun-red, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+
+  section {
+    margin-bottom: 20px;
+  }
+}
+
+// --- עיצוב שורת החיפוש ---
+:host ::ng-deep .p-inputgroup {
+  background: $fun-bg-light;
+  border-radius: 16px;
+  border: 2px solid rgba($fun-orange, 0.4);
+  padding: 4px 12px;
+  transition: $transition;
+
+  &:focus-within {
+    border-color: $fun-teal;
+    box-shadow: 0 0 0 4px rgba($fun-teal, 0.15);
+    transform: translateY(-1px);
+  }
+
+  i {
+    color: $fun-orange;
+    font-size: 1.1rem;
+  }
+
+  .p-inputtext {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px;
+    font-family: 'Fredoka', sans-serif;
+    color: $fun-navy;
+
+    &::placeholder {
+      color: $fun-muted;
+      opacity: 0.7;
+    }
+  }
+}
+
+// --- עיצוב כפתורי המיון (Chips) ---
+.options-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .chip {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid #f1f5f9;
+    background: #f8fafc;
+    color: $fun-muted;
+    font-weight: 600;
+    font-family: 'Fredoka', sans-serif;
+    cursor: pointer;
+    transition: $transition;
+    outline: none;
+
+    &:hover:not(.active) {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    // אפקט לחיצה (Active State)
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.active {
+      background: linear-gradient(135deg, $fun-orange, $fun-red);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba($fun-red, 0.3);
+      
+      // אנימציית דחיסה קלה כשזה כבר לחוץ
+      &:active {
+        box-shadow: 0 2px 8px rgba($fun-red, 0.4);
+      }
+    }
+  }
+}
+
+// --- כותרות ---
+.filter-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: $fun-navy;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+hr {
+  border: 0;
+  border-top: 2px dashed #f1f5f9;
+  margin: 20px 0;
+}
+
+// --- קטגוריות (Checkboxes) ---
+.category-item {
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 10px;
+  transition: $transition;
+
+  &:hover {
+    background: rgba($fun-orange, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .category-label {
+    margin-inline-start: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: $fun-navy;
+  }
+}
+
+:host ::ng-deep .p-checkbox {
+  .p-checkbox-box {
+    border-radius: 8px;
+    border: 2px solid $fun-orange;
+    transition: $transition;
+
+    &.p-highlight {
+      background: $fun-teal;
+      border-color: $fun-teal;
+    }
+  }
+}
