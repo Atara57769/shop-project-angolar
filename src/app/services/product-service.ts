@@ -12,18 +12,20 @@ export class ProductService {
       name: 'Laptop',
       description: 'High performance laptop',
       price: 1200,
-      category: 'Electronics',
+      categoryName: 'Electronics',
       categoryId: 1,
-      imageUrl: 'assets/images/laptop.png'
+      imageUrl: 'assets/images/laptop.png',
+      isAvailable: true
     },
     {
       id: 2,
-      name: 'Headphones',
-      description: 'Noise cancelling headphones',
+      name: 'HeadphoneNumbers',
+      description: 'Noise cancelling headphoneNumbers',
       price: 200,
-      category: 'Accessories',
+      categoryName: 'Accessories',
       categoryId: 2,
-      imageUrl: 'assets/images/headphones.png'
+      imageUrl: 'assets/images/headphoneNumbers.png',
+      isAvailable: true
     }
   ];
   srvCategory:CategoryService=inject(CategoryService);
@@ -46,7 +48,7 @@ export class ProductService {
     }
   }
   addProduct(newProduct: ProductModel) {
-    newProduct.categoryId=this.srvCategory.getIdByName(newProduct.category) ?? 0;
+    newProduct.categoryId=this.srvCategory.getIdByName(newProduct.categoryName) ?? 0;
     this.products.push(newProduct);
     console.log('Product added:', this.products);
   }

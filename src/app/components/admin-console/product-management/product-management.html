@@ -31,7 +31,7 @@
           <td class="name-cell">{{p.name}}</td>
           <td class="description-cell">{{p.description}}</td>
           <td class="price-cell">${{p.price}}</td>
-          <td>{{p.category}}</td>
+          <td>{{p.categoryName}}</td>
           <td class="row-actions">
             <p-button size="small" (click)="editProduct(p.id)" label="Edit" severity="primary" />
             <p-button size="small" (click)="confirm2($event,p.id)" label="Delete" severity="danger" [outlined]="true" />

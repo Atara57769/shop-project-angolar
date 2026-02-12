@@ -4,7 +4,7 @@ export class OrderModel{
   id!: number;
   userId?: number; 
   orderItems: OrderItemModel[]=[];
-  totalPrice: number=0;
+  orderSum: number=0;
   status:OrderStatus='pending';
-  createdAt: Date=new Date();
+  orderDate: Date=new Date();
 }

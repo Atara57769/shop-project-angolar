@@ -49,7 +49,7 @@ export class EditProduct {
       name: this.currentProduct.name,
       price: this.currentProduct.price,
       description: this.currentProduct.description,
-      category: this.currentProduct.category,
+      category: this.currentProduct.categoryName,
       imgUrl: this.currentProduct.imageUrl
     });
     this.previewUrl = this.currentProduct.imageUrl;
@@ -61,7 +61,7 @@ export class EditProduct {
     this.currentProduct.name = this.frmProduct.value.name;
     this.currentProduct.price = this.frmProduct.value.price;
     this.currentProduct.description = this.frmProduct.value.description;
-    this.currentProduct.category = this.frmProduct.value.category;
+    this.currentProduct.categoryName = this.frmProduct.value.category;
     this.currentProduct.imageUrl = this.previewUrl || this.frmProduct.value.imgUrl;
     this.srvProducts.updateProduct(this.currentProduct);
     this.hide();

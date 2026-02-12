@@ -45,8 +45,9 @@ export class AddProdact {
     newProduct.name = this.frmProduct.value.name;
     newProduct.price = this.frmProduct.value.price;
     newProduct.description = this.frmProduct.value.description;
-    newProduct.category = this.frmProduct.value.category;
+    newProduct.categoryName = this.frmProduct.value.category;
     newProduct.imageUrl = this.previewUrl || this.frmProduct.value.imgUrl;
+    newProduct.isAvailable = true;
     this.srvProducts.addProduct(newProduct);
     this.hide();
     this.refresh();

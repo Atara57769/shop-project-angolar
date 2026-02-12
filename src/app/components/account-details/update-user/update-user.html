@@ -2,10 +2,11 @@
   <div class="auth-card">
     <h1 class="header">Update your details</h1>
     <form [formGroup]="frmUpdate" class="newUser">
+   
       <p-floatlabel variant="on">
-      <p-inputmask inputId="phone" mask="(999) 999-9999" formControlName="phone">
+      <p-inputmask inputId="phoneNumber" mask="(999) 999-9999" formControlName="phoneNumber">
       </p-inputmask>
-      <label for="phone">Phone</label></p-floatlabel>
+      <label for="phoneNumber">Phone</label></p-floatlabel>
 
       <p-floatlabel variant="on">
         <input pInputText id="firstName" autocomplete="off" formControlName="firstName" />
@@ -19,7 +20,7 @@
         <input pInputText id="address" autocomplete="off" formControlName="address" />
         <label for="address">Address</label>
       </p-floatlabel>
-      <p-button label="update details" [raised]="true" severity="secondary" [disabled]="frmUpdate.invalid" />
+      <p-button label="update details" [raised]="true" severity="secondary" [disabled]="frmUpdate.invalid" (click)="update()"/>
     </form>
   </div>
 </div>

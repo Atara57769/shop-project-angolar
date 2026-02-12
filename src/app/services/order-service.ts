@@ -35,62 +35,62 @@ export class OrderService {
   }
 ],
       userId: 3,
-      totalPrice: 4500,
+      orderSum: 4500,
       status: 'shipped',
-      createdAt: new Date('2024-05-10')
+      orderDate: new Date('2024-05-10')
     },
     {
       id: 102,
       userId: 3,
       orderItems: [],
-      totalPrice: 150,
+      orderSum: 150,
       status: 'pending',
-      createdAt: new Date('2024-06-01')
+      orderDate: new Date('2024-06-01')
     },{
       id: 103,
       orderItems: [],
       userId: 4,
-      totalPrice: 4500,
+      orderSum: 4500,
       status: 'shipped',
-      createdAt: new Date('2024-05-10')
+      orderDate: new Date('2024-05-10')
     },
     {
       id: 104,
       userId: 4,
       orderItems: [],
-      totalPrice: 150,
+      orderSum: 150,
       status: 'pending',
-      createdAt: new Date('2024-06-01')
+      orderDate: new Date('2024-06-01')
     },{
       id: 105,
       orderItems: [],
       userId: 3,
-      totalPrice: 4500,
+      orderSum: 4500,
       status: 'shipped',
-      createdAt: new Date('2024-05-10')
+      orderDate: new Date('2024-05-10')
     },
     {
       id: 106,
       userId: 3,
       orderItems: [],
-      totalPrice: 150,
+      orderSum: 150,
       status: 'pending',
-      createdAt: new Date('2024-06-01')
+      orderDate: new Date('2024-06-01')
     },{
       id: 107,
       orderItems: [],
       userId: 3,
-      totalPrice: 4500,
+      orderSum: 4500,
       status: 'shipped',
-      createdAt: new Date('2024-05-10')
+      orderDate: new Date('2024-05-10')
     },
     {
       id: 108,
       userId: 3,
       orderItems: [],
-      totalPrice: 150,
+      orderSum: 150,
       status: 'pending',
-      createdAt: new Date('2024-06-01')
+      orderDate: new Date('2024-06-01')
     }
   ];
   getAllOrders(){

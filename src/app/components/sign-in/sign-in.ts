@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { PostUserModel } from '../../models/post-user-model';
 import { UserService } from '../../services/user-service';
 import { AuthService } from '../../services/auth-service';
+import { UserModel } from '../../models/user-model';
 @Component({
   selector: 'app-sign-in',
   imports: [ButtonModule, RouterModule, PasswordModule, FloatLabel, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
@@ -32,21 +33,25 @@ export class SignIn {
     password: new FormControl('', [Validators.required])
   });
   signIn() {
-    const email = this.frmSignUp.get('email')?.value || '';
-    const password = this.frmSignUp.get('password')?.value || '';
-    const loggedInUser = this.userServ.loginUser(email, password);
-    if (loggedInUser) {
+  const email = this.frmSignUp.get('email')?.value || '';
+  const password = this.frmSignUp.get('password')?.value || '';
+
+  this.userServ.loginUser(email, password).subscribe({
+    next: (loggedInUser: UserModel) => {
+
+      this.authService.login(loggedInUser);
+
       if (loggedInUser.isAdmin) {
-        this.authService.login(loggedInUser);
         this.router.navigateByUrl('admin');
-      }
-      else {
-        this.authService.login(loggedInUser);
+      } else {
         this.router.navigateByUrl('account');
       }
+    },
+    error: (err) => {
+       alert("we cant found you,please try again!");
     }
-
-  }
+  });
+}
   signUpShow() {
     this.router.navigateByUrl('sign-up');
   }

@@ -23,8 +23,8 @@
         <tr>
           <td class="id-cell">#{{o.id}}</td>
           <td>{{o.userId}}</td>
-          <td class="price-cell">${{o.totalPrice}}</td>
-          <td>{{o.createdAt | date:'dd/MM/yyyy'}}</td>
+          <td class="price-cell">${{o.orderSum}}</td>
+          <td>{{o.orderDate | date:'dd/MM/yyyy'}}</td>
           <td class="status-cell">
             <p-select [options]="statuses"
                       [(ngModel)]="o.status"

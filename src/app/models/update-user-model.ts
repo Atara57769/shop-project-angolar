@@ -1,12 +1,9 @@
 import { OrderModel } from "./orders-model";
 
-export class UserModel{
-  id: number=-1;
-  email:string=""
+export class UpdateUserModel{
+  id?: number;
   firstName:string=""
   lastName:string=""
   address:string='';
   phoneNumber:string='';
-  isAdmin?:boolean=false
-  orders: OrderModel[]=[];
 }

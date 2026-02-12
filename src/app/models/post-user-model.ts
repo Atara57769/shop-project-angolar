@@ -7,6 +7,5 @@ export class PostUserModel{
   lastName:string=""
   password:string=""
   address:string='';
-  phone:string='';
-  orders: OrderModel[]=[];
+  phoneNumber:string='';
 }

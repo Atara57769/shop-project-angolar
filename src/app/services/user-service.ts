@@ -1,57 +1,41 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { UserModel } from '../models/user-model';
 import { PostUserModel } from '../models/post-user-model';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { UpdateUserModel } from '../models/update-user-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  users: PostUserModel[] = []
+  users: PostUserModel[] = [];
+  private http = inject(HttpClient);
+
+  private baseUrl = 'https://localhost:44313/api';
 
   getUserById(userId: number) {
-    return this.users.find(u => u.id === userId);
+    return this.http.get<UserModel>(`${this.baseUrl}/users/${userId}`);
   }
 
-  updateUser(updatedUser: PostUserModel) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === updatedUser.id) {
-        this.users[i] = updatedUser;
-        break;
-      }
+  getCurrentUserFromServer() {
+    const userJson = sessionStorage.getItem('currentUser');
+    if (!userJson) {
+      return of(null);
     }
+    const { id } = JSON.parse(userJson) as UserModel;
+    return this.getUserById(id);
   }
+
+  updateUser(id: number, updatedUser: UpdateUserModel) {
+    return this.http.put(`${this.baseUrl}/users/${id}`, updatedUser);
+  }
+
   addUser(newUser: PostUserModel) {
-    this.users.push(newUser);
-    let user: UserModel = {
-      id: newUser.id,
-      email: newUser.email,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      address: newUser.address,
-      phone: newUser.phone,
-      orders: []
-    }
-    return user
+    return this.http.post<UserModel>(`${this.baseUrl}/users`, newUser);
   }
+
   loginUser(email: string, password: string) {
-    //let post = this.users.find(u => u.email === email && u.password === password);
-     {
-      let user: UserModel = {
-        id: 1,
-        email: "post.email",
-        firstName:" post.firstName",
-        lastName: "post.lastName",
-        address: "post.address",
-        phone: "post.phone",
-        isAdmin: true,
-        orders: []
-      }
-      return user
-    }
-    return null;
+    return this.http.post<UserModel>(`${this.baseUrl}/users/login`, { email, password });
   }
 }
-   
-  
-
-

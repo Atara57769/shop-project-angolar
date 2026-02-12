@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth-service';
 import { InputMaskModule } from 'primeng/inputmask';
 @Component({
   selector: 'app-sign-up',
-  imports: [InputMaskModule,ButtonModule, RouterModule, PasswordModule, FloatLabel, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
+  imports: [InputMaskModule, ButtonModule, RouterModule, PasswordModule, FloatLabel, FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule, ReactiveFormsModule],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.scss',
 })
@@ -31,9 +31,10 @@ export class SignUp {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     address: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
+
   signUp() {
     this.user = new PostUserModel();
     this.user.email = this.frmSignUp.get('email')?.value || '';
@@ -41,8 +42,18 @@ export class SignUp {
     this.user.lastName = this.frmSignUp.get('lastName')?.value || '';
     this.user.address = this.frmSignUp.get('address')?.value || '';
     this.user.password = this.frmSignUp.get('password')?.value || '';
-    this.authService.login(this.userServ.addUser(this.user));
-    this.router.navigateByUrl('account')
+    this.user.phoneNumber = this.frmSignUp.get('phoneNumber')?.value || '';
+    this.userServ.addUser(this.user).subscribe({
+      next: (createdUser) => {
+        this.authService.login(createdUser);
+        this.router.navigateByUrl('account');
+      },
+      error: (err) => {
+         alert(err.error);
+      }
+    });
+
+
   }
   signInShow() {
     this.router.navigateByUrl('sign-in');

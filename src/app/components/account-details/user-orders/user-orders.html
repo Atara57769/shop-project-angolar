@@ -11,8 +11,8 @@
         </span>
       </header>
       <div class="meta">
-        <p><span class="label">Total</span> ${{ o.totalPrice }}</p>
-        <p><span class="label">Date</span> {{ o.createdAt | date }}</p>
+        <p><span class="label">Total</span> ${{ o.orderSum }}</p>
+        <p><span class="label">Date</span> {{ o.orderDate | date }}</p>
       </div>
       <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
         Mark as delivered
