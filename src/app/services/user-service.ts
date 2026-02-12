@@ -4,6 +4,7 @@ import { PostUserModel } from '../models/post-user-model';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { UpdateUserModel } from '../models/update-user-model';
+import { OrderModel } from '../models/orders-model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,8 @@ export class UserService {
 
   loginUser(email: string, password: string) {
     return this.http.post<UserModel>(`${this.baseUrl}/users/login`, { email, password });
+  }
+  getUserOrders(userId: number) {
+    return this.http.get<OrderModel[]>(`${this.baseUrl}/users/${userId}/orders`);
   }
 }

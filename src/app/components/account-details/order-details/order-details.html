@@ -1,4 +1,6 @@
 <div class="order-wrapper">
+  <button class="back-btn" (click)="goBack()">← Back to Orders</button>
+  
   <div class="order-card">
     
     <div class="order-header">
@@ -7,15 +9,19 @@
         <h2>#{{ order?.id }}</h2>
       </div>
 
-      <div class="status pending">
+      <div class="status" [class]="order?.status || 'pending'">
         {{ order?.status || 'pending' }}
       </div>
     </div>
 
     <div class="meta">
       <div>
+        <span class="label">Date:</span>
+        {{ order?.orderDate | date:'MMM d, y' }}
+      </div>
+      <div>
         <span class="label">Total:</span>
-        ${{ order?.orderSum }}
+        {{ order?.orderSum | currency }}
       </div>
       <div>
         <span class="label">Items:</span>
@@ -24,18 +30,22 @@
     </div>
 
     <div class="items-grid">
-      @for (o of ordrsItems; track $index) {
-        <div class="item-card">
-          <img [src]="o.productImageUrl" />
-          <div class="item-info">
-            <div class="item-name">{{ o.productName }}</div>
-            <div>${{ o.productPrice }}</div>
-            <div>Quantity: {{ o.quantity }}</div>
-            <div class="item-total">
-              ${{ o.quantity * o.productPrice }}
+      @if (ordrsItems && ordrsItems.length > 0) {
+        @for (o of ordrsItems; track $index) {
+          <div class="item-card">
+            <img [src]="o.productImageUrl || placeholder" [alt]="o.productName" />
+            <div class="item-info">
+              <div class="item-name">{{ o.productName }}</div>
+              <div>{{ o.productPrice | currency }}</div>
+              <div>Quantity: {{ o.quantity }}</div>
+              <div class="item-total">
+                {{ o.quantity * o.productPrice | currency }}
+              </div>
             </div>
           </div>
-        </div>
+        }
+      } @else {
+        <div class="empty-state">No items in this order</div>
       }
     </div>
 

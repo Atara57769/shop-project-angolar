@@ -28,7 +28,7 @@
           <td class="status-cell">
             <p-select [options]="statuses"
                       [(ngModel)]="o.status"
-                      placeholder="Choose status"
+                      
                       class="status-select"
                       (onChange)="updateOrderStatus(o.id, $event.value)" />
           </td>

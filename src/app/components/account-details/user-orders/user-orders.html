@@ -1,25 +1,33 @@
-<div class="orders-grid">
-  @for (o of orders; track o.id) {
-    <article class="order-card">
-      <header class="order-header">
-        <div>
-          <p class="eyebrow">Order</p>
-          <h2>#{{ o.id }}</h2>
+@if (loading) {
+  <div class="loading">Loading orders...</div>
+} @else if (error) {
+  <div class="error">{{ error }}</div>
+} @else if (orders.length === 0) {
+  <div class="empty">No orders found</div>
+} @else {
+  <div class="orders-grid">
+    @for (o of orders; track o.id) {
+      <article class="order-card">
+        <header class="order-header">
+          <div>
+            <p class="eyebrow">Order</p>
+            <h2>#{{ o.id }}</h2>
+          </div>
+          <span class="status" [class.delivered]="o.status === 'delivered'" [class.pending]="o.status === 'pending'" [class.shipped]="o.status === 'shipped'">
+            {{ o.status }}
+          </span>
+        </header>
+        <div class="meta">
+          <p><span class="label">Total</span> ${{ o.orderSum }}</p>
+          <p><span class="label">Date</span> {{ o.orderDate | date }}</p>
         </div>
-        <span class="status" [class.delivered]="o.status === 'delivered'" [class.pending]="o.status === 'pending'" [class.shipped]="o.status === 'shipped'">
-          {{ o.status }}
-        </span>
-      </header>
-      <div class="meta">
-        <p><span class="label">Total</span> ${{ o.orderSum }}</p>
-        <p><span class="label">Date</span> {{ o.orderDate | date }}</p>
-      </div>
-      <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
-        Mark as delivered
-      </button>
-       <button type="button" (click)="showDetails(o.id)" >
-        Show details
-      </button>
-    </article>
-  }
-</div>
+        <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
+          Mark as delivered
+        </button>
+         <button type="button" (click)="showDetails(o.id)" >
+          Show details
+        </button>
+      </article>
+    }
+  </div>
+}

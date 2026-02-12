@@ -1,55 +1,34 @@
 import { inject, Injectable } from '@angular/core';
 import { ProductModel } from '../models/product-model';
 import { CategoryService } from './category-service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  products: ProductModel[] = [
-    {
-      id: 1,
-      name: 'Laptop',
-      description: 'High performance laptop',
-      price: 1200,
-      categoryName: 'Electronics',
-      categoryId: 1,
-      imageUrl: 'assets/images/laptop.png',
-      isAvailable: true
-    },
-    {
-      id: 2,
-      name: 'HeadphoneNumbers',
-      description: 'Noise cancelling headphoneNumbers',
-      price: 200,
-      categoryName: 'Accessories',
-      categoryId: 2,
-      imageUrl: 'assets/images/headphoneNumbers.png',
-      isAvailable: true
-    }
-  ];
-  srvCategory:CategoryService=inject(CategoryService);
-  getAllProducts() {
-    return [...this.products];
+  private http = inject(HttpClient);
+  private baseUrl = 'https://localhost:44313/api';
+  srvCategory: CategoryService = inject(CategoryService);
 
+  getAllProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.baseUrl}/products`);
   }
-  getProductById(productId: number) {
-    return this.products.find(p => p.id === productId);
+
+  getProductById(productId: number): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.baseUrl}/products/${productId}`);
   }
-  deleteProductById(productId: number) {
-    this.products = this.products.filter(p => p.id !== productId);
+
+  deleteProductById(productId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/products/${productId}`);
   }
-  updateProduct(updatedProduct: ProductModel) {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === updatedProduct.id) {
-        this.products[i] = updatedProduct;
-        break;
-      }
-    }
+
+  updateProduct(updatedProduct: ProductModel): Observable<ProductModel> {
+    return this.http.put<ProductModel>(`${this.baseUrl}/products/${updatedProduct.id}`, updatedProduct);
   }
-  addProduct(newProduct: ProductModel) {
-    newProduct.categoryId=this.srvCategory.getIdByName(newProduct.categoryName) ?? 0;
-    this.products.push(newProduct);
-    console.log('Product added:', this.products);
+
+  addProduct(newProduct: ProductModel): Observable<ProductModel> {
+    return this.http.post<ProductModel>(`${this.baseUrl}/products`, newProduct);
   }
 }

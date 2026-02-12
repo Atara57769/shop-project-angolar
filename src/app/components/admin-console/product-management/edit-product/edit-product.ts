@@ -40,8 +40,19 @@ export class EditProduct {
     this.categories = this.srvCategory.getCategoryNames();
   }
   ngOnChanges() {
-    this.currentProduct = this.srvProducts.getProductById(this.currentId) ?? new ProductModel();
-    this.refreshForm();
+    if (this.currentId && this.currentId !== -1) {
+      this.srvProducts.getProductById(this.currentId).subscribe({
+        next: (product) => {
+          this.currentProduct = product;
+          this.refreshForm();
+        },
+        error: (err) => {
+          console.error('Error loading product:', err);
+          this.currentProduct = new ProductModel();
+          this.refreshForm();
+        }
+      });
+    }
   }
   refreshForm() {
     this.frmProduct.setValue({
@@ -63,8 +74,17 @@ export class EditProduct {
     this.currentProduct.description = this.frmProduct.value.description;
     this.currentProduct.categoryName = this.frmProduct.value.category;
     this.currentProduct.imageUrl = this.previewUrl || this.frmProduct.value.imgUrl;
-    this.srvProducts.updateProduct(this.currentProduct);
-    this.hide();
+    
+    this.srvProducts.updateProduct(this.currentProduct).subscribe({
+      next: (updatedProduct) => {
+        console.log('Product updated successfully:', updatedProduct);
+        this.hide();
+      },
+      error: (err) => {
+        console.error('Error updating product:', err);
+        alert('Failed to update product: ' + (err?.error?.message || err?.message || 'Unknown error'));
+      }
+    });
   }
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;

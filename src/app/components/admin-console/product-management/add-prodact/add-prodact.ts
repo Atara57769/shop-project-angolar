@@ -48,9 +48,27 @@ export class AddProdact {
     newProduct.categoryName = this.frmProduct.value.category;
     newProduct.imageUrl = this.previewUrl || this.frmProduct.value.imgUrl;
     newProduct.isAvailable = true;
-    this.srvProducts.addProduct(newProduct);
-    this.hide();
-    this.refresh();
+    
+    this.srvProducts.addProduct(newProduct).subscribe({
+      next: (createdProduct) => {
+        console.log('Product added successfully:', createdProduct);
+        this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Success', 
+          detail: 'Product added successfully' 
+        });
+        this.hide();
+        this.refresh();
+      },
+      error: (err) => {
+        console.error('Error adding product:', err);
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: 'Failed to add product: ' + (err?.error?.message || err?.message || 'Unknown error')
+        });
+      }
+    });
   }
   hide() {
     this.refresh();

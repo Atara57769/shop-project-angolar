@@ -15,6 +15,25 @@
     margin: auto;
 }
 
+.back-btn{
+    background: var(--fun-card);
+    border: 2px solid rgba(255, 210, 79, 0.35);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fun-navy);
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+    font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+
+    &:hover{
+        transform: translateX(-4px);
+        box-shadow: var(--fun-shadow);
+    }
+}
+
 .order-card{
     background: var(--fun-card);
     border: 2px solid rgba(255, 210, 79, 0.35);
@@ -50,14 +69,29 @@
     border-radius: 12px;
     font-weight: 700;
     text-transform: capitalize;
-    background: #fff0d2;
+    font-size: 13px;
+
+    &.pending{
+        background: #fff0d2;
+        color: #b8860b;
+    }
+
+    &.shipped{
+        background: #d4edff;
+        color: #0066cc;
+    }
+
+    &.delivered{
+        background: #d4f4dd;
+        color: #1e7e34;
+    }
 }
 
 .meta{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     color: var(--fun-muted);
-     gap: 4px; 
+    gap: 8px; 
 }
 
 .label{
@@ -110,6 +144,14 @@
 .item-total{
     font-weight: 700;
     color: var(--fun-orange);
+}
+
+.empty-state{
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--fun-muted);
+    font-size: 16px;
 }
 
 

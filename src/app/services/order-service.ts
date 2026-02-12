@@ -1,109 +1,33 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { OrderModel } from '../models/orders-model';
+import { HttpClient } from '@angular/common/http';
 export type OrderStatus = 'pending' | 'shipped' | 'delivered';
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  orders: OrderModel[] = [
-    {
-      id: 101,
-      orderItems: [
-  {
-    orderId: 101,
-    productId: 1,
-    quantity: 2,
-    productName: 'Laptop Dell XPS',
-    productImageUrl: 'https://via.placeholder.com/150',
-    productPrice: 4500
-  },
-  {
-    orderId: 101,
-    productId: 2,
-    quantity: 1,
-    productName: 'Wireless Mouse',
-    productImageUrl: 'https://via.placeholder.com/150',
-    productPrice: 150
-  },
-  {
-    orderId: 101,
-    productId: 3,
-    quantity: 3,
-    productName: 'Mechanical Keyboard',
-    productImageUrl: 'https://via.placeholder.com/150',
-    productPrice: 350
-  }
-],
-      userId: 3,
-      orderSum: 4500,
-      status: 'shipped',
-      orderDate: new Date('2024-05-10')
-    },
-    {
-      id: 102,
-      userId: 3,
-      orderItems: [],
-      orderSum: 150,
-      status: 'pending',
-      orderDate: new Date('2024-06-01')
-    },{
-      id: 103,
-      orderItems: [],
-      userId: 4,
-      orderSum: 4500,
-      status: 'shipped',
-      orderDate: new Date('2024-05-10')
-    },
-    {
-      id: 104,
-      userId: 4,
-      orderItems: [],
-      orderSum: 150,
-      status: 'pending',
-      orderDate: new Date('2024-06-01')
-    },{
-      id: 105,
-      orderItems: [],
-      userId: 3,
-      orderSum: 4500,
-      status: 'shipped',
-      orderDate: new Date('2024-05-10')
-    },
-    {
-      id: 106,
-      userId: 3,
-      orderItems: [],
-      orderSum: 150,
-      status: 'pending',
-      orderDate: new Date('2024-06-01')
-    },{
-      id: 107,
-      orderItems: [],
-      userId: 3,
-      orderSum: 4500,
-      status: 'shipped',
-      orderDate: new Date('2024-05-10')
-    },
-    {
-      id: 108,
-      userId: 3,
-      orderItems: [],
-      orderSum: 150,
-      status: 'pending',
-      orderDate: new Date('2024-06-01')
-    }
-  ];
+  private http = inject(HttpClient);
+
+  private baseUrl = 'https://localhost:44313/api';
   getAllOrders(){
-    return [...this.orders];
+     return this.http.get<OrderModel[]>(`${this.baseUrl}/orders`);
   }
-  updateOrderStatus(orderId: number, status: OrderStatus) {
-    const orderIndex = this.orders.findIndex(o => o.id === orderId)
-    if (orderIndex !== -1) {
-      this.orders[orderIndex].status = status;
-    } 
-    console.log(this.orders)
-  }
+updateOrderStatus(orderId: number, status: OrderStatus, onComplete: () => void) {
+  this.getOrderById(orderId).subscribe(order => {
+    if (order) {
+      order.status = status;
+      this.http.put(`${this.baseUrl}/orders/${order.id}`, order)
+        .subscribe({
+          next: () => onComplete(), 
+          error: (err) => {
+            console.error(err);
+            onComplete();
+          }
+        });
+    }
+  });
+}
   getOrderById(id: number) {
-    return this.orders.find(o => o.id === id);
+return this.http.get<OrderModel>(`${this.baseUrl}/orders/${id}`);
   } 
 }

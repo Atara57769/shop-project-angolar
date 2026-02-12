@@ -30,20 +30,48 @@ export class ProductManagement {
   selectedProduct: number = -1;
   constructor(private confirmationService: ConfirmationService, private messageService: MessageService) { }
   ngOnInit() {
-    this.products = this.srvProducts.getAllProducts();
+    this.loadProducts();
   }
+
+  loadProducts() {
+    this.srvProducts.getAllProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: 'Failed to load products' 
+        });
+      }
+    });
+  }
+
   hideDialog() {
     this.visible = false;
-    this.products = this.srvProducts.getAllProducts();
+    this.loadProducts();
   }
   editProduct(id: number) {
     this.selectedProduct = id;
     this.visible = true;
   }
   deleteProduct(productId: number) {
-    this.srvProducts.deleteProductById(productId);
-    this.products = this.srvProducts.getAllProducts();
-    this.visible = false;
+    this.srvProducts.deleteProductById(productId).subscribe({
+      next: () => {
+        this.loadProducts();
+        this.visible = false;
+      },
+      error: (err) => {
+        console.error('Error deleting product:', err);
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: 'Failed to delete product' 
+        });
+      }
+    });
   }
   confirm2(event: Event, id: number) {
     this.confirmationService.confirm({
@@ -82,7 +110,7 @@ export class ProductManagement {
   }
   hideAddDialog() {
     this.visibleAdd = false;
-    this.products = this.srvProducts.getAllProducts();
+    this.loadProducts();
   }
 
 }
