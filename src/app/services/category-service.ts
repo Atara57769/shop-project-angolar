@@ -16,8 +16,10 @@ export class CategoryService {
     console.log('Categories Names:', categoriesNames);
     return categoriesNames;
   }
+
   getIdByName(categoryName: string){
     const category = this.categories.find(cat => cat.name === categoryName);
     return category?.id;
   } 
+  
 }

@@ -58,7 +58,7 @@ export class ShowProducts implements OnInit {
     imageUrl: "/headphones.jpg",
     isAvailable: false
   },{
-    id: 1,
+    id: 4,
     name: "Laptop",
     description: "Gaming laptop",
     price: 2500,
@@ -68,7 +68,7 @@ export class ShowProducts implements OnInit {
     isAvailable: true
   },
   {
-    id: 2,
+    id: 5,
     name: "Toy Car",
     description: "Remote control car",
     price: 120,
@@ -78,7 +78,7 @@ export class ShowProducts implements OnInit {
     isAvailable: true
   },
   {
-    id: 3,
+    id: 6,
     name: "Headphones",
     description: "Wireless headphones",
     price: 300,
@@ -86,8 +86,9 @@ export class ShowProducts implements OnInit {
     categoryId: 1,
     imageUrl: "/headphones.jpg",
     isAvailable: false
-  },{
-    id: 1,
+  },
+  {
+    id: 7,
     name: "Laptop",
     description: "Gaming laptop",
     price: 2500,
@@ -97,7 +98,7 @@ export class ShowProducts implements OnInit {
     isAvailable: true
   },
   {
-    id: 2,
+    id: 8,
     name: "Toy Car",
     description: "Remote control car",
     price: 120,
@@ -107,7 +108,7 @@ export class ShowProducts implements OnInit {
     isAvailable: true
   },
   {
-    id: 3,
+    id: 9,
     name: "Headphones",
     description: "Wireless headphones",
     price: 300,
@@ -120,8 +121,6 @@ export class ShowProducts implements OnInit {
   }
 
   loadMockProducts(): void {
-
-    
     console.log('Mock products loaded:', this.products.length);
   }
 

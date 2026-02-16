@@ -145,3 +145,19 @@ hr {
     }
   }
 }
+
+:host ::ng-deep .p-inputgroup {
+  display: flex; // מוודא שהקונטיינר הוא פלקס
+  align-items: center; // מיישר את האייקון והאינפוט אנכית לאמצע
+
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; // תופס את כל גובה התיבה כדי להתמרכז
+  }
+}
+
+.search-input {
+  align-items: center;
+}

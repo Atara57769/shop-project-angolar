@@ -1,5 +1,5 @@
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -38,21 +38,47 @@ import { InputGroupModule } from 'primeng/inputgroup';
 export class Filters implements OnInit {
 
   search: string = '';
-  sortBy: string = 'new';
-  priceRange: number[] = [0, 500];
+
+  sortBy = signal<string>('new');
+
+  // פונקציה לעדכון (אופציונלי, אפשר גם ישירות ב-HTML)
+  // setSort(value: string) {
+  //   this.sortBy.set(value);
+  //   console.log('Sort by set to:', value);
+  // }
   
   categoryService = inject(CategoryService);
 
   categories: CategoryModel[] = [];
-  selectedCategories: CategoryModel[] = [];
+  selectedCategoriesIds = signal<number[]>([]);
+
+  readonly minLimit = 0;
+  readonly maxLimit = 200;
+
+  rangeValues = signal<number[]>([this.minLimit, this.maxLimit]);
 
   ngOnInit() {
     // Load categories from service
     this.categories = this.categoryService.categories;
     
     // Optional: Select default category
-    if (this.categories && this.categories.length > 1) {
-      this.selectedCategories = [this.categories[1]];
-    }
+    // if (this.categories && this.categories.length > 1) {
+    //   this.selectedCategories = [this.categories[1]];
+    // }
+  }
+
+  //for checking the values of the filters
+  update(){
+    console.log('Search:', this.search);
+    console.log('Selected Categories IDs:', this.selectedCategoriesIds());
+    console.log('Price Range:', this.rangeValues());
+    console.log('Sort By:', this.sortBy());
+  }
+
+  onSearch() {
+    console.log('מבצע חיפוש עבור:', this.search);
+
+    // לשלוח כאן לסינון המוצרים ב API .NET לפי הערך של החיפוש 
+
   }
 }
