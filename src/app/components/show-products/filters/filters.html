@@ -4,7 +4,8 @@
         <section>
             <p-inputgroup class="search-input">
                 <i class="pi pi-search"></i>
-                <input pInputText [(ngModel)]="search" placeholder="search" />
+                <input pInputText [(ngModel)]="search" placeholder="search" (keyup.enter)="onSearch()"
+                    (blur)="onSearch()" />
             </p-inputgroup>
 
         </section>
@@ -34,7 +35,8 @@
                     <div class="flex flex-col gap-4">
                         @for (category of categories; track category.id) {
                         <div class="category-item flex w-full">
-                            <p-checkbox [value]="category" [inputId]="category.name" [(ngModel)]="selectedCategories" />
+                            <p-checkbox [value]="category.id" [inputId]="category.name"
+                                [(ngModel)]="selectedCategoriesIds" />
                             <label [for]="category.name" class="category-label">
                                 {{category.name}}
                             </label>
@@ -66,4 +68,7 @@
             </div>
         </section>
     </div>
+
+    <!-- for checking the values of the filters -->
+    <button (click)="update()">Update Filters</button>
 </div>

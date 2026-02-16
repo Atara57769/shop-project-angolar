@@ -50,7 +50,7 @@ export class Filters implements OnInit {
   categoryService = inject(CategoryService);
 
   categories: CategoryModel[] = [];
-  selectedCategories: CategoryModel[] = [];
+  selectedCategoriesIds = signal<number[]>([]);
 
   readonly minLimit = 0;
   readonly maxLimit = 200;
@@ -65,5 +65,20 @@ export class Filters implements OnInit {
     // if (this.categories && this.categories.length > 1) {
     //   this.selectedCategories = [this.categories[1]];
     // }
+  }
+
+  //for checking the values of the filters
+  update(){
+    console.log('Search:', this.search);
+    console.log('Selected Categories IDs:', this.selectedCategoriesIds());
+    console.log('Price Range:', this.rangeValues());
+    console.log('Sort By:', this.sortBy());
+  }
+
+  onSearch() {
+    console.log('מבצע חיפוש עבור:', this.search);
+
+    // לשלוח כאן לסינון המוצרים ב API .NET לפי הערך של החיפוש 
+
   }
 }
