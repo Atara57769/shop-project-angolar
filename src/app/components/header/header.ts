@@ -28,6 +28,19 @@ export class Header {
   cartService = inject(CartService);
   cartCount = this.cartService.cartCount;
 
+  getUserName(): string {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      try {
+        const user = JSON.parse(currentUser);
+        return user.firstName || 'Account';
+      } catch {
+        return 'Account';
+      }
+    }
+    return 'Account';
+  }
+
   shopShow() {
     this.router.navigateByUrl('show-products');
   }
