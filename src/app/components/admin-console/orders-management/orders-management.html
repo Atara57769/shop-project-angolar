@@ -30,7 +30,7 @@
                       [(ngModel)]="o.status"
                       
                       class="status-select"
-                      (onChange)="updateOrderStatus(o.id, $event.value)" />
+                      (onChange)="o.id !== undefined && updateOrderStatus(o.id, $event.value)" />
           </td>
         </tr>
         }

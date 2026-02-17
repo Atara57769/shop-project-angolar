@@ -1,77 +1,86 @@
-
-<div class="cart-container p-4" style="max-width: 800px; margin: auto;">
-    <div class="flex justify-content-center mb-4">
-        <h2 class="text-xl font-bold m-0 tracking-tight">MY CART</h2>
+<div class="cart-wrapper">
+  <div class="cart-container">
+    
+    <!-- Header -->
+    <div class="cart-header">
+      <h1 class="header">Your Shopping Cart</h1>
+      <!-- <p class="subheader">Review and manage your items</p> -->
     </div>
 
-    <p-dataView [value]="products()" layout="list">
-        <ng-template #list let-items>
-            <div style="display: flex; flex-direction: column; gap: 15px;">
-                @for (item of items; track item.id) {
-                <div class="product-card shadow-1"
-                    style="background: white; border-radius: 12px; padding: 20px; width: 100%;">
-
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-
-                        <div style="display: flex; align-items: center; gap: 20px;">
-                            <div
-                                style="width: 100px; height: 100px; background: #f8f8f8; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                <img [src]="item.productImageUrl" [alt]="item.productName"
-                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" />
-                            </div>
-
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
-                                <h3 style="font-weight: bold; margin: 0; font-size: 1.25rem;">{{item.productName}}</h3>
-                                <div class="quantity-picker-wrapper"
-                                    style="display: flex; align-items: center; gap: 10px; background: #f0f0f0; padding: 5px 10px; border-radius: 20px; width: fit-content;">
-                                    <button class="circle-btn" (click)="updateQuantity(item, -1)"
-                                        [disabled]="item.quantity <= 1"
-                                        style="border: none; background: none; cursor: pointer;">-</button>
-                                    <span style="font-weight: bold;">{{item.quantity || 1}}</span>
-                                    <button class="circle-btn" (click)="updateQuantity(item, 1)"
-                                        style="border: none; background: none; cursor: pointer;">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; min-width: 150px;">
-                            <div>
-                                <div style="font-size: 0.8rem; color: #777;">ITEM_PRICE</div>
-                                <div style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">{{
-                                    item.productPrice |
-                                    number:'1.2-2' }} ₪</div>
-
-                                <div style="font-size: 0.8rem; color: #777;">SUBTOTAL</div>
-                                <div style="font-weight: bold; font-size: 1.5rem; color: #b19361;">
-                                    {{ (item.productPrice * (item.quantity || 1)) | number:'1.2-2' }} ₪
-                                </div>
-                            </div>
-
-                            <button (click)="removeItem(item.productId)"
-                                style="margin-top: 15px; background: none; border: none; color: #ff4d4d; cursor: pointer;">
-                                <i class="pi pi-trash" style="font-size: 1.2rem;"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-                }
-                    </div>
-        </ng-template>
-    </p-dataView>
-
-    <div
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-        <div>
-            <span style="font-weight: bold; font-size: 1.2rem; margin-right: 10px;">Total_Price</span>
-            <span style="font-weight: bold; font-size: 1.25rem;">{{ totalPrice() | number:'1.2-2' }} ₪</span>
+    <!-- Cart Items -->
+    <div class="cart-items-section">
+      @if (products().length === 0) {
+        <div class="empty-cart-card">
+          <i class="pi pi-shopping-cart empty-icon"></i>
+          <h3>Your cart is empty</h3>
+          <p>Start shopping to add items to your cart</p>
         </div>
+      } @else {
+        <div class="cart-items-list">
+          @for (item of products(); track item.productId) {
+            <div class="cart-item-card">
+              <!-- Product Image -->
+              <div class="item-image">
+                <img [src]="item.productImageUrl" [alt]="item.productName" />
+              </div>
 
-        <button class="gold-checkout-btn" (click)="checkout()"
-            style="background: #e1d5c0; border: none; padding: 15px 30px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-            <i class="pi pi-shopping-bag"></i>
-            Checkout
-        </button>
+              <!-- Product Info -->
+              <div class="item-info">
+                <h3 class="item-name">{{ item.productName }}</h3>
+                <p class="item-price">{{ item.productPrice | number:'1.2-2' }} ₪</p>
+              </div>
+
+              <!-- Quantity Controls -->
+              <div class="quantity-controls">
+                <button class="qty-btn" (click)="updateQuantity(item, -1)" [disabled]="item.quantity <= 1" aria-label="Decrease quantity">
+                  <i class="pi pi-minus"></i>
+                </button>
+                <span class="qty-value">{{ item.quantity || 1 }}</span>
+                <button class="qty-btn" (click)="updateQuantity(item, 1)" aria-label="Increase quantity">
+                  <i class="pi pi-plus"></i>
+                </button>
+              </div>
+
+              <!-- Subtotal -->
+              <div class="item-subtotal">
+                {{ (item.productPrice * (item.quantity || 1)) | number:'1.2-2' }} ₪
+              </div>
+
+              <!-- Delete Button -->
+              <button class="delete-btn" (click)="removeItem(item.productId)" aria-label="Remove item">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          }
+        </div>
+      }
     </div>
+
+    <!-- Cart Summary & Checkout -->
+    @if (products().length > 0) {
+      <div class="cart-summary">
+        <div class="summary-card">
+          <div class="summary-row">
+            <span class="summary-label">Subtotal</span>
+            <span class="summary-value">{{ totalPrice() | number:'1.2-2' }} ₪</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Shipping</span>
+            <span class="summary-value">FREE</span>
+          </div>
+          <div class="divider"></div>
+          <div class="summary-row total">
+            <span class="summary-label">Total</span>
+            <span class="total-amount">{{ totalPrice() | number:'1.2-2' }} ₪</span>
+          </div>
+          
+          <button class="checkout-btn" (click)="checkout()">
+            <i class="pi pi-check"></i>
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
 </div>
