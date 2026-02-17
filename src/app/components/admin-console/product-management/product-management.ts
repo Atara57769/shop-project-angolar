@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ProductModel } from '../../../models/product-model';
 import { ProductService } from '../../../services/product-service';
 import { Dialog } from 'primeng/dialog';
@@ -13,6 +13,7 @@ import { CategoryService } from '../../../services/category-service';
 import { CategoryModel } from '../../../models/category-model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddProdact } from './add-prodact/add-prodact';
+import { PostProductModel } from '../../../models/post-product-model';
 @Component({
   selector: 'app-product-management',
   imports: [Dialog, ButtonModule, InputTextModule, EditProduct, ConfirmDialog, ToastModule, CommonModule, ReactiveFormsModule,AddProdact],
@@ -23,6 +24,7 @@ import { AddProdact } from './add-prodact/add-prodact';
 export class ProductManagement {
   srvProducts: ProductService = inject(ProductService);
   srvCategory: CategoryService = inject(CategoryService);
+  private cdr = inject(ChangeDetectorRef);
   products: ProductModel[] = [];
   categories: CategoryModel[] = [];
   visible: boolean = false;
@@ -34,19 +36,20 @@ export class ProductManagement {
   }
 
   loadProducts() {
-    // this.srvProducts.getAllProducts().subscribe({
-    //   next: (products) => {
-    //     this.products = products;
-    //   },
-    //   error: (err) => {
-    //     console.error('Error loading products:', err);
-    //     this.messageService.add({ 
-    //       severity: 'error', 
-    //       summary: 'Error', 
-    //       detail: 'Failed to load products' 
-    //     });
-    //   }
-    // });
+    this.srvProducts.getAllProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Error', 
+          detail: 'Failed to load products' 
+        });
+      }
+    });
   }
 
   hideDialog() {
@@ -58,26 +61,39 @@ export class ProductManagement {
     this.visible = true;
   }
   deleteProduct(productId: number) {
-    // this.srvProducts.deleteProductById(productId).subscribe({
-    //   next: () => {
-    //     this.loadProducts();
-    //     this.visible = false;
-    //   },
-    //   error: (err) => {
-    //     console.error('Error deleting product:', err);
-    //     this.messageService.add({ 
-    //       severity: 'error', 
-    //       summary: 'Error', 
-    //       detail: 'Failed to delete product' 
-    //     });
-    //   }
-    // });
+   this.srvProducts.getProductById(productId).subscribe({
+      next: (product) => {
+        if (!product) 
+          return
+        let updateProduct = new PostProductModel();
+        updateProduct.id = product.id;
+        updateProduct.name = product.name;
+        updateProduct.price = product.price;
+        updateProduct.description = product.description;
+        updateProduct.categoryId = product.categoryId;
+        updateProduct.imageUrl = product.imageUrl;
+        updateProduct.isAvailable = false;
+        this.srvProducts.updateProduct(updateProduct).subscribe({
+          next: () => {
+            this.loadProducts();
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error deleting product:', err);
+      
+      }
+    });
   }
+
+    
+
+  
   confirm2(event: Event, id: number) {
     this.confirmationService.confirm({
 
       target: event.target as EventTarget,
-      message: 'Delete this product?',
+      message: 'Mark this product as out of stock?',
       header: 'Confirm deletion',
       rejectLabel: 'Cancel',
       rejectButtonProps: {
@@ -86,7 +102,7 @@ export class ProductManagement {
         outlined: true,
       },
       acceptButtonProps: {
-        label: 'Delete',
+        label: 'yes',
         severity: 'danger',
         
       },

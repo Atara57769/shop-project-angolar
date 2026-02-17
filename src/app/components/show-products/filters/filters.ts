@@ -59,7 +59,14 @@ export class Filters implements OnInit {
 
   ngOnInit() {
     // Load categories from service
-    this.categories = this.categoryService.categories;
+    this.categoryService.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: (err) => {
+       this.categories = [];
+      }
+    });
     
     // Optional: Select default category
     // if (this.categories && this.categories.length > 1) {

@@ -3,6 +3,7 @@ import { ProductModel } from '../models/product-model';
 import { CategoryService } from './category-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PostProductModel } from '../models/post-product-model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +25,17 @@ export class ProductService {
     return this.http.delete<void>(`${this.baseUrl}/products/${productId}`);
   }
 
-  updateProduct(updatedProduct: ProductModel): Observable<ProductModel> {
+  updateProduct(updatedProduct: PostProductModel): Observable<ProductModel> {
     return this.http.put<ProductModel>(`${this.baseUrl}/products/${updatedProduct.id}`, updatedProduct);
   }
 
-  addProduct(newProduct: ProductModel): Observable<ProductModel> {
+  addProduct(newProduct: PostProductModel): Observable<ProductModel> {
     return this.http.post<ProductModel>(`${this.baseUrl}/products`, newProduct);
   }
+  uploadImage(formData: FormData) {
+  return this.http.post<{ url: string }>(
+    'https://localhost:44313/api/Upload/upload',
+    formData
+  );
+}
 }

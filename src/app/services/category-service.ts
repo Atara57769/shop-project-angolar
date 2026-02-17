@@ -1,25 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CategoryModel } from '../models/category-model';
-
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  categories: CategoryModel[] = [
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Accessories' }
+  private http = inject(HttpClient);
+  private baseUrl = 'https://localhost:44313/api';
 
-  ];
-  
-  getCategoryNames() {
-    const categoriesNames = this.categories.map(cat => cat.name);
-    console.log('Categories Names:', categoriesNames);
-    return categoriesNames;
+
+
+getCategoryNames(categories:CategoryModel[]): string[] {
+     return categories.map(c => c.name);
   }
-
-  getIdByName(categoryName: string){
-    const category = this.categories.find(cat => cat.name === categoryName);
-    return category?.id;
-  } 
-  
+getCategories() {
+    return this.http.get<CategoryModel[]>(`${this.baseUrl}/categories`)
+  }
+ getIdByName(categoryName: string,categories:CategoryModel[]): number {
+    return categories.find(c => c.name === categoryName)?.id ?? -1;
+  }
 }
