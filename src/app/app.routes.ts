@@ -10,11 +10,13 @@ import { UserOrders } from './components/account-details/user-orders/user-orders
 import { OrderDetails } from './components/account-details/order-details/order-details';
 import { ShowProducts } from './components/show-products/show-products';
 import { ProductDetails } from './components/product-details/product-details';
+import { Cart } from './components/cart/cart';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'sign-up', pathMatch: 'full' },
   { path: 'show-products', component: ShowProducts },
   { path: 'product-details/:id', component: ProductDetails },
+  { path: 'cart', component: Cart },
   { path: 'products', component: ProductManagement },
   { path: 'orders', component: OrdersManagement },
   { path: 'sign-in', component: SignIn },

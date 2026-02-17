@@ -5,7 +5,7 @@
   
   <div class="all-products">
     @for (product of products; track product.id) {
-      <p-card styleClass="product-card-primeng" (click)="goToDetails(product.id)">
+      <p-card class="product-card-primeng" (click)="goToDetails(product.id)">
         <ng-template pTemplate="header">
           <div class="product-image-container">
             <img [src]="product.imageUrl" class="product-image-full" alt="{{ product.name }}" />

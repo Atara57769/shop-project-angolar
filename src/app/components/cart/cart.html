@@ -1,0 +1,14 @@
+<div class="cart-page">
+    <h2>Your Cart</h2>
+    @if(items.length === 0) {
+    <p>Your cart is empty.</p>
+    } 
+    @else {
+    <ul>
+        @for (item of items; track item.id) {
+        <li>{{item.name}} — {{item.price}}</li>
+        }
+    </ul>
+    }
+    <button pButton type="button" label="Back" (click)="goBack()">back to shop</button>
+</div>
