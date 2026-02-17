@@ -11,6 +11,7 @@ import { OrderDetails } from './components/account-details/order-details/order-d
 import { ShowProducts } from './components/show-products/show-products';
 import { ProductDetails } from './components/product-details/product-details';
 
+
 export const routes: Routes = [
   { path: '', redirectTo: 'sign-up', pathMatch: 'full' },
   { path: 'show-products', component: ShowProducts },
@@ -24,6 +25,6 @@ export const routes: Routes = [
         {path:'update-user', component:UpdateUser},
         {path:'user-orders', component:UserOrders},
         {path:'order-details/:id', component:OrderDetails}
-    ]},
-  { path: 'admin', component: AdminConsole }
+    ]}
 ];
+

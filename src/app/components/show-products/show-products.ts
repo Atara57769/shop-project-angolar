@@ -125,6 +125,8 @@ export class ShowProducts implements OnInit {
   }
 
   goToDetails(productId: number): void {
+    // Log the clicked product ID for debugging
+    console.log('Clicked product ID:', productId);
     // Navigate to product details page
     this.router.navigate(['/product-details', productId]);
   }
