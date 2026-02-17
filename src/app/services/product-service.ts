@@ -12,10 +12,17 @@ export class ProductService {
   private baseUrl = 'https://localhost:44313/api';
   srvCategory: CategoryService = inject(CategoryService);
 
-  getAllProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(`${this.baseUrl}/products`);
+  getAllProducts(filters: any): Observable<ProductModel[]> {
+    let params = {
+      search: filters.searchTerm || '',
+      categoryId: filters.categoryId || '',
+      minPrice: filters.minPrice || 0,
+      maxPrice: filters.maxPrice || 200,
+      sort: filters.sortBy || ''
+    };
+    return this.http.get<ProductModel[]>(`${this.baseUrl}/products`,{ params });
   }
-
+  
   getProductById(productId: number): Observable<ProductModel> {
     return this.http.get<ProductModel>(`${this.baseUrl}/products/${productId}`);
   }
