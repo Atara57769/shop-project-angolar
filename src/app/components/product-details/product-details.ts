@@ -147,7 +147,10 @@ export class ProductDetails implements OnInit {
   addToCart(): void {
     if (this.product) {
       console.log(`Adding ${this.quantity} x ${this.product.name} to cart`);
-      this.cartService.addToCart(this.quantity);
+      this.cartService.addToCart(
+        ...[this.product],
+        this.quantity
+      )
     }
   }
 }
