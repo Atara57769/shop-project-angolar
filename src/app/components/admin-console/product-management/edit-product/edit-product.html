@@ -27,14 +27,16 @@
    <div class="field">
   <label>Upload Image</label>
 
-  <p-fileUpload
-      mode="basic"
-      name="file"
-      accept="image/*"
-      chooseLabel="Change Image"
-      [auto]="false"
-      (onSelect)="onFileSelected($event)">
-  </p-fileUpload>
+ <p-fileUpload
+  #fu
+  mode="basic"
+  [auto]="true"
+  chooseLabel="Change Image"
+  [showUploadButton]="false"
+  [showCancelButton]="false"
+  accept="image/*"
+  (onSelect)="onFileSelected($event)">
+</p-fileUpload>
 </div>
 
 @if (previewUrl) {

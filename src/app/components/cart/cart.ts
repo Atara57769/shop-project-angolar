@@ -1,32 +1,4 @@
-// import { Component, OnInit, inject } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { CartService } from '../../services/cart-service';
 
-// @Component({
-//        selector: 'app-cart',
-//        imports: [],
-//        templateUrl: './cart.html',
-//        styleUrls: ['./cart.scss'],
-// })
-
-// export class Cart implements OnInit {
-  
-//   cartService = inject(CartService);
-
-//   router = inject(Router);
-//   items: any[] = this.cartService.items;
-
-
-//   ngOnInit(): void {
-//     // load cart items from a service when available
-//     this.items = this.cartService.items;
-//   }
-
-//   goBack(): void {
-//     this.router.navigate(['/show-products']);
-//   }
-
-// }
 
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,6 +9,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { OrderDetails } from '../account-details/order-details/order-details';
 import { OrderItemModel } from '../../models/order-item-model';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-cart',
@@ -52,6 +25,7 @@ import { Router } from '@angular/router';
 export class Cart {
   private cartService = inject(CartService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   products = this.cartService.cartItems;
   totalPrice = this.cartService.totalPrice;
@@ -70,6 +44,12 @@ export class Cart {
       alert('Your cart is empty');
       return;
     }
+    if (!this.authService.isUserConnect()) {
+      alert('Please sign in to checkout');
+      this.router.navigate(['/sign-in']);
+      return;
+    }
+
     this.router.navigate(['/checkout']);
   }
 }
