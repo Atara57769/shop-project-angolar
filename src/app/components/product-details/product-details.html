@@ -53,10 +53,10 @@
               inputId="quantity"
               styleClass="quantity-input">
               <ng-template pTemplate="incrementbuttonicon">
-                <span class="pi pi-plus"></span>
+                <span >+</span>
               </ng-template>
               <ng-template pTemplate="decrementbuttonicon">
-                <span class="pi pi-minus"></span>
+                <span >-</span>
               </ng-template>
             </p-inputnumber>
           </div>
@@ -87,7 +87,7 @@
       <div class="error-content">
         <i class="pi pi-exclamation-triangle error-icon"></i>
         <h2>Product Not Found</h2>
-        <p>Sorry, we couldn't find the product you're looking for.</p>
+        <p>{{ errorMessage || "Sorry, we couldn't find the product you're looking for." }}</p>
         <p-button 
           label="Back to Shop" 
           icon="pi pi-arrow-left" 

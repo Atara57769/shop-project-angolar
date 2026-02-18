@@ -1,131 +1,73 @@
-
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { ProductModel } from '../../models/product-model';
-import { ButtonModule } from 'primeng/button';
-import { ProductService } from '../../services/product-service';
-import { Filters } from './filters/filters';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Router } from '@angular/router';
 
+import { ProductModel } from '../../models/product-model';
+import { ProductFilters } from '../../models/product-filters';
+import { ProductService } from '../../services/product-service';
+import { Filters } from './filters/filters';
+
 @Component({
-       selector: 'app-show-products',
-       imports: [CardModule,ButtonModule,CurrencyPipe,Filters],
-       templateUrl: './show-products.html',
-       styleUrls: ['./show-products.scss'],
+  selector: 'app-show-products',
+  imports: [CardModule, CurrencyPipe, Filters, ProgressSpinnerModule],
+  templateUrl: './show-products.html',
+  styleUrls: ['./show-products.scss'],
 })
-
 export class ShowProducts implements OnInit {
-
-  productService = inject(ProductService);
+  private productService = inject(ProductService);
   router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   products: ProductModel[] = [];
+  loading = true;
+  errorMessage = '';
+
+  private readonly pageSize = 12;
+  private currentFilters: ProductFilters = { position: 1, skip: this.pageSize, sort: 'new' };
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
-  loadProducts(): void {
-   this.products=[
-  {
-    id: 1,
-    name: "Laptop",
-    description: "Gaming laptop",
-    price: 2500,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/laptop.jpg",
-    isAvailable: true
-  },
-  {
-    id: 2,
-    name: "Toy Car",
-    description: "Remote control car",
-    price: 120,
-    categoryName: "Toys",
-    categoryId: 2,
-    imageUrl: "/car.jpg",
-    isAvailable: true
-  },
-  {
-    id: 3,
-    name: "Headphones",
-    description: "Wireless headphones",
-    price: 300,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/headphones.jpg",
-    isAvailable: false
-  },{
-    id: 4,
-    name: "Laptop",
-    description: "Gaming laptop",
-    price: 2500,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/laptop.jpg",
-    isAvailable: true
-  },
-  {
-    id: 5,
-    name: "Toy Car",
-    description: "Remote control car",
-    price: 120,
-    categoryName: "Toys",
-    categoryId: 2,
-    imageUrl: "/car.jpg",
-    isAvailable: true
-  },
-  {
-    id: 6,
-    name: "Headphones",
-    description: "Wireless headphones",
-    price: 300,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/headphones.jpg",
-    isAvailable: false
-  },
-  {
-    id: 7,
-    name: "Laptop",
-    description: "Gaming laptop",
-    price: 2500,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/laptop.jpg",
-    isAvailable: true
-  },
-  {
-    id: 8,
-    name: "Toy Car",
-    description: "Remote control car",
-    price: 120,
-    categoryName: "Toys",
-    categoryId: 2,
-    imageUrl: "/car.jpg",
-    isAvailable: true
-  },
-  {
-    id: 9,
-    name: "Headphones",
-    description: "Wireless headphones",
-    price: 300,
-    categoryName: "Electronics",
-    categoryId: 1,
-    imageUrl: "/headphones.jpg",
-    isAvailable: false
-  }
-];
+  onFiltersChange(filters: ProductFilters): void {
+    this.currentFilters = {
+      ...this.currentFilters,
+      ...filters,
+      position: 1,
+      skip: this.pageSize,
+    };
+    this.loadProducts();
   }
 
-  loadMockProducts(): void {
-    console.log('Mock products loaded:', this.products.length);
+  loadProducts(): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.productService.getProducts(this.currentFilters).subscribe({
+      next: (products) => {
+        this.products = this.applySort(products);
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+        this.products = [];
+        this.loading = false;
+        this.errorMessage = 'Unable to load products from the shop API.';
+      },
+    });
+  }
+
+  private applySort(products: ProductModel[]): ProductModel[] {
+    if (this.currentFilters.sort === 'priceLowHigh') {
+      return [...products].sort((a, b) => a.price - b.price);
+    }
+    return products;
   }
 
   goToDetails(productId: number): void {
-    // Navigate to product details page
     this.router.navigate(['/product-details', productId]);
   }
 }

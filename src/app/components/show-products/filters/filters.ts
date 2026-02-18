@@ -1,5 +1,4 @@
-
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -14,78 +13,90 @@ import { SliderModule } from 'primeng/slider';
 import { TagModule } from 'primeng/tag';
 import { CategoryModel } from '../../../models/category-model';
 import { InputGroupModule } from 'primeng/inputgroup';
+import { ProductFilters } from '../../../models/product-filters';
 
 @Component({
   selector: 'app-filters',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    CheckboxModule, 
-    InputTextModule, 
+    CommonModule,
+    FormsModule,
+    CheckboxModule,
+    InputTextModule,
     IconFieldModule,
     InputIconModule,
     ButtonModule,
     CardModule,
     DividerModule,
     SliderModule,
-    TagModule,  InputGroupModule,
-    InputTextModule
+    TagModule,
+    InputGroupModule,
   ],
   templateUrl: './filters.html',
-  styleUrls: ['./filters.scss']
+  styleUrls: ['./filters.scss'],
 })
 export class Filters implements OnInit {
+  @Output() filtersChange = new EventEmitter<ProductFilters>();
 
   search: string = '';
+  sortBy: ProductFilters['sort'] = 'new';
 
-  sortBy = signal<string>('new');
-
-  // פונקציה לעדכון (אופציונלי, אפשר גם ישירות ב-HTML)
-  // setSort(value: string) {
-  //   this.sortBy.set(value);
-  //   console.log('Sort by set to:', value);
-  // }
-  
   categoryService = inject(CategoryService);
-
+private cdr = inject(ChangeDetectorRef);
   categories: CategoryModel[] = [];
-  selectedCategoriesIds = signal<number[]>([]);
+  selectedCategoriesIds: number[] = [];
 
   readonly minLimit = 0;
-  readonly maxLimit = 200;
+  readonly maxLimit = 10000;
 
-  rangeValues = signal<number[]>([this.minLimit, this.maxLimit]);
+  rangeValues: number[] = [this.minLimit, this.maxLimit];
+  private priceTouched = false;
 
   ngOnInit() {
-    // Load categories from service
     this.categoryService.getCategories().subscribe({
       next: (res) => {
         this.categories = res;
+        this.cdr.detectChanges();
       },
-      error: (err) => {
-       this.categories = [];
-      }
+      error: () => {
+        this.categories = [];
+      },
     });
-    
-    // Optional: Select default category
-    // if (this.categories && this.categories.length > 1) {
-    //   this.selectedCategories = [this.categories[1]];
-    // }
   }
 
-  //for checking the values of the filters
-  update(){
-    console.log('Search:', this.search);
-    console.log('Selected Categories IDs:', this.selectedCategoriesIds());
-    console.log('Price Range:', this.rangeValues());
-    console.log('Sort By:', this.sortBy());
+  setSort(value: ProductFilters['sort']) {
+    this.sortBy = value;
+    this.emitFilters();
   }
 
   onSearch() {
-    console.log('מבצע חיפוש עבור:', this.search);
+    this.emitFilters();
+  }
 
-    // לשלוח כאן לסינון המוצרים ב API .NET לפי הערך של החיפוש 
+  onCategoryChange() {
+    this.emitFilters();
+  }
 
+  onPriceChange(values: number[]) {
+    if (!values || values.length !== 2) {
+      return;
+    }
+    this.priceTouched = true;
+    this.rangeValues = values;
+    this.emitFilters();
+  }
+
+  private emitFilters() {
+    const [minRange, maxRange] = this.rangeValues;
+
+    const filters: ProductFilters = {
+      description: this.search.trim() || undefined,
+      categoryIds: this.selectedCategoriesIds.length ? this.selectedCategoriesIds : undefined,
+      minPrice: this.priceTouched ? minRange : undefined,
+      maxPrice: this.priceTouched ? maxRange : undefined,
+      sort: this.sortBy,
+    };
+
+    this.filtersChange.emit(filters);
   }
 }

@@ -15,11 +15,11 @@
         <section>
             <h3 class="filter-title">SORT BY</h3>
             <div class="options-row">
-                <button class="chip" [class.active]="sortBy() === 'new'" (click)="sortBy.set('new')">
+                <button class="chip" [class.active]="sortBy === 'new'" (click)="setSort('new')">
                     New in
                 </button>
 
-                <button class="chip" [class.active]="sortBy() === 'priceLowHigh'" (click)="sortBy.set('priceLowHigh')">
+                <button class="chip" [class.active]="sortBy === 'priceLowHigh'" (click)="setSort('priceLowHigh')">
                     Priced from low to high
                 </button>
             </div>
@@ -36,7 +36,7 @@
                         @for (category of categories; track category.id) {
                         <div class="category-item flex w-full">
                             <p-checkbox [value]="category.id" [inputId]="category.name"
-                                [(ngModel)]="selectedCategoriesIds" />
+                                [(ngModel)]="selectedCategoriesIds" (onChange)="onCategoryChange()" />
                             <label [for]="category.name" class="category-label">
                                 {{category.name}}
                             </label>
@@ -52,23 +52,20 @@
         <section>
             <h3 class="filter-title">PRICE</h3>
             <div class="price-slider-container">
-                <p-slider [ngModel]="rangeValues()" (ngModelChange)="rangeValues.set($event)" [range]="true"
+                <p-slider [(ngModel)]="rangeValues" (onSlideEnd)="onPriceChange($event.values ?? rangeValues)" [range]="true"
                     [min]="minLimit" [max]="maxLimit" />
 
                 <div class="price-inputs">
                     <div class="price-field">
                         <label>Minimum price</label>
-                        <div class="input-box">{{ rangeValues()[0] }} ₪</div>
+                        <div class="input-box">{{ rangeValues[0] }} $</div>
                     </div>
                     <div class="price-field">
                         <label>Maximum price</label>
-                        <div class="input-box">{{ rangeValues()[1] }} ₪</div>
+                        <div class="input-box">{{ rangeValues[1] }} $</div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-
-    <!-- for checking the values of the filters -->
-    <button (click)="update()">Update Filters</button>
 </div>

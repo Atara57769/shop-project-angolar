@@ -46,6 +46,27 @@
     margin: 8px 0;
 }
 
+.loading-state,
+.error-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--fun-card);
+    border-radius: 20px;
+    border: 2px solid rgba(47, 131, 208, 0.15);
+    color: var(--fun-ink);
+}
+
+.loading-state p {
+    margin-top: 12px;
+    color: var(--fun-muted);
+}
+
+.error-state h3 {
+    margin-bottom: 8px;
+    color: var(--fun-navy);
+}
+
 /* Product Card Styling */
 :host ::ng-deep .product-card-primeng {
     cursor: pointer;

@@ -1,29 +1,41 @@
 <div class="products-page-container">
   <div class="filters-container">
-    <app-filters></app-filters>
+    <app-filters (filtersChange)="onFiltersChange($event)"></app-filters>
   </div>
   
   <div class="all-products">
-    @for (product of products; track product.id) {
-      <p-card class="product-card-primeng" (click)="goToDetails(product.id)">
-        <ng-template pTemplate="header">
-          <div class="product-image-container">
-            <img [src]="product.imageUrl" class="product-image-full" alt="{{ product.name }}" />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="product-footer">
-            <span class="product-name-footer">{{ product.name }}</span>
-            <span class="product-price-footer">
-              {{ product.price | currency:'ILS':'symbol':'1.2-2' }}
-            </span>
-          </div>
-        </ng-template>
-      </p-card>
-    } @empty {
+    @if (loading) {
+      <div class="loading-state">
+        <p-progressSpinner />
+        <p>Loading products...</p>
+      </div>
+    } @else if (errorMessage) {
+      <div class="error-state">
+        <h3>{{ errorMessage }}</h3>
+        <p>Please make sure the WebApiShop API is running.</p>
+      </div>
+    } @else if (products.length) {
+      @for (product of products; track product.id) {
+        <p-card class="product-card-primeng" (click)="goToDetails(product.id)">
+          <ng-template pTemplate="header">
+            <div class="product-image-container">
+              <img [src]="product.imageUrl" class="product-image-full" alt="{{ product.name }}" />
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="product-footer">
+              <span class="product-name-footer">{{ product.name }}</span>
+              <span class="product-price-footer">
+                {{ product.price | currency:'ILS':'symbol':'1.2-2' }}
+              </span>
+            </div>
+          </ng-template>
+        </p-card>
+      }
+    } @else {
       <div class="no-products">
-        <h3>No products available</h3>
-        <p>Products are loading from the API or no products were found.</p>
+        <h3>No products found</h3>
+        <p>Try adjusting the filters or search term.</p>
         <p><small>Total products: {{ products.length }}</small></p>
       </div>
     }
