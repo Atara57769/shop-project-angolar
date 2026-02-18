@@ -1,4 +1,4 @@
-import { Component, inject, Input, output } from '@angular/core';
+import { Component, inject, Input, output, ViewChild } from '@angular/core';
 import { Dialog } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,10 +11,13 @@ import { Select } from 'primeng/select';
 import { CategoryService } from '../../../../services/category-service';
 import { CategoryModel } from '../../../../models/category-model';
 import { MessageService } from 'primeng/api';
-
+import { PostProductModel } from '../../../../models/post-product-model';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { FileSelectEvent } from 'primeng/fileupload';
 @Component({
   selector: 'app-add-prodact',
-  imports: [Select, FormsModule, Dialog, ButtonModule, InputTextModule, ReactiveFormsModule],
+  imports: [Select, FormsModule, ToggleButtonModule,Dialog, ButtonModule, InputTextModule, ReactiveFormsModule,FileUploadModule   ],
   templateUrl: './add-prodact.html',
   styleUrl: './add-prodact.scss',
   providers: [MessageService]
@@ -25,80 +28,121 @@ export class AddProdact {
     price: new FormControl(0.0, [Validators.required, Validators.min(0)]),
     description: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
-    imgUrl: new FormControl('', [Validators.required])
+    imgUrl: new FormControl('', [Validators.required]),
+    isAvailable: new FormControl(true)
   });
   srvProducts = inject(ProductService);
   close = output<void>();
   srvCategory: CategoryService = inject(CategoryService);
   categories: string[] = [];
-  previewUrl = '';
-  filePath = '';
-  private objectUrl?: string;
+  categoriesObj:CategoryModel[] = [];
+  previewUrl: string = '';
+  uploading = false;
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
+
   constructor(private messageService: MessageService) {}
   ngOnInit() {
-    this.categories = this.srvCategory.getCategoryNames();
-    this.refresh();
-  }
-  saveProduct() {
-    const newProduct = new ProductModel();
-    newProduct.id = 0;
-    newProduct.name = this.frmProduct.value.name;
-    newProduct.price = this.frmProduct.value.price;
-    newProduct.description = this.frmProduct.value.description;
-    newProduct.categoryName = this.frmProduct.value.category;
-    newProduct.imageUrl = this.previewUrl || this.frmProduct.value.imgUrl;
-    newProduct.isAvailable = true;
-    
-    this.srvProducts.addProduct(newProduct).subscribe({
-      next: (createdProduct) => {
-        console.log('Product added successfully:', createdProduct);
-        this.messageService.add({ 
-          severity: 'success', 
-          summary: 'Success', 
-          detail: 'Product added successfully' 
-        });
-        this.hide();
-        this.refresh();
+    this.srvCategory.getCategories().subscribe({
+      next: (res) => {
+        this.categoriesObj = res;
+        this.categories = res.map(c => c.name);
       },
       error: (err) => {
-        console.error('Error adding product:', err);
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Error', 
-          detail: 'Failed to add product: ' + (err?.error?.message || err?.message || 'Unknown error')
-        });
+        this.categoriesObj = [];
+        this.categories = [];
       }
     });
+     this.refresh()
   }
+
+onFileSelected(event: FileSelectEvent) {
+
+  const file = event.files[0];
+  if (!file) return;
+
+  this.previewUrl = URL.createObjectURL(file);
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  this.uploading = true;
+
+  this.srvProducts.uploadImage(formData).subscribe({
+    next: (res) => {
+      this.frmProduct.patchValue({
+        imgUrl: res.url
+      });
+      this.uploading = false;
+    },
+    error: () => this.uploading = false
+  });
+}
+
+
+ saveProduct() {
+
+  if (!this.frmProduct.value.imgUrl) {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Image missing',
+      detail: 'Please upload an image first'
+    });
+    return;
+  }
+
+  const product: PostProductModel = {
+    id: this.frmProduct.value.id,
+    name: this.frmProduct.value.name,
+    price: this.frmProduct.value.price,
+    description: this.frmProduct.value.description,
+    categoryId: this.srvCategory.getIdByName(
+      this.frmProduct.value.category,
+      this.categoriesObj
+    ),
+    imageUrl: this.frmProduct.value.imgUrl, 
+    isAvailable: this.frmProduct.value.isAvailable
+  };
+
+  this.srvProducts.addProduct(product).subscribe({
+    next: () => {
+
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Product added successfully'
+      });
+
+      this.hide();
+      this.refresh();
+    },
+
+    error: (err) => {
+      console.error(err);
+
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: err?.error?.message || 'Failed to add product'
+      });
+    }
+  });
+}
   hide() {
     this.refresh();
     this.close.emit();
   } 
   refresh() {
-    this.frmProduct.reset();
-    this.revokePreview();
-    this.previewUrl = '';
+   this.frmProduct.reset({
+    name: '',
+    price: 0,
+    description: '',
+    category: '',
+    imgUrl: '',
+    isAvailable: true
+  });
+  this.previewUrl = '';
+   this.fileUpload?.clear();  
   }
-  onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    const path = input.value || '';
-    if (!file) {
-      this.filePath = '';
-      this.frmProduct.patchValue({ imgUrl: '' });
-      return;
-    }
-    this.revokePreview();
-    this.objectUrl = URL.createObjectURL(file);
-    this.previewUrl = this.objectUrl;
-    this.filePath = path;
-    this.frmProduct.patchValue({ imgUrl: path });
-  }
-  private revokePreview() {
-    if (this.objectUrl) {
-      URL.revokeObjectURL(this.objectUrl);
-      this.objectUrl = undefined;
-    }
-  }
+  
   
 }

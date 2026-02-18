@@ -16,7 +16,7 @@
 
     <div class="field">
       <label for="category">Category</label>
-      <p-select [options]="categories" formControlName="category" placeholder="Select a category" class="w-full" />
+      <p-select [options]="categories" formControlName="categoryName" placeholder="Select a category" class="w-full" />
     </div>
 
     <div class="field">
@@ -24,12 +24,26 @@
       <input pInputText id="description" autocomplete="off" formControlName="description" />
     </div>
 
-   
-    <div class="field">
-      <label for="imgUrl">Image URL</label>
-      <input pInputText id="imgUrl" autocomplete="off" formControlName="imgUrl"  />
-    </div>
+   <div class="field">
+  <label>Upload Image</label>
 
+  <p-fileUpload
+      mode="basic"
+      name="file"
+      accept="image/*"
+      chooseLabel="Change Image"
+      [auto]="false"
+      (onSelect)="onFileSelected($event)">
+  </p-fileUpload>
+</div>
+
+@if (previewUrl) {
+  <img [src]="previewUrl">
+}
+<div class="field">
+  <label>Availability</label>
+  <p-toggleButton formControlName="isAvailable" onLabel="Available" offLabel="Out of stock" offIcon="pi pi-times"></p-toggleButton>
+</div>
     <div class="actions">
       <p-button label="Cancel" severity="secondary" (click)="hide()" />
       <p-button label="Save changes" (click)="saveProduct()" />

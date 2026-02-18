@@ -1,7 +1,7 @@
 import { OrderItemModel } from "./order-item-model";
 export type OrderStatus = 'pending' | 'shipped' | 'delivered';
 export class OrderModel{
-  id!: number;
+  id?: number;
   userId?: number; 
   orderItems: OrderItemModel[]=[];
   orderSum: number=0;

@@ -21,6 +21,7 @@
           <th>Description</th>
           <th>Price</th>
           <th>Category</th>
+          <th>Stock</th>
           <th class="actions-col">Actions</th>
         </tr>
       </thead>
@@ -32,9 +33,15 @@
           <td class="description-cell">{{p.description}}</td>
           <td class="price-cell">${{p.price}}</td>
           <td>{{p.categoryName}}</td>
+          @if(p.isAvailable){
+            <td>Available</td>
+          }
+          @else{
+            <td>Not Available</td>
+          }
           <td class="row-actions">
             <p-button size="small" (click)="editProduct(p.id)" label="Edit" severity="primary" />
-            <p-button size="small" (click)="confirm2($event,p.id)" label="Delete" severity="danger" [outlined]="true" />
+            <p-button size="small" (click)="confirm2($event,p.id)" label="Remove" severity="danger" [outlined]="true" />
           </td>
         </tr>
         }

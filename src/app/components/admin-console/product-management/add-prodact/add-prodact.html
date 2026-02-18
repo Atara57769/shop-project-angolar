@@ -24,11 +24,30 @@
     </div>
 
    
-    <div class="field">
-      <label for="imgUrl">Image URL</label>
-      <input pInputText id="imgUrl" autocomplete="off" formControlName="imgUrl"  />
-    </div>
+      <label>Upload Image</label>
 
+<p-fileUpload
+  mode="basic"
+  chooseLabel="Change Image"
+  [showUploadButton]="false"
+  [showCancelButton]="false"
+  accept="image/*"
+  (onSelect)="onFileSelected($event)">
+</p-fileUpload>
+@if (previewUrl) {
+  <img [src]="previewUrl" class="product-preview">
+}
+<div class="field">
+  <label>Availability</label>
+
+  <p-toggleButton
+      formControlName="isAvailable"
+      onLabel="Available"
+      offLabel="Out of stock"
+      offIcon="pi pi-times">
+  </p-toggleButton>
+
+</div>
     <div class="actions">
       <p-button label="Cancel" severity="secondary" (click)="hide()" />
       <p-button label="Add product" (click)="saveProduct()" [disabled]="frmProduct.invalid"/>

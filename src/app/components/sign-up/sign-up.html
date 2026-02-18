@@ -20,9 +20,9 @@
         <label for="address">Address</label>
       </p-floatlabel>
             <p-floatlabel variant="on">
-      <p-inputmask inputId="phoneNumber" mask="(999) 999-9999" formControlName="phoneNumber">
-      </p-inputmask>
-      <label for="phoneNumber">Phone</label></p-floatlabel>
+        <p-inputmask id="phoneNumber" mask="(999) 999-9999" formControlName="phoneNumber" placeholder="(999) 999-9999"></p-inputmask>
+        <label for="phoneNumber">Phone</label>
+      </p-floatlabel>
       <p-floatlabel variant="on">
         <p-password formControlName="password" [toggleMask]="true" inputId="password" />
         <label for="password">Password</label>
