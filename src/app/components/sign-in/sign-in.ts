@@ -32,6 +32,7 @@ export class SignIn {
     address: new FormControl(''),
     password: new FormControl('', [Validators.required])
   });
+
   signIn() {
   const email = this.frmSignUp.get('email')?.value || '';
   const password = this.frmSignUp.get('password')?.value || '';
@@ -40,15 +41,17 @@ export class SignIn {
     next: (loggedInUser: UserModel) => {
 
       this.authService.login(loggedInUser);
+      localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
 
       if (loggedInUser.isAdmin) {
         this.router.navigateByUrl('admin');
       } else {
         this.router.navigateByUrl('account');
       }
+
     },
     error: (err) => {
-       alert("we cant found you,please try again!");
+       alert("we cant found you,please try again!");      
     }
   });
 }

@@ -21,10 +21,10 @@
           <p><span class="label">Total</span> ${{ o.orderSum }}</p>
           <p><span class="label">Date</span> {{ o.orderDate | date }}</p>
         </div>
-        <button type="button" (click)="updateStatus(o.id)" [disabled]="o.status === 'delivered'">
+        <button type="button" (click)="o.id !== undefined && updateStatus(o.id)" [disabled]="o.status === 'delivered'">
           Mark as delivered
         </button>
-         <button type="button" (click)="showDetails(o.id)" >
+         <button type="button" (click)="o.id !== undefined && showDetails(o.id)" >
           Show details
         </button>
       </article>

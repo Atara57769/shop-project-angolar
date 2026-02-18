@@ -13,10 +13,9 @@
 
     <div class="actions">
       <p-button styleClass="btn cool" label="Shop" icon="pi pi-shopping-bag" (click)='shopShow()' />
-      <p-button styleClass="btn warm" label="Account" icon="pi pi-user" (click)='accountShow()' />
-      <p-overlaybadge value="{{cartCount}}" severity="danger" badgeSize="small">
-        <p-button styleClass="btn deep" label="Cart" badge="{{cartCount}}" (click)="cartCountIncrement()"
-          icon="pi pi-shopping-cart" />
+      <p-button styleClass="btn warm" [label]="getUserName()" icon="pi pi-user" (click)='accountShow()' />
+      <p-overlaybadge [value]="cartCount()" severity="danger" badgeSize="small">
+        <p-button styleClass="btn deep" label="Cart" (click)="cartShow()" icon="pi pi-shopping-cart" />
       </p-overlaybadge>
     </div>
   </header>

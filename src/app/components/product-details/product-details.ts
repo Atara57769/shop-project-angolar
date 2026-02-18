@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
+import { CartService } from '../../services/cart-service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class ProductDetails implements OnInit {
   productService = inject(ProductService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  cartService = inject(CartService);
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
@@ -145,7 +147,10 @@ export class ProductDetails implements OnInit {
   addToCart(): void {
     if (this.product) {
       console.log(`Adding ${this.quantity} x ${this.product.name} to cart`);
-      // TODO: Implement cart service
+      this.cartService.addToCart(
+        ...[this.product],
+        this.quantity
+      )
     }
   }
 }

@@ -26,6 +26,7 @@ export class SignUp {
   authService = inject(AuthService);
   router = inject(Router);
   user: PostUserModel = new PostUserModel();
+
   frmSignUp = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     firstName: new FormControl(''),
@@ -43,17 +44,18 @@ export class SignUp {
     this.user.address = this.frmSignUp.get('address')?.value || '';
     this.user.password = this.frmSignUp.get('password')?.value || '';
     this.user.phoneNumber = this.frmSignUp.get('phoneNumber')?.value || '';
+
     this.userServ.addUser(this.user).subscribe({
       next: (createdUser) => {
         this.authService.login(createdUser);
         this.router.navigateByUrl('account');
+        localStorage.setItem('currentUser', JSON.stringify(createdUser));
       },
       error: (err) => {
-         alert(err.error);
+        alert(err.error.message || 'An error occurred during sign up. Please try again.');
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
       }
     });
-
-
   }
   signInShow() {
     this.router.navigateByUrl('sign-in');
