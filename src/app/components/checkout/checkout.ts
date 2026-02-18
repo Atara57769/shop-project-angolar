@@ -93,7 +93,7 @@ export class Checkout {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: `Order placed successfully! Total: ${this.totalPrice()} ₪`
+      detail: `Order placed successfully! Total: ${this.totalPrice()} $`
     });
 
     

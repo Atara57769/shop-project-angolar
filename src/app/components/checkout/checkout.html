@@ -21,10 +21,10 @@
             <div class="cart-item-row">
               <div class="item-info">
                 <h4 class="item-name">{{ item.productName }}</h4>
-                <p class="item-meta">Qty: {{ item.quantity }} × {{ item.productPrice | number:'1.2-2' }} ₪</p>
+                <p class="item-meta">Qty: {{ item.quantity }} × {{ item.productPrice | number:'1.2-2' }} $</p>
               </div>
               <div class="item-price">
-                {{ (item.productPrice * item.quantity) | number:'1.2-2' }} ₪
+                {{ (item.productPrice * item.quantity) | number:'1.2-2' }} $
               </div>
             </div>
           }
@@ -33,7 +33,7 @@
         <div class="total-section">
           <div class="total-row">
             <span>Total</span>
-            <span class="total-amount">{{ totalPrice() | number:'1.2-2' }} ₪</span>
+            <span class="total-amount">{{ totalPrice() | number:'1.2-2' }} $</span>
           </div>
         </div>
       </div>
