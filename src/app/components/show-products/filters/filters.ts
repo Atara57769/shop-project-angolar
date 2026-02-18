@@ -1,9 +1,7 @@
-
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
-import { CategoryService } from '../../../services/category-service';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -12,42 +10,39 @@ import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { SliderModule } from 'primeng/slider';
 import { TagModule } from 'primeng/tag';
-import { CategoryModel } from '../../../models/category-model';
 import { InputGroupModule } from 'primeng/inputgroup';
+
+import { CategoryService } from '../../../services/category-service';
+import { ProductService } from '../../../services/product-service';
+import { CategoryModel } from '../../../models/category-model';
 
 @Component({
   selector: 'app-filters',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    CheckboxModule, 
-    InputTextModule, 
+    CommonModule,
+    FormsModule,
+    CheckboxModule,
+    InputTextModule,
     IconFieldModule,
     InputIconModule,
     ButtonModule,
     CardModule,
     DividerModule,
     SliderModule,
-    TagModule,  InputGroupModule,
-    InputTextModule
+    TagModule,
+    InputGroupModule
   ],
   templateUrl: './filters.html',
   styleUrls: ['./filters.scss']
 })
 export class Filters implements OnInit {
 
-  search: string = '';
-
-  sortBy = signal<string>('new');
-
-  // פונקציה לעדכון (אופציונלי, אפשר גם ישירות ב-HTML)
-  // setSort(value: string) {
-  //   this.sortBy.set(value);
-  //   console.log('Sort by set to:', value);
-  // }
-  
+  productService = inject(ProductService);
   categoryService = inject(CategoryService);
+
+  search: string = '';
+  sortBy = signal<string>('new');
 
   categories: CategoryModel[] = [];
   selectedCategoriesIds = signal<number[]>([]);
@@ -57,28 +52,71 @@ export class Filters implements OnInit {
 
   rangeValues = signal<number[]>([this.minLimit, this.maxLimit]);
 
-  ngOnInit() {
-    // Load categories from service
+    constructor() {
+    //ירוץ כאשר אחד הסיגנלים 
+    effect(() => {
+      // רישום התלות בסיגנלים
+      this.sortBy();
+      this.selectedCategoriesIds();
+      this.rangeValues();
+
+      // הרצת הפילטור
+      this.applyAllFilters();
+    });
+  }
+
+  ngOnInit(): void {
+    // טעינת הקטגוריות מהסרוויס בזמן האתחול
     this.categories = this.categoryService.categories;
-    
-    // Optional: Select default category
-    // if (this.categories && this.categories.length > 1) {
-    //   this.selectedCategories = [this.categories[1]];
-    // }
   }
 
-  //for checking the values of the filters
-  update(){
-    console.log('Search:', this.search);
-    console.log('Selected Categories IDs:', this.selectedCategoriesIds());
-    console.log('Price Range:', this.rangeValues());
-    console.log('Sort By:', this.sortBy());
+  // =========================
+  // פונקציה מרכזית שמאגדת הכל
+  // =========================
+  applyAllFilters() {
+
+    const filters = {
+      searchTerm: this.search,
+      categoryId: this.selectedCategoriesIds(),
+      minPrice: this.rangeValues()[0],
+      maxPrice: this.rangeValues()[1],
+      sortBy: this.sortBy()
+    };
+
+    this.productService.getAllProducts(filters)
+      .subscribe(res => {
+        console.log('Filtered products:', res);
+      });
   }
 
-  onSearch() {
-    console.log('מבצע חיפוש עבור:', this.search);
+  // =========================
+  // פונקציות ייעודיות
+  // =========================
 
-    // לשלוח כאן לסינון המוצרים ב API .NET לפי הערך של החיפוש 
+  filterBySearch() {
+    this.applyAllFilters();
+    //בדיקה שמופעלת הפונקציה
+    console.log('חיפוש');
+  }
 
+  filterBySort(value: string) {
+    this.sortBy.set(value);
+    //בדיקה שמופעלת הפונקציה
+    console.log('מיון');
+  }
+
+  filterByCategory() {
+    this.applyAllFilters();
+    //בדיקה שמופעלת הפונקציה
+    console.log('קטגוריה');
+  }
+
+  filterByPrice() {
+    this.applyAllFilters();
+    //בדיקה שמופעלת הפונקציה
+    console.log('מחיר');
   }
 }
+
+
+
