@@ -1,74 +1,101 @@
 <div class="filters">
-    <div class="filter-container">
+  <div class="filter-container">
 
-        <section>
-            <p-inputgroup class="search-input">
-                <i class="pi pi-search"></i>
-                <input pInputText [(ngModel)]="search" placeholder="search" (keyup.enter)="onSearch()"
-                    (blur)="onSearch()" />
-            </p-inputgroup>
+    <!-- SEARCH -->
+    <section>
+      <p-inputgroup class="search-input">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          [(ngModel)]="search"
+          placeholder="search"
+          (keyup.enter)="filterBySearch()"
+          (blur)="filterBySearch()" />
+      </p-inputgroup>
+    </section>
 
-        </section>
+    <hr>
 
-        <hr>
+    <!-- SORT -->
+    <section>
+      <h3 class="filter-title">SORT BY</h3>
+      <div class="options-row">
+        <button
+          class="chip"
+          [class.active]="sortBy() === 'new'"
+          (click)="filterBySort('new')">
+          New in
+        </button>
 
-        <section>
-            <h3 class="filter-title">SORT BY</h3>
-            <div class="options-row">
-                <button class="chip" [class.active]="sortBy() === 'new'" (click)="sortBy.set('new')">
-                    New in
-                </button>
+        <button
+          class="chip"
+          [class.active]="sortBy() === 'priceLowHigh'"
+          (click)="filterBySort('priceLowHigh')">
+          Priced from low to high
+        </button>
+      </div>
+    </section>
 
-                <button class="chip" [class.active]="sortBy() === 'priceLowHigh'" (click)="sortBy.set('priceLowHigh')">
-                    Priced from low to high
-                </button>
+    <hr>
+
+    <!-- CATEGORIES -->
+    <section>
+      <h3 class="filter-title">CATEGORIES</h3>
+
+      <div class="categories-wrapper">
+        <div class="card flex justify-center">
+          <div class="flex flex-col gap-4">
+
+            @for (category of categories; track category.id) {
+              <div class="category-item flex w-full">
+                <p-checkbox
+                  [value]="category.id"
+                  [inputId]="category.name"
+                  [(ngModel)]="selectedCategoriesIds"
+                  (onChange)="filterByCategory()" />
+                <label [for]="category.name" class="category-label">
+                  {{category.name}}
+                </label>
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- PRICE -->
+    <section>
+      <h3 class="filter-title">PRICE</h3>
+
+      <div class="price-slider-container">
+        <p-slider
+          [ngModel]="rangeValues()"
+          (ngModelChange)="rangeValues.set($event); filterByPrice()"
+          [range]="true"
+          [min]="minLimit"
+          [max]="maxLimit">
+        </p-slider>
+
+        <div class="price-inputs">
+          <div class="price-field">
+            <label>Minimum price</label>
+            <div class="input-box">
+              {{ rangeValues()[0] }} ₪
             </div>
-        </section>
+          </div>
 
-        <hr>
-
-        <section>
-
-            <h3 class="filter-title">CATEGORIES</h3>
-            <div class="categories-wrapper">
-                <div class="card flex justify-center">
-                    <div class="flex flex-col gap-4">
-                        @for (category of categories; track category.id) {
-                        <div class="category-item flex w-full">
-                            <p-checkbox [value]="category.id" [inputId]="category.name"
-                                [(ngModel)]="selectedCategoriesIds" />
-                            <label [for]="category.name" class="category-label">
-                                {{category.name}}
-                            </label>
-                        </div>
-                        }
-                    </div>
-                </div>
+          <div class="price-field">
+            <label>Maximum price</label>
+            <div class="input-box">
+              {{ rangeValues()[1] }} ₪
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <hr>
-
-        <section>
-            <h3 class="filter-title">PRICE</h3>
-            <div class="price-slider-container">
-                <p-slider [ngModel]="rangeValues()" (ngModelChange)="rangeValues.set($event)" [range]="true"
-                    [min]="minLimit" [max]="maxLimit" />
-
-                <div class="price-inputs">
-                    <div class="price-field">
-                        <label>Minimum price</label>
-                        <div class="input-box">{{ rangeValues()[0] }} ₪</div>
-                    </div>
-                    <div class="price-field">
-                        <label>Maximum price</label>
-                        <div class="input-box">{{ rangeValues()[1] }} ₪</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- for checking the values of the filters -->
-    <button (click)="update()">Update Filters</button>
+  </div>
 </div>

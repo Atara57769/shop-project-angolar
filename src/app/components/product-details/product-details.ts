@@ -59,16 +59,15 @@ export class ProductDetails implements OnInit {
         this.product = data;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Error loading product:', error);
-        this.loading = false;
-        
-        // Fallback to mock product
-        this.loadMockProduct(id);
-      }
+    error: (error : any) => {
+      console.error('Error loading product:', error);
+      this.loading = false; 
+
+      // Fallback to mock product
+      this.loadMockProduct(id);
+    }
     });
   }
-
   loadMockProduct(id: number): void {
     // Mock products matching the ones in show-products
     const mockProducts: ProductModel[] = [
