@@ -41,8 +41,7 @@ export class SignIn {
     next: (loggedInUser: UserModel) => {
 
       this.authService.login(loggedInUser);
-      localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-
+     
       if (loggedInUser.isAdmin) {
         this.router.navigateByUrl('admin');
       } else {

@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Cart } from '../cart/cart';
 import { CartService } from '../../services/cart-service';
+import { computed } from '@angular/core';
 @Component({
   selector: 'app-header',
   imports: [ButtonModule, SignIn, SignUp, AccountDetails, BadgeModule, OverlayBadgeModule, AdminConsole, RouterModule, SplitButtonModule, ToastModule, Cart],
@@ -28,18 +29,12 @@ export class Header {
   cartService = inject(CartService);
   cartCount = this.cartService.cartCount;
 
-  getUserName(): string {
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
-      try {
-        const user = JSON.parse(currentUser);
-        return user.firstName || 'Account';
-      } catch {
-        return 'Account';
-      }
-    }
-    return 'Account';
-  }
+
+  userName = computed(() => {
+  const user = this.authService.getCurrentUser();
+  return user?.firstName || 'Account';
+});
+  
 
   shopShow() {
     this.router.navigateByUrl('show-products');

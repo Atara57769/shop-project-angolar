@@ -49,11 +49,11 @@ export class SignUp {
       next: (createdUser) => {
         this.authService.login(createdUser);
         this.router.navigateByUrl('account');
-        localStorage.setItem('currentUser', JSON.stringify(createdUser));
+        
       },
       error: (err) => {
         alert(err.error.message || 'An error occurred during sign up. Please try again.');
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
+      
       }
     });
   }
