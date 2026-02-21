@@ -47,7 +47,7 @@ private cdr = inject(ChangeDetectorRef);
   selectedCategoriesIds: number[] = [];
 
   readonly minLimit = 0;
-  readonly maxLimit = 10000;
+  readonly maxLimit = 130;
 
   rangeValues: number[] = [this.minLimit, this.maxLimit];
   private priceTouched = false;

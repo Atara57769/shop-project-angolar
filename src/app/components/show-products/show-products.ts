@@ -24,7 +24,7 @@ export class ShowProducts implements OnInit {
   loading = true;
   errorMessage = '';
 
-  private readonly pageSize = 12;
+  private readonly pageSize = 100;
   private currentFilters: ProductFilters = { position: 1, skip: this.pageSize, sort: 'new' };
 
   ngOnInit(): void {
