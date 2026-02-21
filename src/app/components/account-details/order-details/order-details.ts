@@ -34,9 +34,7 @@ export class OrderDetails implements OnInit {
             console.log('Order items:', this.ordrsItems);
           },
           error: (err) => {
-            console.error('Error loading order details:', err);
-            const errorMessage = err?.error?.message || err?.message || 'Unable to load order details. Please try again.';
-            alert('Failed to load order details: ' + errorMessage);
+            return
           }
         });
       }

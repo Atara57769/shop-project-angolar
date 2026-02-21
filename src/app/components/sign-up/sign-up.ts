@@ -52,7 +52,7 @@ export class SignUp {
         
       },
       error: (err) => {
-        alert(err.error.message || 'An error occurred during sign up. Please try again.');
+        alert(err.error || 'An error occurred during sign up. Please try again.');
       
       }
     });

@@ -1,10 +1,12 @@
-@if (loading) {
-  <div class="loading">Loading orders...</div>
+
+
+@if (orders.length === 0) {
+  <div class="empty">No orders found</div>
 } @else if (error) {
   <div class="error">{{ error }}</div>
-} @else if (orders.length === 0) {
-  <div class="empty">No orders found</div>
-} @else {
+}
+  
+ @else {
   <div class="orders-grid">
     @for (o of orders; track o.id) {
       <article class="order-card">
