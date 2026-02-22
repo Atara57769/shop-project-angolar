@@ -6,16 +6,12 @@
 } @else if (product) {
   <div class="product-details-container">
     <div class="product-image-section">
-      <p-image 
-        [src]="product.imageUrl" 
-        [preview]="true" 
-        alt="{{product.name}}" 
-        width="450"
-        [imageStyle]="{ 'border-radius': '16px' }">
-        <ng-template #indicator>
-          <i class="pi pi-search"></i>
-        </ng-template>
-      </p-image>
+   <p-image 
+  [src]="product.imageUrl" 
+  [preview]="true" 
+  alt="{{product.name}}"
+  styleClass="product-main-image">
+</p-image>
     </div>
 
     <div class="product-info-section">
@@ -43,7 +39,7 @@
           <p-divider />
           
           <div class="quantity-section">
-            <label for="quantity">Quantity</label>
+            <label for="quantity" class="qnt-label">Quantity</label>
             <p-inputnumber 
               [(ngModel)]="quantity" 
               [showButtons]="true" 

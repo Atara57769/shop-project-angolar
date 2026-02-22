@@ -14,7 +14,7 @@ import { Cart } from './components/cart/cart';
 import { Checkout } from './components/checkout/checkout';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'sign-up', pathMatch: 'full' },
+  { path: '', redirectTo: 'show-products', pathMatch: 'full' },
   { path: 'show-products', component: ShowProducts },
   { path: 'product-details/:id', component: ProductDetails },
   { path: 'cart', component: Cart },

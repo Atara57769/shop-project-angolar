@@ -4,71 +4,88 @@
     padding: 0;
     font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
 }
+
 :host{
     display: block;
 }
+
 .orders-shell{
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
+/* ===== LOADING ===== */
+
 .loading-shell{
     display: grid;
     place-items: center;
     gap: 6px;
     padding: 32px 16px;
-    border: 2px dashed rgba(255, 210, 79, 0.5);
+    border: 2px dashed rgba(29,161,216,0.45);
     border-radius: 16px;
-    background: radial-gradient(circle at 22% 18%, rgba(255, 154, 60, 0.18), transparent 32%),
-                radial-gradient(circle at 78% 26%, rgba(47, 131, 208, 0.14), transparent 30%),
-                linear-gradient(135deg, rgba(255, 247, 230, 0.8), rgba(253, 241, 214, 0.9));
+    background:
+        radial-gradient(circle at 22% 18%, rgba(29,161,216,0.18), transparent 32%),
+        radial-gradient(circle at 78% 26%, rgba(11,111,164,0.14), transparent 30%),
+        linear-gradient(135deg, rgba(240,248,255,0.9), rgba(230,244,252,0.9));
     color: var(--fun-navy);
     text-align: center;
 }
+
 .spinner{
     width: 56px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 5px solid rgba(255, 210, 79, 0.65);
-    border-top-color: rgba(47, 131, 208, 0.85);
-    box-shadow: 0 0 0 3px rgba(24, 177, 153, 0.12);
+    border: 5px solid rgba(29,161,216,0.45);
+    border-top-color: rgba(11,111,164,0.9);
+    box-shadow: 0 0 0 3px rgba(29,161,216,0.12);
     animation: spin 1s linear infinite;
 }
+
 .loading-text{
     font-weight: 800;
-    margin: 0;
 }
+
 .loading-hint{
-    margin: 0;
     color: var(--fun-muted);
 }
+
+/* ===== ERROR ===== */
+
 .error-banner{
     padding: 10px 12px;
     border-radius: 14px;
-    background: rgba(255, 92, 92, 0.1);
-    color: #b91c1c;
-    border: 1px solid rgba(255, 92, 92, 0.25);
+    background: rgba(29,161,216,0.12);
+    color: #0B6FA4;
+    border: 1px solid rgba(29,161,216,0.3);
     font-weight: 700;
 }
+
+/* ===== EMPTY ===== */
+
 .empty-state{
     padding: 18px;
     border-radius: 16px;
-    border: 1px dashed rgba(23, 79, 146, 0.18);
+    border: 1px dashed rgba(29,161,216,0.25);
     background: #fff;
     color: var(--fun-muted);
     text-align: center;
     box-shadow: var(--fun-shadow);
 }
+
+/* ===== GRID ===== */
+
 .orders-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 12px;
-
-    
 }
+
+/* ===== CARD ===== */
+
 .order-card{
     background: var(--fun-card);
-    border: 2px solid rgba(255, 210, 79, 0.35);
+    border: 2px solid rgba(29,161,216,0.25);
     border-radius: 18px;
     padding: 12px;
     box-shadow: var(--fun-shadow);
@@ -76,66 +93,93 @@
     flex-direction: column;
     gap: 8px;
 }
+
 .order-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .eyebrow{
     letter-spacing: 0.08em;
     font-size: 11px;
     text-transform: uppercase;
-    color: var(--fun-orange);
+    color: #1DA1D8;
 }
+
 .order-card h2{
-    margin: 0;
     font-size: 18px;
     letter-spacing: -0.02em;
     color: var(--fun-navy);
 }
+
+/* ===== STATUS ===== */
+
 .status{
     padding: 5px 9px;
     border-radius: 10px;
     font-weight: 700;
     text-transform: capitalize;
-    color: #0f141f;
-    background: #fff0d2;
+    color: #0B6FA4;
+    background: #e8f6fd;
 }
-.status.delivered{ background: #dcfce7; color: #15803d; }
-.status.shipped{ background: #e0f2fe; color: #075985; }
-.status.pending{ background: #fff0d2; color: #a16207; }
+
+.status.delivered{
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status.shipped{
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.status.pending{
+    background: #f0f9ff;
+    color: #0369a1;
+}
+
+/* ===== META ===== */
+
 .meta{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 4px;
     color: var(--fun-muted);
 }
+
 .label{
     font-weight: 700;
     color: var(--fun-ink);
     margin-right: 6px;
 }
+
+/* ===== BUTTON ===== */
+
 button{
     margin-top: 6px;
     padding: 9px 10px;
     border: none;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--fun-blue), var(--fun-teal));
-    color: #0f141f;
+    background: linear-gradient(135deg,#1DA1D8,#0B6FA4);
+    color: white;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--fun-glow);
+    box-shadow: 0 8px 18px rgba(11,111,164,0.25);
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
+
 button:hover:not(:disabled){
     transform: translateY(-1px);
-    filter: brightness(1.02);
+    filter: brightness(1.05);
 }
+
 button:disabled{
     cursor: not-allowed;
     opacity: 0.6;
     box-shadow: none;
 }
+
 @keyframes spin{
     to { transform: rotate(360deg); }
 }

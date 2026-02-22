@@ -49,9 +49,7 @@ export class CartService {
 
       if (existingItem) {
         return prevItems.map(p =>
-          p.productId === product.id
-            ? { ...p, quantity: (p.quantity || 1) + quantity }
-            : p
+          p.productId === product.id? { ...p, quantity: (p.quantity || 1) + quantity }: p
         );
       }
 

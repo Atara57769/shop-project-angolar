@@ -1,163 +1,181 @@
-$fun-orange: #ffd26f;
-$fun-red: #ff5c5c;
-$fun-navy: #1a2a44;
-$fun-muted: #64748b;
-$fun-teal: #4fd1c5;
-$fun-bg-light: #fff9ee;
-$transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+/* ===== FILTER PANEL ===== */
+.filters {
+  height: 100%;
+}
 
 .filter-container {
-  background: white;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3f9fd 100%
+  );
   border-radius: 26px;
-  padding: 24px;
-  border: 2px solid rgba($fun-red, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  max-width: 400px;
-
-  section {
-    margin-bottom: 20px;
-  }
+  padding: 1.6rem;
+  box-shadow: 0 12px 28px rgba(13,110,253,0.08);
+  border: 1px solid #e3f1f8;
 }
 
-// --- עיצוב שורת החיפוש ---
-:host ::ng-deep .p-inputgroup {
-  background: $fun-bg-light;
-  border-radius: 16px;
-  border: 2px solid rgba($fun-orange, 0.4);
-  padding: 4px 12px;
-  transition: $transition;
-
-  &:focus-within {
-    border-color: $fun-teal;
-    box-shadow: 0 0 0 4px rgba($fun-teal, 0.15);
-    transform: translateY(-1px);
-  }
-
-  i {
-    color: $fun-orange;
-    font-size: 1.1rem;
-  }
-
-  .p-inputtext {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 10px;
-    font-family: 'Fredoka', sans-serif;
-    color: $fun-navy;
-
-    &::placeholder {
-      color: $fun-muted;
-      opacity: 0.7;
-    }
-  }
-}
-
-// --- עיצוב כפתורי המיון (Chips) ---
-.options-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-
-  .chip {
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 2px solid #f1f5f9;
-    background: #f8fafc;
-    color: $fun-muted;
-    font-weight: 600;
-    font-family: 'Fredoka', sans-serif;
-    cursor: pointer;
-    transition: $transition;
-    outline: none;
-
-    &:hover:not(.active) {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-    }
-
-    // אפקט לחיצה (Active State)
-    &:active {
-      transform: scale(0.95);
-    }
-
-    &.active {
-      background: linear-gradient(135deg, $fun-orange, $fun-red);
-      color: white;
-      border-color: transparent;
-      box-shadow: 0 4px 15px rgba($fun-red, 0.3);
-      
-      // אנימציית דחיסה קלה כשזה כבר לחוץ
-      &:active {
-        box-shadow: 0 2px 8px rgba($fun-red, 0.4);
-      }
-    }
-  }
-}
-
-// --- כותרות ---
-.filter-title {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: $fun-navy;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
+/* ===== SECTIONS ===== */
+section {
+  margin-bottom: 1.4rem;
 }
 
 hr {
-  border: 0;
-  border-top: 2px dashed #f1f5f9;
-  margin: 20px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d6eaf6,
+    transparent
+  );
+  margin: 1.2rem 0;
 }
 
-// --- קטגוריות (Checkboxes) ---
-.category-item {
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 10px;
-  transition: $transition;
-
-  &:hover {
-    background: rgba($fun-orange, 0.1);
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  .category-label {
-    margin-inline-start: 12px;
-    cursor: pointer;
-    font-weight: 500;
-    color: $fun-navy;
-  }
+/* ===== TITLES ===== */
+.filter-title {
+  font-size: 0.85rem;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+  color: #0B6FA4;
+  margin-bottom: 0.8rem;
 }
 
-:host ::ng-deep .p-checkbox {
-  .p-checkbox-box {
-    border-radius: 8px;
-    border: 2px solid $fun-orange;
-    transition: $transition;
-
-    &.p-highlight {
-      background: $fun-teal;
-      border-color: $fun-teal;
-    }
-  }
-}
-
-:host ::ng-deep .p-inputgroup {
-  display: flex; // מוודא שהקונטיינר הוא פלקס
-  align-items: center; // מיישר את האייקון והאינפוט אנכית לאמצע
-
-  i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%; // תופס את כל גובה התיבה כדי להתמרכז
-  }
-}
-
+/* ===== SEARCH ===== */
 .search-input {
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f0f8fc;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus-within {
+  border-color: #1DA1D8;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(29,161,216,0.15);
+}
+
+.search-input input {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* ===== SORT CHIPS ===== */
+.options-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chip {
+  border-radius: 999px;
+  border: 2px solid #cfe7f4;
+  background: white;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  color: #0B6FA4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  background: #eaf7fd;
+}
+
+.chip.active {
+  background: linear-gradient(135deg, #1DA1D8, #0B6FA4);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 14px rgba(11,111,164,0.25);
+}
+
+/* ===== CATEGORY LIST ===== */
+.category-item {
   align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+}
+
+.category-label {
+  font-weight: 500;
+  color: #0B6FA4;
+}
+
+/* PrimeNG checkbox צבע מותג */
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  background: #1DA1D8;
+  border-color: #1DA1D8;
+}
+
+/* ===== PRICE SLIDER ===== */
+.price-slider-container {
+  padding-top: 0.5rem;
+}
+
+/* slider track */
+:host ::ng-deep .p-slider-range {
+  background: linear-gradient(90deg, #1DA1D8, #0B6FA4);
+}
+
+/* slider knob */
+:host ::ng-deep .p-slider-handle {
+  border: 3px solid #1DA1D8;
+  background: white;
+  width: 18px;
+  height: 18px;
+}
+
+/* ===== PRICE BOXES ===== */
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 0.6rem;
+}
+
+.price-field {
+  flex: 1;
+}
+
+.price-field label {
+  font-size: 0.75rem;
+  color: #6b9bb5;
+  font-weight: 600;
+}
+
+.input-box {
+  margin-top: 0.3rem;
+  background: white;
+  border-radius: 14px;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  color: #0B6FA4;
+  border: 2px solid #e3f1f8;
+}
+.categories-row {
+  display: flex;
+  flex-wrap: wrap;   /* יורד שורה כשאין מקום */
+  gap: 0.6rem;
+}
+
+/* כל קטגוריה נראית כמו chip */
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  background: white;
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  border: 2px solid #d6eaf6;
+
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.category-item:hover {
+  background: #eaf7fd;
+  border-color: #1DA1D8;
 }

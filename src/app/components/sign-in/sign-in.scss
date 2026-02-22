@@ -1,3 +1,11 @@
+.auth-card::before,
+.auth-card::after {
+  background: linear-gradient(
+    135deg,
+    rgba(29,161,216,0.18),
+    rgba(11,111,164,0.18)
+  );
+}
 *,
 *::before,
 *::after {
@@ -28,7 +36,6 @@ html, body {
   background: var(--fun-card);
   border-radius: 24px;
   padding: 26px 24px;
-  border: 2px solid rgba(255, 154, 60, 0.25);
   box-shadow: var(--fun-shadow);
   position: relative;
   overflow: hidden;
@@ -135,4 +142,12 @@ html, body {
 
 :host ::ng-deep .p-button:hover:not(.p-disabled) {
   transform: translateY(-1px);
+}
+.auth-card::before,
+.auth-card::after {
+  background: linear-gradient(
+    135deg,
+    rgba(29,161,216,0.18),
+    rgba(11,111,164,0.18)
+  );
 }

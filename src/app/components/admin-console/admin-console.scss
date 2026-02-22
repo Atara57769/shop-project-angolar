@@ -10,12 +10,14 @@
     padding: 10px 4px 48px;
 }
 
+/* ===== TOP BAR ===== */
+
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--fun-card);
-    border: 2px solid rgba(24, 177, 153, 0.2);
+    border: 2px solid rgba(29,161,216,0.25); /* כחול במקום ירקרק */
     box-shadow: var(--fun-shadow);
     border-radius: 22px;
     padding: 16px 18px;
@@ -26,24 +28,24 @@
     overflow: hidden;
 }
 
-
-
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* ===== BRAND ICON ===== */
+
 .brand-dot {
     width: 48px;
     height: 48px;
     border-radius: 16px;
-    background: linear-gradient(135deg, var(--fun-orange), var(--fun-yellow));
-    box-shadow: var(--fun-glow);
+    background: linear-gradient(135deg, #1DA1D8, #0B6FA4);
+    box-shadow: 0 8px 18px rgba(11,111,164,0.25);
     margin-right: 7px;
     display: grid;
     place-items: center;
-    color: var(--fun-navy);
+    color: white;
     font-weight: 800;
 }
 
@@ -61,6 +63,8 @@
     color: var(--fun-muted);
 }
 
+/* ===== NAV ===== */
+
 .nav-links {
     display: flex;
     gap: 10px;
@@ -68,26 +72,28 @@
 
 .nav-links button {
     text-decoration: none;
-    color: var(--fun-ink);
+    color: var(--fun-navy);
     padding: 10px 16px;
     border-radius: 14px;
     font-weight: 700;
-    border: 2px solid rgba(23, 79, 146, 0.12);
-    background: #fff9ee;
+    border: 2px solid rgba(29,161,216,0.25);
+    background: #f3fafe; /* במקום קרם */
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .nav-links button:hover {
-    background: linear-gradient(135deg, var(--fun-teal), var(--fun-blue));
-    color: #0f141f;
-    box-shadow: var(--fun-glow);
+    background: linear-gradient(135deg, #49B6E6, #1DA1D8);
+    color: white;
+    box-shadow: 0 8px 18px rgba(11,111,164,0.25);
     transform: translateY(-1px);
 }
 
+/* ===== SELECTED BUTTON ===== */
+
 .selecctedButton {
-    background: linear-gradient(135deg, var(--fun-red), var(--fun-orange)) !important;
-    color: #0f141f !important;
-    box-shadow: var(--fun-glow) !important;
+    background: linear-gradient(135deg, #1DA1D8, #0B6FA4) !important;
+    color: white !important;
+    box-shadow: 0 10px 22px rgba(11,111,164,0.28) !important;
     transform: translateY(-1px) !important;
     border-color: transparent !important;
 }
@@ -95,6 +101,8 @@
 .page-shell {
     margin-top: 20px;
 }
+
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
     .top-bar {

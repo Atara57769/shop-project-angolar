@@ -8,15 +8,18 @@ import { ProductModel } from '../../models/product-model';
 import { ProductFilters } from '../../models/product-filters';
 import { ProductService } from '../../services/product-service';
 import { Filters } from './filters/filters';
+import { ButtonModule } from 'primeng/button';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'app-show-products',
-  imports: [CardModule, CurrencyPipe, Filters, ProgressSpinnerModule],
+  imports: [ButtonModule,CardModule, CurrencyPipe, Filters, ProgressSpinnerModule],
   templateUrl: './show-products.html',
   styleUrls: ['./show-products.scss'],
 })
 export class ShowProducts implements OnInit {
   private productService = inject(ProductService);
+  private cartSrvice = inject(CartService);
   router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
@@ -71,4 +74,9 @@ export class ShowProducts implements OnInit {
   goToDetails(productId: number): void {
     this.router.navigate(['/product-details', productId]);
   }
+
+  addToCart(product: ProductModel): void {
+    this.cartSrvice.addToCart(product, 1);
+  }
+
 }

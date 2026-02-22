@@ -4,11 +4,13 @@
     padding: 0;
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
+
 :host{
     display: block;
     padding-top: 24px;
     height: 100%;
 }
+
 .account-shell{
     max-width: 1040px;
     margin: 0 auto;
@@ -16,15 +18,17 @@
     flex-direction: column;
     gap: 18px;
 }
+
 .hero{
     background: var(--fun-card);
-    border: 2px solid rgba(255, 210, 79, 0.3);
+    border: 2px solid rgba(29,161,216,0.25); /* היה צהוב */
     border-radius: 24px;
     padding: 22px 24px;
     box-shadow: var(--fun-shadow);
     position: relative;
     overflow: hidden;
 }
+
 .eyebrow{
     letter-spacing: 0.08em;
     font-size: 12px;
@@ -32,23 +36,27 @@
     color: var(--fun-orange);
     margin-bottom: 6px;
 }
+
 .hero h1{
     margin: 0 0 6px;
     color: var(--fun-navy);
     letter-spacing: -0.02em;
     font-size: 26px;
 }
+
 .lede{
     margin: 0 0 12px;
     color: var(--fun-muted);
 }
+
 .pill-row{
     display: flex;
     gap: 10px;
 }
+
 .pill{
-    border: 2px solid rgba(24, 177, 153, 0.2);
-    background: #fff8eb;
+    border: 2px solid rgba(29,161,216,0.2); /* היה ירקרק */
+    background: #f3fafe; /* היה קרם */
     color: var(--fun-ink);
     padding: 8px 14px;
     border-radius: 14px;
@@ -56,17 +64,60 @@
     transition: all 0.2s ease;
     font-weight: 600;
 }
+
 .pill.active{
     background: linear-gradient(135deg, var(--fun-teal), var(--fun-blue));
     color: #0f141f;
     border-color: transparent;
     box-shadow: var(--fun-glow);
 }
+
 .content-card{
     background: var(--fun-card);
     border-radius: 24px;
-    border: 1px solid rgba(23, 79, 146, 0.12);
+    border: 1px solid rgba(29,161,216,0.18); /* היה כחול כהה ישן */
     box-shadow: var(--fun-shadow);
     padding: 20px;
     overflow: hidden;
+}
+/* ===== HERO FIX COLORS ===== */
+
+.hero {
+  background: #ffffff !important;
+  border: 2px solid rgba(29,161,216,0.22) !important;
+}
+
+/* הטקסט הקטן למעלה */
+.eyebrow {
+  color: #1DA1D8 !important;
+}
+
+/* pills רגילים */
+.pill {
+  background: #f3fafe !important;
+  border: 2px solid rgba(29,161,216,0.25) !important;
+  color: #0B6FA4 !important;
+}
+
+/* hover עדין */
+.pill:hover {
+  background: #e8f6fd !important;
+}
+
+/* pill פעיל */
+.pill.active {
+  background: linear-gradient(
+    135deg,
+    #49B6E6,
+    #0B6FA4
+  ) !important;
+
+  color: white !important;
+  box-shadow: 0 8px 18px rgba(11,111,164,0.25) !important;
+}
+
+/* הכרטיס שמתחת */
+.content-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(29,161,216,0.18) !important;
 }

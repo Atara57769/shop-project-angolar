@@ -17,7 +17,7 @@
     } @else if (products.length) {
       @for (product of products; track product.id) {
         @if(product.isAvailable){
-        <p-card class="product-card-primeng" (click)="goToDetails(product.id)">
+        <p-card class="product-card-primeng" >
           <ng-template pTemplate="header">
             <div class="product-image-container">
               <img [src]="product.imageUrl" class="product-image-full" alt="{{ product.name }}" />
@@ -29,7 +29,22 @@
               <span class="product-price-footer">
                 {{ product.price | currency:'USD':'symbol':'1.2-2' }}
               </span>
+          
             </div>
+                <div class="product-actions">
+    <p-button
+      styleClass="btn deep full"
+      label="Add to cart"
+      (click)="addToCart(product)"
+    />
+
+    <p-button
+      styleClass="btn outline full"
+      label="More details"
+      (click)="goToDetails(product.id)"
+    />
+  </div>
+
           </ng-template>
         </p-card>
       }

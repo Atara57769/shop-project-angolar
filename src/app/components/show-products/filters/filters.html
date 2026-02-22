@@ -3,7 +3,6 @@
 
         <section>
             <p-inputgroup class="search-input">
-                <i class="pi pi-search"></i>
                 <input pInputText [(ngModel)]="search" placeholder="search" (keyup.enter)="onSearch()"
                     (blur)="onSearch()" />
             </p-inputgroup>
@@ -32,7 +31,7 @@
             <h3 class="filter-title">CATEGORIES</h3>
             <div class="categories-wrapper">
                 <div class="card flex justify-center">
-                    <div class="flex flex-col gap-4">
+                    <div class="categories-row">
                         @for (category of categories; track category.id) {
                         <div class="category-item flex w-full">
                             <p-checkbox [value]="category.id" [inputId]="category.name"

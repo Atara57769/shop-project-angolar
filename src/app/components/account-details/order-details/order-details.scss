@@ -15,9 +15,11 @@
     margin: auto;
 }
 
+/* ===== BACK BUTTON ===== */
+
 .back-btn{
     background: var(--fun-card);
-    border: 2px solid rgba(255, 210, 79, 0.35);
+    border: 2px solid rgba(29,161,216,0.28);
     border-radius: 12px;
     padding: 10px 16px;
     font-size: 14px;
@@ -26,17 +28,18 @@
     cursor: pointer;
     margin-bottom: 16px;
     transition: all 0.2s ease;
-    font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
-
-    &:hover{
-        transform: translateX(-4px);
-        box-shadow: var(--fun-shadow);
-    }
 }
+
+.back-btn:hover{
+    transform: translateX(-4px);
+    box-shadow: var(--fun-shadow);
+}
+
+/* ===== ORDER CARD ===== */
 
 .order-card{
     background: var(--fun-card);
-    border: 2px solid rgba(255, 210, 79, 0.35);
+    border: 2px solid rgba(29,161,216,0.28);
     border-radius: 18px;
     padding: 16px;
     box-shadow: var(--fun-shadow);
@@ -55,7 +58,7 @@
     letter-spacing: 0.08em;
     font-size: 11px;
     text-transform: uppercase;
-    color: var(--fun-orange);
+    color: #1DA1D8;
 }
 
 .order-card h2{
@@ -64,34 +67,38 @@
     color: var(--fun-navy);
 }
 
+/* ===== STATUS ===== */
+
 .status{
     padding: 6px 10px;
     border-radius: 12px;
     font-weight: 700;
     text-transform: capitalize;
     font-size: 13px;
-
-    &.pending{
-        background: #fff0d2;
-        color: #b8860b;
-    }
-
-    &.shipped{
-        background: #d4edff;
-        color: #0066cc;
-    }
-
-    &.delivered{
-        background: #d4f4dd;
-        color: #1e7e34;
-    }
 }
+
+.status.pending{
+    background: #f0f9ff;
+    color: #0369a1;
+}
+
+.status.shipped{
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.status.delivered{
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+/* ===== META ===== */
 
 .meta{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     color: var(--fun-muted);
-    gap: 8px; 
+    gap: 8px;
 }
 
 .label{
@@ -100,6 +107,7 @@
     margin-right: 6px;
 }
 
+/* ===== ITEMS ===== */
 
 .items-grid{
     display: grid;
@@ -114,7 +122,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(11,111,164,0.08);
     transition: transform 0.15s ease;
 }
 
@@ -143,8 +151,10 @@
 
 .item-total{
     font-weight: 700;
-    color: var(--fun-orange);
+    color: #1DA1D8;
 }
+
+/* ===== EMPTY ===== */
 
 .empty-state{
     grid-column: 1 / -1;
@@ -154,6 +164,7 @@
     font-size: 16px;
 }
 
+/* ===== MOBILE ===== */
 
 @media (max-width: 600px){
 

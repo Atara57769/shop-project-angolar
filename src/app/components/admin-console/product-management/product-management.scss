@@ -5,9 +5,11 @@
   overflow-x: hidden;
 }
 
+/* ===== CARD ===== */
+
 .management-card {
   background: var(--fun-card);
-  border: 2px solid rgba(47, 131, 208, 0.14);
+  border: 2px solid rgba(29,161,216,0.22);
   border-radius: 20px;
   padding: 16px;
   box-shadow: var(--fun-shadow);
@@ -35,11 +37,6 @@
   color: var(--fun-muted);
 }
 
-.helper {
-  margin: 6px 0 0;
-  color: var(--fun-muted);
-}
-
 .actions {
   display: flex;
   align-items: center;
@@ -47,17 +44,18 @@
   flex-wrap: wrap;
 }
 
+/* ===== TABLE ===== */
+
 .table-wrapper {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(23, 79, 146, 0.12);
+  border: 1px solid rgba(29,161,216,0.18);
 }
 
 .data-table {
   width: 100%;
-  max-width: 100%;
   border-collapse: collapse;
   background: #fff;
   table-layout: fixed;
@@ -68,33 +66,36 @@
   padding: 12px 10px;
   text-align: left;
   word-break: break-word;
-  overflow-wrap: break-word;
 }
 
+/* HEADER ROW – removed yellow */
 .data-table thead th {
-  background: #fff4dd;
+  background: #f3fafe;
   font-weight: 800;
   color: var(--fun-navy);
-  border-bottom: 1px solid rgba(23, 79, 146, 0.12);
+  border-bottom: 1px solid rgba(29,161,216,0.18);
 }
 
+/* ROWS */
 .data-table tbody tr {
-  border-bottom: 1px solid rgba(23, 79, 146, 0.08);
+  border-bottom: 1px solid rgba(29,161,216,0.12);
 }
 
 .data-table tbody tr:hover {
-  background: rgba(24, 177, 153, 0.08);
+  background: rgba(29,161,216,0.08);
 }
 
+/* IMAGE */
 .thumb {
   width: 48px;
   height: 48px;
   min-width: 48px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(23, 79, 146, 0.2);
+  box-shadow: 0 6px 14px rgba(11,111,164,0.18);
 }
 
+/* CELLS */
 .name-cell {
   font-weight: 800;
   color: var(--fun-ink);
@@ -104,12 +105,14 @@
   color: var(--fun-muted);
 }
 
+/* PRICE */
 .price-cell {
   font-weight: 800;
-  color: var(--fun-teal);
+  color: #1DA1D8;
   white-space: nowrap;
 }
 
+/* ACTIONS */
 .actions-col {
   width: 140px;
   max-width: 140px;
@@ -121,21 +124,24 @@
   flex-wrap: wrap;
 }
 
+/* ===== BUTTONS ===== */
+
 :host ::ng-deep .p-button {
   border-radius: 12px;
 }
 
 :host ::ng-deep .p-button.p-button-primary {
-  background: linear-gradient(135deg, var(--fun-blue), var(--fun-teal));
+  background: linear-gradient(135deg,#1DA1D8,#0B6FA4);
   border: none;
-  color: #0f141f;
+  color: white;
 }
 
 :host ::ng-deep .p-button.p-button-danger {
-  border-color: var(--fun-red);
-  color: var(--fun-red);
+  border-color: #0B6FA4;
+  color: #0B6FA4;
 }
 
+/* CONFIRM DIALOG */
 :host ::ng-deep .p-confirm-dialog {
   max-width: 90vw;
 }

@@ -5,9 +5,11 @@
   overflow-x: hidden;
 }
 
+/* ===== CARD ===== */
+
 .management-card {
   background: var(--fun-card);
-  border: 2px solid rgba(255, 210, 79, 0.35);
+  border: 2px solid rgba(29,161,216,0.25);
   border-radius: 20px;
   padding: 16px;
   box-shadow: var(--fun-shadow);
@@ -35,32 +37,30 @@
   color: var(--fun-muted);
 }
 
-.helper {
-  margin: 6px 0 0;
-  color: var(--fun-muted);
-}
+/* ===== BADGE ===== */
 
 .badge {
   padding: 8px 12px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--fun-yellow), var(--fun-orange));
-  color: var(--fun-navy);
+  background: linear-gradient(135deg,#49B6E6,#1DA1D8);
+  color: white;
   font-weight: 800;
   white-space: nowrap;
-  box-shadow: var(--fun-glow);
+  box-shadow: 0 8px 18px rgba(11,111,164,0.25);
 }
+
+/* ===== TABLE ===== */
 
 .table-wrapper {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(23, 79, 146, 0.12);
+  border: 1px solid rgba(29,161,216,0.18);
 }
 
 .data-table {
   width: 100%;
-  max-width: 100%;
   border-collapse: collapse;
   background: #fff;
   table-layout: fixed;
@@ -71,33 +71,36 @@
   padding: 12px 10px;
   text-align: left;
   word-break: break-word;
-  overflow-wrap: break-word;
 }
 
+/* HEADER */
 .data-table thead th {
-  background: #fff4dd;
+  background: #f3fafe;
   font-weight: 800;
   color: var(--fun-navy);
-  border-bottom: 1px solid rgba(23, 79, 146, 0.12);
+  border-bottom: 1px solid rgba(29,161,216,0.18);
 }
 
+/* ROWS */
 .data-table tbody tr {
-  border-bottom: 1px solid rgba(23, 79, 146, 0.08);
+  border-bottom: 1px solid rgba(29,161,216,0.12);
 }
 
 .data-table tbody tr:hover {
-  background: rgba(255, 210, 79, 0.12);
+  background: rgba(29,161,216,0.08);
 }
+
+/* CELLS */
 
 .id-cell {
   font-weight: 800;
-  color: var(--fun-blue);
+  color: #1DA1D8;
   white-space: nowrap;
 }
 
 .price-cell {
   font-weight: 800;
-  color: var(--fun-teal);
+  color: #0B6FA4;
   white-space: nowrap;
 }
 
@@ -111,6 +114,7 @@
   max-width: 100%;
 }
 
+/* PRIME SELECT FIX */
 :host ::ng-deep select,
 :host ::ng-deep .p-dropdown {
   max-width: 100%;
