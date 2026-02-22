@@ -16,6 +16,7 @@
       </div>
     } @else if (products.length) {
       @for (product of products; track product.id) {
+        @if(product.isAvailable){
         <p-card class="product-card-primeng" (click)="goToDetails(product.id)">
           <ng-template pTemplate="header">
             <div class="product-image-container">
@@ -31,6 +32,7 @@
             </div>
           </ng-template>
         </p-card>
+      }
       }
     } @else {
       <div class="no-products">

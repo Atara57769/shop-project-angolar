@@ -1,18 +1,11 @@
 <div class="page">
   <header class="hero">
     <div class="brand">
-      <div class="badge">
-        <span class="badge-star">★</span>
-      </div>
-      <div>
-        <p class="eyebrow">Welcome to</p>
-        <h1>FunLand</h1>
-        <p class="lede">A playful hub for signing in, shopping, and managing orders.</p>
-      </div>
+    <img src="logo.png" (click)='shopShow()'>
+    
     </div>
 
     <div class="actions">
-      <p-button styleClass="btn cool" label="Shop" icon="pi pi-shopping-bag" (click)='shopShow()' />
       <p-button styleClass="btn warm" [label]="userName()" icon="pi pi-user" (click)='accountShow()' />
       <p-overlaybadge [value]="cartCount()" severity="danger" badgeSize="small">
         <p-button styleClass="btn deep" label="Cart" (click)="cartShow()" icon="pi pi-shopping-cart" />
