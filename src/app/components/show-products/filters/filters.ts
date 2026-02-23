@@ -39,10 +39,11 @@ export class Filters implements OnInit {
   @Output() filtersChange = new EventEmitter<ProductFilters>();
 
   search: string = '';
-  sortBy: ProductFilters['sort'] = 'new';
+  sortBy: ProductFilters['sort'] = 'name';
+  sortDirection: ProductFilters['sortDirection'] = 'asc';
 
   categoryService = inject(CategoryService);
-private cdr = inject(ChangeDetectorRef);
+  private cdr = inject(ChangeDetectorRef);
   categories: CategoryModel[] = [];
   selectedCategoriesIds: number[] = [];
 
@@ -64,11 +65,6 @@ private cdr = inject(ChangeDetectorRef);
     });
   }
 
-  setSort(value: ProductFilters['sort']) {
-    this.sortBy = value;
-    this.emitFilters();
-  }
-
   onSearch() {
     this.emitFilters();
   }
@@ -86,7 +82,14 @@ private cdr = inject(ChangeDetectorRef);
     this.emitFilters();
   }
 
+  onSortChange(sortBy: ProductFilters['sort'], sortDirection: ProductFilters['sortDirection']) {
+    this.sortBy = sortBy;
+    this.sortDirection = sortDirection;
+    this.emitFilters();
+  }
+
   private emitFilters() {
+
     const [minRange, maxRange] = this.rangeValues;
 
     const filters: ProductFilters = {
@@ -95,6 +98,7 @@ private cdr = inject(ChangeDetectorRef);
       minPrice: this.priceTouched ? minRange : undefined,
       maxPrice: this.priceTouched ? maxRange : undefined,
       sort: this.sortBy,
+      sortDirection: this.sortDirection,
     };
 
     this.filtersChange.emit(filters);

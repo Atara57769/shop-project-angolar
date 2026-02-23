@@ -5,5 +5,6 @@ export interface ProductFilters {
   maxPrice?: number;
   skip?: number; // number of items to return
   position?: number; // page index (1-based)
-  sort?: 'new' | 'priceLowHigh';
+  sort?: 'name' | 'price';
+  sortDirection?: 'asc' | 'desc';
 }

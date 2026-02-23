@@ -14,12 +14,20 @@
         <section>
             <h3 class="filter-title">SORT BY</h3>
             <div class="options-row">
-                <button class="chip" [class.active]="sortBy === 'new'" (click)="setSort('new')">
-                    New in
+                <button class="chip" [class.active]="sortBy === 'name' && sortDirection === 'asc'" (click)="onSortChange('name', 'asc')">
+                    Name from A to Z
                 </button>
 
-                <button class="chip" [class.active]="sortBy === 'priceLowHigh'" (click)="setSort('priceLowHigh')">
+                <button class="chip" [class.active]="sortBy === 'name' && sortDirection === 'desc'" (click)="onSortChange('name', 'desc')">
+                    Name from Z to A   
+                </button>
+
+                <button class="chip" [class.active]="sortBy === 'price' && sortDirection === 'asc'" (click)="onSortChange('price', 'asc')">
                     Priced from low to high
+                </button>
+
+                <button class="chip" [class.active]="sortBy === 'price' && sortDirection === 'desc'" (click)="onSortChange('price', 'desc')">
+                    Priced from high to low
                 </button>
             </div>
         </section>

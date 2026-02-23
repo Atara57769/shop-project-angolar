@@ -51,6 +51,12 @@ export class ProductService {
       params = params.set('position', filters.position.toString());
     }
 
+    if (filters.sort) {
+      params = params.set('orderBy', filters.sort);
+    }
+    if (filters.sortDirection) {
+      params = params.set('orderDirection', filters.sortDirection);
+    }
     return this.http.get<ProductModel[]>(`${this.baseUrl}/products`, { params });
   }
 
