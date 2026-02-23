@@ -20,6 +20,12 @@
   align-items: center;
   justify-content: space-between;
 
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
   background: linear-gradient(
     135deg,
     #1DA1D8,
