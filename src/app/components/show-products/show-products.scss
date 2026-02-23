@@ -10,14 +10,16 @@
     #d7ecf7 40%,
     #cfe7f4 100%
   );
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
 }
 /* ===== FILTER AREA ===== */
 .filters-container {
-  background: white;
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 2rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  width: 20vw;
 }
 
 /* ===== GRID ===== */
@@ -25,6 +27,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2rem;
+  width: 70vw;
 }
 
 /* ===== PRODUCT CARD ===== */

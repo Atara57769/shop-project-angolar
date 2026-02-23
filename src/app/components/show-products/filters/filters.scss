@@ -1,6 +1,8 @@
 /* ===== FILTER PANEL ===== */
 .filters {
   height: 100%;
+  width: 20vw;
+  
 }
 
 .filter-container {
@@ -9,9 +11,11 @@
     #ffffff 0%,
     #f3f9fd 100%
   );
+  // background-color:#cfe7f4;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   border-radius: 26px;
   padding: 1.6rem;
-  box-shadow: 0 12px 28px rgba(13,110,253,0.08);
+  // box-shadow: 0 12px 28px rgba(13,110,253,0.08);
   border: 1px solid #e3f1f8;
 }
 

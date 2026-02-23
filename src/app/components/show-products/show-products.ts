@@ -28,7 +28,7 @@ export class ShowProducts implements OnInit {
   errorMessage = '';
 
   private readonly pageSize = 100;
-  private currentFilters: ProductFilters = { position: 1, skip: this.pageSize, sort: 'new' };
+  private currentFilters: ProductFilters = { position: 1, skip: this.pageSize, sort: 'name', sortDirection: 'asc' };
 
   ngOnInit(): void {
     this.loadProducts();
@@ -65,7 +65,7 @@ export class ShowProducts implements OnInit {
   }
 
   private applySort(products: ProductModel[]): ProductModel[] {
-    if (this.currentFilters.sort === 'priceLowHigh') {
+    if (this.currentFilters.sort === 'price') {
       return [...products].sort((a, b) => a.price - b.price);
     }
     return products;
