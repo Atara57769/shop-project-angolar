@@ -1,5 +1,5 @@
 import { PostOrderItemModel } from './post-order-item-model';
-export type OrderStatus = 'pending' | 'shipped' | 'delivered';
+import { OrderStatus } from './orders-model';
 
 export class PostOrderModel{
   id?: number;
