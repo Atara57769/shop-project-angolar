@@ -15,7 +15,7 @@
             <p class="eyebrow">Order</p>
             <h2>#{{ o.id }}</h2>
           </div>
-          <span class="status" [class.delivered]="o.status === 'delivered'" [class.pending]="o.status === 'pending'" [class.shipped]="o.status === 'shipped'">
+          <span class="status" [class.delivered]="o.status === 'delivered'" [class.created]="o.status === 'created'" [class.shipped]="o.status === 'shipped' || o.status=='collected'">
             {{ o.status }}
           </span>
         </header>

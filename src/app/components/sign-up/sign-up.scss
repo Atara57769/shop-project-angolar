@@ -153,3 +153,7 @@ html, body {
   transform: translateY(-1px);
   box-shadow: 0 12px 26px rgba(11,111,164,0.35);
 }
+.errorText{
+  color: var(--fun-red);
+  font-weight: 700;
+}

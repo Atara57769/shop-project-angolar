@@ -6,6 +6,6 @@ export class PostOrderModel{
   userId?: number; 
   orderItems: PostOrderItemModel[]=[];
   orderSum: number=0;
-  status:OrderStatus='pending';
+  status:OrderStatus='created';
   orderDate: Date = new Date();
 }

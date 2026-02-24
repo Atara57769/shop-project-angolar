@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -25,6 +25,7 @@ export class SignUp {
   userServ = inject(UserService);
   authService = inject(AuthService);
   router = inject(Router);
+  errorText = signal('');
   user: PostUserModel = new PostUserModel();
 
   frmSignUp = new FormGroup({
@@ -52,8 +53,7 @@ export class SignUp {
         
       },
       error: (err) => {
-        alert(err.error || 'An error occurred during sign up. Please try again.');
-      
+        this.errorText.set(err.error || 'An error occurred during sign up. Please try again.');     
       }
     });
   }

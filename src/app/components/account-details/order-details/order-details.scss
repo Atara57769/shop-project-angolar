@@ -77,7 +77,7 @@
     font-size: 13px;
 }
 
-.status.pending{
+.status.created{
     background: #f0f9ff;
     color: #0369a1;
 }
@@ -88,8 +88,8 @@
 }
 
 .status.delivered{
-    background: #dbeafe;
-    color: #1e40af;
+    background: #75c55f;
+    color: white;
 }
 
 /* ===== META ===== */

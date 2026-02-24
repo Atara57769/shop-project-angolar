@@ -51,7 +51,7 @@ export class ShowProducts implements OnInit {
     this.productService.getProducts(this.currentFilters).subscribe({
       next: (products) => {
         const normalizedProducts = Array.isArray(products) ? products : [];
-        this.products = normalizedProducts.length ? this.applySort(normalizedProducts) : [];
+        this.products = normalizedProducts.length ? normalizedProducts : [];
         this.loading = false;
         this.cdr.detectChanges();
       },

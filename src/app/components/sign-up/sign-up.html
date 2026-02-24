@@ -19,7 +19,7 @@
         <input pInputText id="address" autocomplete="off" formControlName="address" />
         <label for="address">Address</label>
       </p-floatlabel>
-            <p-floatlabel variant="on">
+          <p-floatlabel variant="on">
         <p-inputmask id="phoneNumber" mask="(999) 999-9999" formControlName="phoneNumber" placeholder="(999) 999-9999"></p-inputmask>
         <label for="phoneNumber">Phone</label>
       </p-floatlabel>
@@ -27,6 +27,7 @@
         <p-password formControlName="password" [toggleMask]="true" inputId="password" />
         <label for="password">Password</label>
       </p-floatlabel >
+       <div class="errorText">{{errorText()}}</div>
       <p-button label="Create account" [raised]="true" severity="secondary" [disabled]="frmSignUp.invalid" (click)="signUp()" />
       <p class="login-text">Already a member?
         <a class="login-link" (click)="signInShow()">Sign in</a>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -24,6 +24,7 @@ export class SignIn {
   userServ = inject(UserService);
   authService = inject(AuthService);
   router = inject(Router);
+  errorText = signal('');
   user: PostUserModel = new PostUserModel();
   frmSignUp = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -49,8 +50,8 @@ export class SignIn {
       }
 
     },
-    error: (err) => {
-       alert("we cant found you,please try again!");      
+    error: (err) => { 
+       this.errorText.set("we cant found you, please try again!");
     }
   });
 }

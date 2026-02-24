@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { item } from '@primeuix/themes/nora/tieredmenu';
 import { PostOrderItemModel } from '../models/post-order-item-model';
 import { PostOrderModel } from '../models/post-order-model';
-export type OrderStatus = 'pending' | 'shipped' | 'delivered';
+import { OrderStatus } from '../models/orders-model';
 @Injectable({
   providedIn: 'root',
 })

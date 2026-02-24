@@ -16,7 +16,7 @@ export class OrdersManagement implements OnInit {
   srvOrders: OrderService = inject(OrderService);
   orders: OrderModel[] = [];
   private cdr = inject(ChangeDetectorRef);
-  statuses: OrderStatus[] = ['pending', 'shipped', 'delivered'];
+  statuses: OrderStatus[] = ['created','collected', 'shipped', 'delivered'];
 
   ngOnInit() {
     this.loadOrders();

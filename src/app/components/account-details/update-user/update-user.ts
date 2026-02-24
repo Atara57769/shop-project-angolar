@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -25,6 +25,7 @@ import { UpdateUserModel } from '../../../models/update-user-model';
 export class UpdateUser {
   userServ = inject(UserService);
   authService = inject(AuthService);
+  message = signal('');
   user: PostUserModel = new PostUserModel();
   frmUpdate = new FormGroup({
     phoneNumber: new FormControl('', [Validators.required]),
@@ -32,6 +33,18 @@ export class UpdateUser {
     lastName: new FormControl(''),
     address: new FormControl('', [Validators.required])
   });
+  ngOnInit() {
+    let currentUser: UserModel | null = this.authService.getCurrentUser();
+    if (currentUser) {
+      this.frmUpdate.patchValue({
+        phoneNumber: currentUser.phoneNumber,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        address: currentUser.address
+      });
+    }
+  }
+
 
   update() {
     if (this.frmUpdate.invalid) return;
@@ -40,7 +53,7 @@ export class UpdateUser {
     if (!currentUser) return;
 
     const updatedUser: UpdateUserModel = {
-      id:currentUser.id,
+      id: currentUser.id,
       phoneNumber: this.frmUpdate.get('phoneNumber')?.value || currentUser.phoneNumber,
       firstName: this.frmUpdate.get('firstName')?.value || currentUser.firstName,
       lastName: this.frmUpdate.get('lastName')?.value || currentUser.lastName,
@@ -51,13 +64,13 @@ export class UpdateUser {
       .subscribe({
         next: () => {
           const mergedUser = { ...currentUser, ...updatedUser };
-          sessionStorage.setItem('currentUser', JSON.stringify(mergedUser));
-          
-          alert('User updated successfully');
+          this.authService.login(mergedUser);
+          this.message.set('Your account has been updated successfully!');
         },
         error: (err) => {
-          alert('Update failed'+err.error);
+          this.message.set('Update failed: ' + (err.error || 'An error occurred. Please try again.'));
         }
       });
+
   }
 }

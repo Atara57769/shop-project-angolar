@@ -21,6 +21,7 @@
         <label for="address">Address</label>
       </p-floatlabel>
       <p-button label="update details" [raised]="true" severity="secondary" [disabled]="frmUpdate.invalid" (click)="update()"/>
+       <div class="message">{{message()}}</div>
     </form>
   </div>
 </div>

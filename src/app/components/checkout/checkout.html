@@ -101,7 +101,7 @@
           <h3 class="section-title">Delivery Address</h3>
           
           <div class="form-group">
-            <label class="form-label">Street Address</label>
+            <label class="form-label">Address</label>
             <input pInputText 
               formControlName="street"
               placeholder="123 Main Street"
@@ -111,63 +111,14 @@
             }
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">City</label>
-              <input pInputText 
-                formControlName="city"
-                placeholder="New York"
-                class="form-input" />
-              @if (checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched) {
-                <small class="error-text">City required</small>
-              }
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">State/Province</label>
-              <input pInputText 
-                formControlName="state"
-                placeholder="NY"
-                class="form-input" />
-              @if (checkoutForm.get('state')?.invalid && checkoutForm.get('state')?.touched) {
-                <small class="error-text">State required</small>
-              }
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Postal Code</label>
-              <input pInputText 
-                formControlName="postalCode"
-                placeholder="10001"
-                class="form-input" />
-              @if (checkoutForm.get('postalCode')?.invalid && checkoutForm.get('postalCode')?.touched) {
-                <small class="error-text">Valid postal code required</small>
-              }
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Country</label>
-              <input pInputText 
-                formControlName="country"
-                placeholder="United States"
-                class="form-input" />
-              @if (checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched) {
-                <small class="error-text">Country required</small>
-              }
-            </div>
-          </div>
-
           <div class="form-group">
             <label class="form-label">Phone Number</label>
             <input pInputText 
               formControlName="phone"
               placeholder="+1 2025551234"
-              class="form-input" />
-            @if (checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched) {
-              <small class="error-text">Valid phone number required (9-15 digits)</small>
-            }
+              class="form-input" 
+               [disabled]="true"/>
+            
           </div>
         </div>
 
