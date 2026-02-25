@@ -7,6 +7,12 @@
       <!-- <p class="subheader">Review and manage your items</p> -->
     </div>
 
+    @if (availabilityError()) {
+      <div class="availability-error">
+        Unable to verify product availability right now. Please try again in a moment.
+      </div>
+    }
+
     <!-- Cart Items -->
     <div class="cart-items-section">
       @if (products().length === 0) {
@@ -50,6 +56,12 @@
               <button class="delete-btn" (click)="removeItem(item.productId)" aria-label="Remove item">
                 <i class="pi pi-trash"></i>
               </button>
+
+              @if (isUnavailable(item.productId)) {
+                <div class="availability-note">
+                  This item is currently unavailable. Please remove it to continue.
+                </div>
+              }
             </div>
           }
         </div>

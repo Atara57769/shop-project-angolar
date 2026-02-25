@@ -56,6 +56,16 @@ html, body {
   margin-bottom: 48px; 
 }
 
+.availability-error {
+  background: #fff5f5;
+  border: 1px solid #f2b8b5;
+  color: #a12b2b;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
 .cart-header {
   text-align: center;
   margin-bottom: 32px;
@@ -156,6 +166,17 @@ html, body {
   .item-subtotal {
     font-weight: 700;
     color: var(--fun-navy);
+  }
+
+  .availability-note {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #fff5f5;
+    border: 1px solid #f2b8b5;
+    color: #a12b2b;
+    font-weight: 600;
   }
 }
 

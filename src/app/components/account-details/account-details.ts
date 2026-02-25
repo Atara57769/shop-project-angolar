@@ -16,6 +16,7 @@ export class AccountDetails implements OnInit {
   authService=inject(AuthService);
   router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
+  isAdmin:boolean=false
 
   ngOnInit() {
     // Listen for navigation events and trigger change detection
@@ -24,6 +25,7 @@ export class AccountDetails implements OnInit {
     ).subscribe(() => {
       this.cdr.detectChanges();
     });
+    this.isAdmin=this.authService.getCurrentUser()?.isAdmin ?? false
   }
 
   get orders(): boolean {
@@ -40,6 +42,10 @@ export class AccountDetails implements OnInit {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  showAdmin(){
+    this.router.navigate(['/admin'])
   }
 
   updateUserDetails() {
