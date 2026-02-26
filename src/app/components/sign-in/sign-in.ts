@@ -51,7 +51,7 @@ export class SignIn {
 
     },
     error: (err) => { 
-       this.errorText.set("we cant found you, please try again!");
+       this.errorText.set("we can't find you, please try again!");
     }
   });
 }
