@@ -8,11 +8,12 @@ import { SignUp } from './components/sign-up/sign-up';
 import { AdminConsole } from './components/admin-console/admin-console';
 import { AccountDetails } from './components/account-details/account-details';
 import { Header } from './components/header/header';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @Component({
   selector: 'app-root',
-  imports: [AccountDetails,SignIn,SignUp,AdminConsole,Header],
+  imports: [AccountDetails, SignIn, SignUp, AdminConsole, Header, ChatComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
