@@ -7,7 +7,7 @@ import { ChatService } from './chat.service';
   selector: 'app-chat',
   imports: [CommonModule, FormsModule],
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
   messages: { role: string; content: string }[] = [];

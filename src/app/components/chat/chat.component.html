@@ -1,17 +1,51 @@
-<button class="chat-toggle" (click)="isOpen = !isOpen">
-  {{ isOpen ? '✕' : '💬' }}
+<button class="chat-toggle" (click)="isOpen = !isOpen" [class.open]="isOpen">
+  <i [class]="isOpen ? 'pi pi-times' : 'pi pi-comments'"></i>
 </button>
+
 <div class="chat-window" *ngIf="isOpen">
-  <div class="chat-header">AI Shopping Assistant</div>
-  <div class="chat-messages">
-    <div *ngFor="let m of messages" [class]="'msg ' + m.role">
-      {{ m.content }}
+  <div class="chat-header">
+    <div class="header-info">
+      <div class="assistant-avatar">
+        <i class="pi pi-sparkles"></i>
+        <span class="status-dot"></span>
+      </div>
+      <div class="header-text">
+        <span class="title">AI Shopping Assistant</span>
+        <span class="subtitle">Online</span>
+      </div>
     </div>
-    <div *ngIf="loading" class="msg assistant">Typing...</div>
+    <button class="close-btn" (click)="isOpen = false">
+      <i class="pi pi-times"></i>
+    </button>
   </div>
+
+  <div class="chat-messages">
+    <div *ngFor="let m of messages" class="message-row" [class.user]="m.role === 'user'" [class.assistant]="m.role === 'assistant'">
+      <div class="avatar" *ngIf="m.role === 'assistant'">
+        <i class="pi pi-sparkles"></i>
+      </div>
+      <div class="msg" [class.user]="m.role === 'user'" [class.assistant]="m.role === 'assistant'">
+        {{ m.content }}
+      </div>
+    </div>
+    
+    <div class="message-row assistant" *ngIf="loading">
+      <div class="avatar">
+        <i class="pi pi-sparkles"></i>
+      </div>
+      <div class="msg assistant typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
   <div class="chat-input">
     <textarea [(ngModel)]="input" (keydown)="onKey($event)"
       placeholder="Ask about our products..."></textarea>
-    <button (click)="send()" [disabled]="loading">Send</button>
+    <button class="send-btn" (click)="send()" [disabled]="loading || !input.trim()">
+      <i class="pi pi-send"></i>
+    </button>
   </div>
 </div>
