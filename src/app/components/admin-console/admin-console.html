@@ -10,15 +10,30 @@
     <nav class="nav-links">
        <button (click)="showProducts()" [class.selecctedButton]="prod">Products</button>
       <button (click)="showOrders()" [class.selecctedButton]="orders">Orders</button>
-      
+      <button 
+        (click)="updateVectorDb()" 
+        [disabled]="isUpdating"
+        [class.btn-updating]="isUpdating"
+        class="btn-sync-db">
+        <i class="pi pi-database" [class.pi-spin]="isUpdating"></i>
+        <span>{{ isUpdating ? 'Updating Vector DB...' : 'Update Vector DB' }}</span>
+      </button>
     </nav>
   </header>
-    <main class="main-content">
-        @if(prod){
-        <app-product-management ></app-product-management>
-        }
-        @if(orders){        
-        <app-orders-management ></app-orders-management>
-        }
-    </main>
+
+  @if (updateStatus) {
+    <div class="status-banner" [class.success]="updateStatus.success" [class.error]="!updateStatus.success">
+      <i class="pi" [class.pi-check-circle]="updateStatus.success" [class.pi-exclamation-circle]="!updateStatus.success"></i>
+      <span class="status-message">{{ updateStatus.message }}</span>
+    </div>
+  }
+
+  <main class="main-content">
+      @if(prod){
+      <app-product-management ></app-product-management>
+      }
+      @if(orders){        
+      <app-orders-management ></app-orders-management>
+      }
+  </main>
 </div>

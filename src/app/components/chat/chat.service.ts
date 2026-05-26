@@ -14,4 +14,8 @@ export class ChatService {
       products: [] // will be filled in Hours 5-6
     });
   }
+
+  updateVectorDb() {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/chatbot/update-db`, {});
+  }
 }

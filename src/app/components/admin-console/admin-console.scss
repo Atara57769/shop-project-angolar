@@ -113,5 +113,107 @@
 
     .nav-links {
         width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ===== UPDATE VECTOR DB BUTTON ===== */
+.btn-sync-db {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5); /* Modern deep violet/indigo */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    i {
+        font-size: 14px;
+        transition: transform 0.3s ease;
+    }
+
+    span {
+        font-size: 14px;
+    }
+
+    &:hover:not([disabled]) {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(124, 58, 237, 0.4);
+        background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    }
+
+    &:active:not([disabled]) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        background: #e5e7eb;
+        color: #9ca3af;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
+.btn-updating {
+    background: #6d28d9 !important;
+    opacity: 0.85;
+    
+    .pi-spin {
+        animation: spin 1s infinite linear;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== STATUS BANNER ===== */
+.status-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: var(--fun-shadow);
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    border: 1px solid transparent;
+
+    i {
+        font-size: 18px;
+    }
+
+    &.success {
+        background: rgba(24, 177, 153, 0.1);
+        color: var(--fun-teal);
+        border-color: rgba(24, 177, 153, 0.25);
+    }
+
+    &.error {
+        background: rgba(255, 92, 92, 0.1);
+        color: var(--fun-red);
+        border-color: rgba(255, 92, 92, 0.25);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
