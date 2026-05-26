@@ -6,11 +6,11 @@
   <div class="chat-header">
     <div class="header-info">
       <div class="assistant-avatar">
-        <i class="pi pi-sparkles"></i>
+        <span style="font-size: 1.5rem;">👱🏻‍♀️</span>
         <span class="status-dot"></span>
       </div>
       <div class="header-text">
-        <span class="title">AI Shopping Assistant</span>
+        <span class="title">Maya Shopping Assistant</span>
         <span class="subtitle">Online</span>
       </div>
     </div>
@@ -20,30 +20,31 @@
   </div>
 
   <div class="chat-messages">
-    <div *ngFor="let m of messages" class="message-row" [class.user]="m.role === 'user'" [class.assistant]="m.role === 'assistant'">
+    <div *ngFor="let m of messages; trackBy: trackByFn" class="message-row" [class.user]="m.role === 'user'"
+      [class.assistant]="m.role === 'assistant'">
+
       <div class="avatar" *ngIf="m.role === 'assistant'">
-        <i class="pi pi-sparkles"></i>
+        <span style="font-size: 1.2rem;">👱🏻‍♀️</span>
       </div>
+
       <div class="msg" [class.user]="m.role === 'user'" [class.assistant]="m.role === 'assistant'">
         {{ m.content }}
       </div>
     </div>
-    
+
     <div class="message-row assistant" *ngIf="loading">
       <div class="avatar">
         <i class="pi pi-sparkles"></i>
       </div>
       <div class="msg assistant typing">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
     </div>
   </div>
 
   <div class="chat-input">
-    <textarea [(ngModel)]="input" (keydown)="onKey($event)"
-      placeholder="Ask about our products..."></textarea>
+    <textarea [(ngModel)]="input" (keydown)="onKey($event)" placeholder="Ask about our products...">
+    </textarea>
     <button class="send-btn" (click)="send()" [disabled]="loading || !input.trim()">
       <i class="pi pi-send"></i>
     </button>
