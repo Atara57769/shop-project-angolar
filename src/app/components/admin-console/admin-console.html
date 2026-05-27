@@ -12,19 +12,19 @@
       <button (click)="showOrders()" [class.selecctedButton]="orders">Orders</button>
       <button 
         (click)="updateVectorDb()" 
-        [disabled]="isUpdating"
-        [class.btn-updating]="isUpdating"
+        [disabled]="isUpdating()"
+        [class.btn-updating]="isUpdating()"
         class="btn-sync-db">
-        <i class="pi pi-database" [class.pi-spin]="isUpdating"></i>
-        <span>{{ isUpdating ? 'Updating Vector DB...' : 'Update Vector DB' }}</span>
+        <i class="pi pi-database" [class.pi-spin]="isUpdating()"></i>
+        <span>{{ isUpdating() ? 'Updating Vector DB...' : 'Update Vector DB' }}</span>
       </button>
     </nav>
   </header>
 
-  @if (updateStatus) {
-    <div class="status-banner" [class.success]="updateStatus.success" [class.error]="!updateStatus.success">
-      <i class="pi" [class.pi-check-circle]="updateStatus.success" [class.pi-exclamation-circle]="!updateStatus.success"></i>
-      <span class="status-message">{{ updateStatus.message }}</span>
+  @if (updateStatus()) {
+    <div class="status-banner" [class.success]="updateStatus()!.success" [class.error]="!updateStatus()!.success">
+      <i class="pi" [class.pi-check-circle]="updateStatus()!.success" [class.pi-exclamation-circle]="!updateStatus()!.success"></i>
+      <span class="status-message">{{ updateStatus()!.message }}</span>
     </div>
   }
 

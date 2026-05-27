@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductManagement } from './product-management/product-management';
 import { OrdersManagement } from './orders-management/orders-management';
 import { ChatService } from '../chat/chat.service';
@@ -13,8 +13,8 @@ export class AdminConsole {
 prod:boolean=true;
 orders:boolean=false;
 
-isUpdating: boolean = false;
-updateStatus: { success: boolean; message: string } | null = null;
+isUpdating = signal<boolean>(false);
+updateStatus = signal<{ success: boolean; message: string } | null>(null);
 
 private chatService = inject(ChatService);
 
@@ -28,27 +28,27 @@ showOrders(){
 }
 
 updateVectorDb() {
-  if (this.isUpdating) return;
+  if (this.isUpdating()) return;
 
-  this.isUpdating = true;
-  this.updateStatus = null;
+  this.isUpdating.set(true);
+  this.updateStatus.set(null);
 
   this.chatService.updateVectorDb().subscribe({
     next: (res) => {
-      this.isUpdating = false;
-      this.updateStatus = {
+      this.isUpdating.set(false);
+      this.updateStatus.set({
         success: true,
         message: res.message || 'Vector database successfully updated!'
-      };
+      });
       this.autoDismissStatus();
     },
     error: (err) => {
-      this.isUpdating = false;
+      this.isUpdating.set(false);
       const errMsg = err.error?.message || err.error?.details || 'An unexpected error occurred.';
-      this.updateStatus = {
+      this.updateStatus.set({
         success: false,
         message: `Failed to update: ${errMsg}`
-      };
+      });
       this.autoDismissStatus();
     }
   });
@@ -56,7 +56,7 @@ updateVectorDb() {
 
 private autoDismissStatus() {
   setTimeout(() => {
-    this.updateStatus = null;
+    this.updateStatus.set(null);
   }, 5000);
 }
 }
