@@ -10,8 +10,7 @@ export class ChatService {
   send(message: string, history: { role: string; content: string }[]) {
     return this.http.post<{ reply: string }>(`${this.baseUrl}/chatbot`, {
       message,
-      history,
-      products: [] // will be filled in Hours 5-6
+      history
     });
   }
 
